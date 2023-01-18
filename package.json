@@ -1,0 +1,35 @@
+{
+  "name": "notun_asha_dashboard_frontend",
+  "private": true,
+  "version": "1.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "prettier --write ."
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "^5.0.0-alpha.114",
+    "@mui/material": "^5.11.3",
+    "@mui/x-date-pickers": "^5.0.13",
+    "@tanstack/react-query": "^4.20.4",
+    "axios": "^1.2.2",
+    "interweave": "^13.0.0",
+    "moment": "^2.29.4",
+    "notistack": "^2.0.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.41.3",
+    "react-icons": "^4.7.1",
+    "react-router-dom": "^6.6.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "prettier": "^2.8.1",
+    "vite": "^4.0.0"
+  }
+}
