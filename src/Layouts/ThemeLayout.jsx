@@ -47,15 +47,16 @@ const ThemeLayout = ({ children }) => {
         main: "#5E5D72",
       },
       color13: {
-        main: "#3D464D",
-      },
-      color14: {
         main: "#403E57",
       },
+      textblack: "#0B0B0B",
+      textTan: "#928888",
+      textWhite: "#FFFFFF",
+      textAsh: "#3D464D",
     },
-    // typography: {
-    //   fontFamily: ["Poppins", "sans-serif"].join(","),
-    // },
+    typography: {
+      fontFamily: ["Poppins", "sans-serif"].join(","),
+    },
     components: {
       MuiCssBaseline: {
         styleOverrides: {
@@ -64,6 +65,7 @@ const ThemeLayout = ({ children }) => {
             padding: 0,
             minHeight: "100vh",
             textRendering: "optimizeSpeed",
+            backgroundColor: "#F5F5F5",
 
             // use fonts for non-mui components
             "*": {
@@ -82,15 +84,15 @@ const ThemeLayout = ({ children }) => {
               width: "10px",
             },
             "&::-webkit-scrollbar-track, & *::-webkit-scrollbar-track": {
-              background: "#3D464D",
+              background: "#e0e0e0",
             },
             "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
-              background: "#4D7B52",
+              background: "#3D464D",
               borderRadius: "4px",
             },
             "&::-webkit-scrollbar-track:hover, & *::-webkit-scrollbar-track:hover":
               {
-                background: "#3D464D",
+                background: "#e0e0e0",
               },
             "&::-selection, & *::-selection": {
               backgroundColor: "gray",
@@ -148,10 +150,6 @@ const ThemeLayout = ({ children }) => {
             lineHeight: "26px",
             color: "#092C4C",
           },
-          body1: {
-            fontSize: "28px",
-            lineHeight: "22px",
-          },
           body2: {
             fontSize: "24px",
             lineHeight: "22px",
@@ -180,8 +178,8 @@ const ThemeLayout = ({ children }) => {
       },
       MuiButton: {
         defaultProps: {
-          sx: {
-            textDecoration: "unset",
+          style: {
+            textTransform: "unset",
             minWidth: "unset",
           },
         },
@@ -248,6 +246,13 @@ const ThemeLayout = ({ children }) => {
             "& .MuiOutlinedInput-notchedOutline": {
               border: 0,
             },
+          },
+        },
+      },
+      MuiToolbar: {
+        defaultProps: {
+          style: {
+            height: "83px",
           },
         },
       },

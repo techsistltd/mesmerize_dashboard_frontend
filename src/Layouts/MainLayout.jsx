@@ -1,6 +1,7 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, Toolbar } from "@mui/material";
 import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import DrawerHeader from "../Components/Shared/DrawerHeader";
 import ThemeLayout from "./ThemeLayout";
 
 const MainLayout = () => {
@@ -16,24 +17,29 @@ const MainLayout = () => {
 
   return (
     <ThemeLayout>
-      <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          padding: "0 !important",
-        }}
-      >
-        <Container
-          maxWidth="xl"
+      <Container maxWidth="xl" sx={{ display: "flex" }}>
+        <DrawerHeader />
+        <Box
+          component="main"
           sx={{
             flexGrow: 1,
-            height: 1,
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          <Outlet />
-        </Container>
-      </Box>
+          <Toolbar sx={{ mb: "40px" }} />
+          <Container
+            maxWidth="xl"
+            sx={{
+              flexGrow: 1,
+              height: 1,
+            }}
+          >
+            <Outlet />
+          </Container>
+        </Box>
+      </Container>
     </ThemeLayout>
   );
 };
