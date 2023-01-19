@@ -13,9 +13,9 @@ import {
 import React, { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsNewspaper } from "react-icons/bs";
-import { FaBloggerB } from "react-icons/fa";
+import { IoSnow } from "react-icons/io5";
 import { MdNotifications, MdSettingsSuggest } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import BrandLogo from "../../Assets/BrandLogo.svg";
 
 const drawerMenus = [
@@ -26,7 +26,7 @@ const drawerMenus = [
   },
   {
     title: "Manage News",
-    icon: FaBloggerB,
+    icon: IoSnow,
     path: "news",
     children: [
       {
@@ -44,6 +44,10 @@ const drawerMenus = [
       {
         title: "Add Video",
         path: "add-videos",
+      },
+      {
+        title: "Comments",
+        path: "comments",
       },
     ],
   },
@@ -67,9 +71,15 @@ const drawerMenus = [
 const SideDrawer = ({ drawerWidth }) => {
   const [expanded, setExpanded] = useState(null);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleExpandedMenu = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : null);
+  };
+
+  const handleMenu = (path) => {
+    setExpanded(null);
+    navigate(path);
   };
 
   return (
@@ -110,19 +120,10 @@ const SideDrawer = ({ drawerWidth }) => {
           "& .MuiButtonBase-root": {
             p: "0px 12px !important",
             fontSize: "14px",
-            color: "white",
             gap: "12px",
             height: "42px",
             borderRadius: "2px",
             justifyContent: "flex-start",
-
-            "&:hover": {
-              bgcolor: "white",
-              color: "black",
-              "& path": {
-                color: "black",
-              },
-            },
           },
           "& .MuiPaper-root": {
             color: "inherit",
@@ -186,6 +187,39 @@ const SideDrawer = ({ drawerWidth }) => {
                               }
                               fullWidth
                               variant="text"
+                              sx={{
+                                bgcolor: Boolean(
+                                  `/${path}${
+                                    childPath ? `/${childPath}` : ""
+                                  }` === pathname
+                                )
+                                  ? "white"
+                                  : "transparent",
+                                color: Boolean(
+                                  `/${path}${
+                                    childPath ? `/${childPath}` : ""
+                                  }` === pathname
+                                )
+                                  ? "black"
+                                  : "white",
+                                "& path": {
+                                  color: Boolean(
+                                    `/${path}${
+                                      childPath ? `/${childPath}` : ""
+                                    }` === pathname
+                                  )
+                                    ? "black"
+                                    : "white",
+                                },
+
+                                "&:hover": {
+                                  bgcolor: "white",
+                                  color: "black",
+                                  "& path": {
+                                    color: "black",
+                                  },
+                                },
+                              }}
                             >
                               <CircleIcon
                                 sx={{
@@ -204,9 +238,30 @@ const SideDrawer = ({ drawerWidth }) => {
                   </Accordion>
                 ) : (
                   <Button
-                    onClick={() => navigate(`/${path}`)}
                     fullWidth
                     variant="text"
+                    onClick={() => handleMenu(`/${path}`)}
+                    sx={{
+                      bgcolor: Boolean(`/${path}` === pathname)
+                        ? "white"
+                        : "transparent",
+                      color: Boolean(`/${path}` === pathname)
+                        ? "black"
+                        : "white",
+                      "& path": {
+                        color: Boolean(`/${path}` === pathname)
+                          ? "black"
+                          : "white",
+                      },
+
+                      "&:hover": {
+                        bgcolor: "white",
+                        color: "black",
+                        "& path": {
+                          color: "black",
+                        },
+                      },
+                    }}
                   >
                     <Icon
                       style={{

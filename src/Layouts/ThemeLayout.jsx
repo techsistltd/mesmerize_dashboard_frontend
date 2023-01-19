@@ -252,7 +252,7 @@ const ThemeLayout = ({ children }) => {
       MuiToolbar: {
         defaultProps: {
           style: {
-            height: "83px",
+            height: "75px",
           },
         },
       },
