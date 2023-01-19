@@ -49,6 +49,10 @@ const ThemeLayout = ({ children }) => {
       color13: {
         main: "#403E57",
       },
+      color14: {
+        main: "rgba(8, 88, 247, 0.6)",
+        contrastText: "#FFFFFF",
+      },
       textblack: "#0B0B0B",
       textTan: "#928888",
       textWhite: "#FFFFFF",

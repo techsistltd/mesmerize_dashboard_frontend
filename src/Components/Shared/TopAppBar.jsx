@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../Global/GlobalContext";
 
 const profileMenus = [
   {
@@ -39,6 +40,7 @@ const profileMenus = [
 ];
 
 const TopAppBar = ({ drawerWidth }) => {
+  const { currentUser } = useGlobalContext();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -126,12 +128,12 @@ const TopAppBar = ({ drawerWidth }) => {
                   fontSize: "16px",
                 }}
               >
-                Forhad Ibn Haque
+                {currentUser?.fullname ?? "Admin"}
               </Typography>
               <ArrowDropDownIcon />
             </Box>
             <Typography sx={{ fontSize: "14px" }}>
-              forhad96office@gmail.com
+              {currentUser?.email}
             </Typography>
           </Button>
         </Box>

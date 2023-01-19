@@ -52,7 +52,7 @@ axiosApi.interceptors.response.use(
     return response;
   },
   function (error) {
-    const originalConfig = error.config;
+    const originalRequest = error.config;
 
     if (error?.response?.status === 401) {
       if (!isRefreshingToken) {
