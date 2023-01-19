@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useGlobalContext } from "./Global/GlobalContext";
 import MainLayout from "./Layouts/MainLayout";
 import Home from "./Pages/Home";
@@ -24,7 +20,8 @@ function App() {
     },
     {
       path: "*",
-      element: <Navigate to="/" />,
+      // element: <Navigate to="/" />,
+      element: <MainLayout />,
     },
   ]);
 

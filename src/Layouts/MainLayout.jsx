@@ -1,7 +1,8 @@
 import { Box, Container, Toolbar } from "@mui/material";
 import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import DrawerHeader from "../Components/Shared/DrawerHeader";
+import SideDrawer from "../Components/Shared/SideDrawer";
+import TopAppBar from "../Components/Shared/TopAppBar";
 import ThemeLayout from "./ThemeLayout";
 
 const MainLayout = () => {
@@ -15,10 +16,14 @@ const MainLayout = () => {
     });
   }, [pathname]);
 
+  // drawer Width
+  const drawerWidth = 240;
+
   return (
     <ThemeLayout>
       <Container maxWidth="xl" sx={{ display: "flex" }}>
-        <DrawerHeader />
+        <TopAppBar drawerWidth={drawerWidth} />
+        <SideDrawer drawerWidth={drawerWidth} />
         <Box
           component="main"
           sx={{
