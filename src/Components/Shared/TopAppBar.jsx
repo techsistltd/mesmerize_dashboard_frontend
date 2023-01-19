@@ -4,6 +4,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person2Icon from "@mui/icons-material/Person2";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import {
+  AppBar,
   Avatar,
   Badge,
   Box,
@@ -18,6 +19,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../Global/GlobalContext";
 
 const profileMenus = [
   {
@@ -37,122 +39,134 @@ const profileMenus = [
   },
 ];
 
-const TopBar = () => {
+const TopAppBar = ({ drawerWidth }) => {
+  const { currentUser } = useGlobalContext();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
   return (
-    <Toolbar
+    <AppBar
+      color="color6"
+      position="fixed"
       sx={{
-        padding: "12px 24px !important",
-        justifyContent: "flex-end",
-        gap: "35px",
+        width: `calc(100% - ${drawerWidth}px)`,
+        ml: `${drawerWidth}px`,
+        color: "textblack",
+        boxShadow: 2,
       }}
     >
-      <Badge
-        badgeContent={17}
-        overlap="circular"
-        color="primary"
+      <Toolbar
         sx={{
-          "& .MuiBadge-badge": {
-            height: "20px",
-            width: "20px",
-          },
+          padding: "12px 24px !important",
+          justifyContent: "flex-end",
+          gap: "35px",
         }}
       >
-        <IconButton
-          onClick={() => navigate("/notification")}
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          sx={{ bgcolor: "color5.main", height: "45px", width: "45px" }}
-        >
-          <NotificationsIcon sx={{ fontSize: "26px" }} />
-        </IconButton>
-      </Badge>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: "20px",
-        }}
-      >
-        <Box
-          component={Link}
-          to="/profile"
+        <Badge
+          badgeContent={17}
+          overlap="circular"
+          color="primary"
           sx={{
-            height: "40px",
-            width: "40px",
-            border: "1px solid",
-            borderColor: "primary.main",
-            borderRadius: "50%",
+            "& .MuiBadge-badge": {
+              height: "20px",
+              width: "20px",
+            },
           }}
         >
-          <Avatar
-            sx={{
-              height: 1,
-              width: 1,
-            }}
-          />
-        </Box>
-        <Button
-          onClick={(event) => setAnchorEl(event.currentTarget)}
+          <IconButton
+            onClick={() => navigate("/notification")}
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+            sx={{ bgcolor: "color5.main", height: "45px", width: "45px" }}
+          >
+            <NotificationsIcon sx={{ fontSize: "26px" }} />
+          </IconButton>
+        </Badge>
+        <Box
           sx={{
-            flexDirection: "column",
+            display: "flex",
+            alignItems: "center",
+            gap: "20px",
           }}
         >
           <Box
+            component={Link}
+            to="/profile"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: 1,
+              height: "40px",
+              width: "40px",
+              border: "1px solid",
+              borderColor: "primary.main",
+              borderRadius: "50%",
             }}
           >
-            <Typography
+            <Avatar
               sx={{
-                fontWeight: 500,
-                fontSize: "16px",
+                height: 1,
+                width: 1,
+              }}
+            />
+          </Box>
+          <Button
+            onClick={(event) => setAnchorEl(event.currentTarget)}
+            sx={{
+              flexDirection: "column",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: 1,
               }}
             >
-              Forhad Ibn Haque
+              <Typography
+                sx={{
+                  fontWeight: 500,
+                  fontSize: "16px",
+                }}
+              >
+                {currentUser?.fullname ?? "Admin"}
+              </Typography>
+              <ArrowDropDownIcon />
+            </Box>
+            <Typography sx={{ fontSize: "14px" }}>
+              {currentUser?.email}
             </Typography>
-            <ArrowDropDownIcon />
-          </Box>
-          <Typography sx={{ fontSize: "14px" }}>
-            forhad96office@gmail.com
-          </Typography>
-        </Button>
-      </Box>
+          </Button>
+        </Box>
 
-      {/* profile menu */}
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={() => setAnchorEl(null)}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-      >
-        {profileMenus.map(({ title, icon: Icon, color }, idx) => {
-          return (
-            <MenuItem
-              onClick={() => setAnchorEl(null)}
-              key={`profile-menus-${idx}`}
-            >
-              <ListItemIcon>
-                <Icon sx={{ color }} />
-              </ListItemIcon>
-              <ListItemText sx={{ color }}>{title}</ListItemText>
-            </MenuItem>
-          );
-        })}
-      </Menu>
-    </Toolbar>
+        {/* profile menu */}
+        <Menu
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={() => setAnchorEl(null)}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+        >
+          {profileMenus.map(({ title, icon: Icon, color }, idx) => {
+            return (
+              <MenuItem
+                onClick={() => setAnchorEl(null)}
+                key={`profile-menus-${idx}`}
+              >
+                <ListItemIcon>
+                  <Icon sx={{ color }} />
+                </ListItemIcon>
+                <ListItemText sx={{ color }}>{title}</ListItemText>
+              </MenuItem>
+            );
+          })}
+        </Menu>
+      </Toolbar>
+    </AppBar>
   );
 };
 
-export default TopBar;
+export default TopAppBar;

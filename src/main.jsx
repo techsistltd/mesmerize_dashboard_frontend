@@ -5,6 +5,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import GlobalContext from "./Global/GlobalContext";
+import ThemeLayout from "./Layouts/ThemeLayout";
 import { queryClient } from "./Utils/axiosApi";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -18,7 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
       >
         <GlobalContext>
-          <App />
+          <ThemeLayout>
+            <App />
+          </ThemeLayout>
         </GlobalContext>
       </SnackbarProvider>
     </QueryClientProvider>

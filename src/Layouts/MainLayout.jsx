@@ -1,8 +1,8 @@
 import { Box, Container, Toolbar } from "@mui/material";
 import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import DrawerHeader from "../Components/Shared/DrawerHeader";
-import ThemeLayout from "./ThemeLayout";
+import SideDrawer from "../Components/Shared/SideDrawer";
+import TopAppBar from "../Components/Shared/TopAppBar";
 
 const MainLayout = () => {
   // Scroll-to-top
@@ -15,32 +15,34 @@ const MainLayout = () => {
     });
   }, [pathname]);
 
+  // drawer width
+  const drawerWidth = "290px";
+
   return (
-    <ThemeLayout>
-      <Container maxWidth="xl" sx={{ display: "flex" }}>
-        <DrawerHeader />
-        <Box
-          component="main"
+    <Container maxWidth="xl" sx={{ display: "flex" }}>
+      <TopAppBar drawerWidth={drawerWidth} />
+      <SideDrawer drawerWidth={drawerWidth} />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Toolbar sx={{ mb: "40px" }} />
+        <Container
+          maxWidth="xl"
           sx={{
             flexGrow: 1,
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
+            height: 1,
           }}
         >
-          <Toolbar sx={{ mb: "40px" }} />
-          <Container
-            maxWidth="xl"
-            sx={{
-              flexGrow: 1,
-              height: 1,
-            }}
-          >
-            <Outlet />
-          </Container>
-        </Box>
-      </Container>
-    </ThemeLayout>
+          <Outlet />
+        </Container>
+      </Box>
+    </Container>
   );
 };
 
