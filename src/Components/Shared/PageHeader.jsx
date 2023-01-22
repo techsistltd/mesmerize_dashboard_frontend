@@ -70,7 +70,7 @@ const PageHeader = () => {
         sx={{
           fontSize: "20px",
           fontWeight: 700,
-          color: "textblack",
+          color: "textBlack",
           textTransform: "capitalize",
         }}
       >

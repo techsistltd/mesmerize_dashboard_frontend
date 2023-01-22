@@ -51,7 +51,7 @@ const TopAppBar = ({ drawerWidth }) => {
       sx={{
         width: `calc(100% - ${drawerWidth}px)`,
         ml: `${drawerWidth}px`,
-        color: "textblack",
+        color: "textBlack",
         boxShadow: 2,
       }}
     >

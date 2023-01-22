@@ -53,7 +53,7 @@ const ThemeLayout = ({ children }) => {
         main: "rgba(8, 88, 247, 0.6)",
         contrastText: "#FFFFFF",
       },
-      textblack: "#0B0B0B",
+      textBlack: "#0B0B0B",
       textTan: "#928888",
       textWhite: "#FFFFFF",
       textAsh: "#3D464D",
@@ -163,18 +163,21 @@ const ThemeLayout = ({ children }) => {
           {
             props: { variant: "body3" },
             style: {
+              display: "block",
               fontSize: "18px",
             },
           },
           {
             props: { variant: "body4" },
             style: {
+              display: "block",
               fontSize: "16px",
             },
           },
           {
             props: { variant: "body5" },
             style: {
+              display: "block",
               fontSize: "12px",
             },
           },
