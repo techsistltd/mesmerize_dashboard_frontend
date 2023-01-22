@@ -1,6 +1,8 @@
 import { Box, Container, Toolbar } from "@mui/material";
 import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import Footer from "../Components/Shared/Footer";
+import PageHeader from "../Components/Shared/PageHeader";
 import SideDrawer from "../Components/Shared/SideDrawer";
 import TopAppBar from "../Components/Shared/TopAppBar";
 
@@ -31,7 +33,8 @@ const MainLayout = () => {
           flexDirection: "column",
         }}
       >
-        <Toolbar sx={{ mb: "40px" }} />
+        <Toolbar sx={{ mb: "10px" }} />
+        <PageHeader />
         <Container
           maxWidth="xl"
           sx={{
@@ -41,6 +44,7 @@ const MainLayout = () => {
         >
           <Outlet />
         </Container>
+        <Footer />
       </Box>
     </Container>
   );

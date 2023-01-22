@@ -10,7 +10,8 @@ const onProd = Boolean(process.env.NODE_ENV === "production");
 
 const baseURL = onProd
   ? "https://backend.notunasha.com"
-  : "http://192.168.1.101:8000";
+  : "http://127.0.0.1:8000";
+// : "http://192.168.1.101:8000";
 
 // const baseURL = "https://api.notunasha.com";
 

@@ -169,7 +169,7 @@ const ThemeLayout = ({ children }) => {
           {
             props: { variant: "body4" },
             style: {
-              fontSize: "18px",
+              fontSize: "16px",
             },
           },
           {
