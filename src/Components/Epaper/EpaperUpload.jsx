@@ -48,6 +48,7 @@ const EpaperUpload = ({ date }) => {
               minWidth: "454px",
             }}
           />
+          <Typography variant="body3">Page Image Source</Typography>
           <TextField
             size="small"
             type="file"
@@ -62,8 +63,8 @@ const EpaperUpload = ({ date }) => {
             }}
           />
           <Button
-            variant="contained"
-            color="color14"
+            variant="button3"
+            sx={{ minWidth: "155px", mt: "15px" }}
             onClick={() => setUploadFormOpen(false)}
           >
             Upload Page
@@ -72,11 +73,7 @@ const EpaperUpload = ({ date }) => {
       </Collapse>
 
       <Collapse in={!Boolean(uploadFormOpen)}>
-        <Button
-          variant="contained"
-          color="color14"
-          onClick={() => setUploadFormOpen(true)}
-        >
+        <Button variant="button3" onClick={() => setUploadFormOpen(true)}>
           Add new page
         </Button>
       </Collapse>

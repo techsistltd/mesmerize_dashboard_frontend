@@ -203,36 +203,37 @@ const ThemeLayout = ({ children }) => {
           {
             props: { variant: "button2" },
             style: {
-              backgroundColor: "#67A13E",
+              backgroundColor: "#EA5046",
               "&:hover": {
-                backgroundColor: "#67A13EE6",
+                backgroundColor: "#EA5046E6",
               },
             },
           },
           {
             props: { variant: "button3" },
             style: {
-              backgroundColor: "#67A13E",
+              color: "#FFFFFF",
+              backgroundColor: "#0858F7CC",
               "&:hover": {
-                backgroundColor: "#67A13EE6",
+                backgroundColor: "#0858F7B3",
               },
             },
           },
           {
             props: { variant: "button4" },
             style: {
-              backgroundColor: "#67A13E",
+              backgroundColor: "#8F6A97",
               "&:hover": {
-                backgroundColor: "#67A13EE6",
+                backgroundColor: "#8F6A97E6",
               },
             },
           },
           {
             props: { variant: "button5" },
             style: {
-              backgroundColor: "#67A13E",
+              backgroundColor: "#2ABC1E",
               "&:hover": {
-                backgroundColor: "#67A13EE6",
+                backgroundColor: "#2ABC1EE6",
               },
             },
           },

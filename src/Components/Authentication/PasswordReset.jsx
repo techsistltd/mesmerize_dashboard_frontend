@@ -96,8 +96,7 @@ const PasswordReset = () => {
       <LoadingButton
         loading={isLoading}
         type="submit"
-        variant="contained"
-        color="color14"
+        variant="button3"
         sx={{
           width: 1,
           height: "40px",

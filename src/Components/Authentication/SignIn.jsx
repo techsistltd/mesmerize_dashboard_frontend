@@ -151,9 +151,8 @@ const SignIn = () => {
 
         <LoadingButton
           loading={singInLoading}
-          variant="contained"
+          variant="button3"
           type="submit"
-          color="color14"
           sx={{
             width: 1,
             height: "40px",

@@ -2,6 +2,7 @@ import { Box, Container, TextField, Typography } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 import React, { useState } from "react";
+import EpaperPageList from "../Components/Epaper/EpaperPageList";
 import EpaperUpload from "../Components/Epaper/EpaperUpload";
 
 const Epaper = () => {
@@ -52,6 +53,7 @@ const Epaper = () => {
           />
         </Box>
         <EpaperUpload date={date} />
+        <EpaperPageList />
       </Container>
     </Box>
   );
