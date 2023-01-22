@@ -35,15 +35,14 @@ const MainLayout = () => {
       >
         <Toolbar sx={{ mb: "10px" }} />
         <PageHeader />
-        <Container
-          maxWidth="xl"
+        <Box
           sx={{
             flexGrow: 1,
             height: 1,
           }}
         >
           <Outlet />
-        </Container>
+        </Box>
         <Footer />
       </Box>
     </Container>

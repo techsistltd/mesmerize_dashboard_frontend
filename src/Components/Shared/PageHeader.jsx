@@ -62,6 +62,7 @@ const PageHeader = () => {
         justifyContent: "space-between",
         boxShadow: "0px 3px 1px -2px rgba(76, 78, 100, 0.2)",
         borderRadius: "3px",
+        bgcolor: "color6.main",
       }}
     >
       <Typography
