@@ -15,9 +15,18 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import DeleteDialog from "../Shared/DeleteDialog";
 
 const EpaperPageList = ({ paperPages = [], isLoading = false }) => {
+  const [deleteItem, setDeleteItem] = useState(null);
+
+  const handleDeleteItem = (confirm = false) => {
+    if (confirm) {
+    }
+    setDeleteItem(null);
+  };
+
   return (
     <Box sx={{ mt: "40px" }}>
       <Box
@@ -146,7 +155,10 @@ const EpaperPageList = ({ paperPages = [], isLoading = false }) => {
                           <IconButton sx={{ p: 0, color: "textBlack" }}>
                             <VisibilityOutlinedIcon />
                           </IconButton>
-                          <IconButton sx={{ p: 0, color: "textBlack" }}>
+                          <IconButton
+                            sx={{ p: 0, color: "textBlack" }}
+                            onClick={() => setDeleteItem(page?.id)}
+                          >
                             <DeleteIcon />
                           </IconButton>
                         </Box>
@@ -178,6 +190,12 @@ const EpaperPageList = ({ paperPages = [], isLoading = false }) => {
           <Alert severity="info">No page found!</Alert>
         )}
       </TableContainer>
+      {Boolean(deleteItem) && (
+        <DeleteDialog
+          open={Boolean(deleteItem)}
+          handleClose={handleDeleteItem}
+        />
+      )}
     </Box>
   );
 };
