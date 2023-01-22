@@ -3,17 +3,23 @@ import { Breadcrumbs, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useMatches } from "react-router-dom";
 
-const PageHeader = ({ pageTitle = "Notun Asha" }) => {
+const PageHeader = () => {
+  const [pageTitle, setPageTitle] = useState("Notun Asha");
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const { pathname } = useLocation();
   let matches = useMatches();
 
   useEffect(() => {
-    let crumbs = matches
-      .filter((match) => Boolean(match.handle?.crumb))
-      .map((data) => data.handle.crumb);
+    let crumbs = matches.filter((match) => Boolean(match.handle?.crumb));
 
-    const crumbsComponents = crumbs.map(({ to = "", title = "" }) => {
+    const matched = crumbs.find((match) => match.pathname === pathname);
+
+    if (Boolean(matched?.handle?.crumb?.title)) {
+      setPageTitle(matched?.handle?.crumb?.title);
+    }
+
+    const crumbsComponents = crumbs.map((data) => {
+      const { to = "", title = "" } = data?.handle?.crumb ?? {};
       return (
         <Typography
           key={`route-for=${to}`}
@@ -42,6 +48,7 @@ const PageHeader = ({ pageTitle = "Notun Asha" }) => {
 
     return () => {
       setBreadcrumbs([]);
+      setPageTitle("Notun Asha");
     };
   }, [pathname]);
 
