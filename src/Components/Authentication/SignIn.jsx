@@ -70,9 +70,7 @@ const SignIn = () => {
   return (
     <Box
       sx={{
-        bgcolor: "primary.main",
         padding: "45px",
-        borderRadius: "4px",
         minWidth: "425px",
       }}
     >
