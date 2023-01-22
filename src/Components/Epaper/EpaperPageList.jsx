@@ -2,8 +2,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import {
+  Alert,
   Box,
   Button,
+  IconButton,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -14,7 +17,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const EpaperPageList = () => {
+const EpaperPageList = ({ paperPages = [], isLoading = false }) => {
   return (
     <Box sx={{ mt: "40px" }}>
       <Box
@@ -43,7 +46,7 @@ const EpaperPageList = () => {
             <TableRow>
               <TableCell align="center">Image</TableCell>
               <TableCell align="center">Page No</TableCell>
-              <TableCell align="center">Size</TableCell>
+              <TableCell align="center">Category</TableCell>
               <TableCell align="center">Action</TableCell>
               <TableCell align="center">Mapping</TableCell>
             </TableRow>
@@ -61,56 +64,119 @@ const EpaperPageList = () => {
               },
             }}
           >
-            <TableRow>
-              <TableCell align="center" sx={{ maxWidth: "100px" }}>
-                <Box
-                  sx={{
-                    display: "inline-block",
-                    width: "104px",
-                    height: "94px",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={"https://via.placeholder.com/104x94.png"}
-                    sx={{ width: 1, height: 1, borderRadius: "5px" }}
-                  />
-                </Box>
-              </TableCell>
-              <TableCell align="center">Page 1</TableCell>
-              <TableCell align="center">100 kb</TableCell>
-              <TableCell align="center">
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    gap: "12px",
-                  }}
-                >
-                  <VisibilityOutlinedIcon />
-                  <DeleteIcon />
-                </Box>
-              </TableCell>
-              <TableCell align="center" sx={{ maxWidth: "100px" }}>
-                <Button
-                  sx={{
-                    gap: "8.25px",
-                    bgcolor: "#D9D9D9",
-                    px: "10px",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  <EditIcon
-                    sx={{
-                      width: "13.5px",
-                      height: "13.5px",
-                    }}
-                  />
-                  <Box component="span">Create Area Map</Box>
-                </Button>
-              </TableCell>
-            </TableRow>
+            {Boolean(isLoading)
+              ? new Array(3).fill(null).map((_, idx) => {
+                  return (
+                    <TableRow key={`table-content-skeleton-${idx}`}>
+                      <TableCell align="center" sx={{ maxWidth: "100px" }}>
+                        <Skeleton
+                          variant="rectangular"
+                          sx={{
+                            display: "inline-block",
+                            width: "120px",
+                            height: "90px",
+                            borderRadius: "5px",
+                          }}
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton
+                          variant="text"
+                          sx={{ display: "inline-block", width: "100px" }}
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton
+                          variant="text"
+                          sx={{ display: "inline-block", width: "50px" }}
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Box
+                          sx={{
+                            display: "inline-flex",
+                            gap: "12px",
+                          }}
+                        >
+                          <Skeleton
+                            variant="rounded"
+                            sx={{ height: "20px", width: "20px" }}
+                          />
+                          <Skeleton
+                            variant="rounded"
+                            sx={{ height: "20px", width: "20px" }}
+                          />
+                        </Box>
+                      </TableCell>
+                      <TableCell align="center" sx={{ maxWidth: "100px" }}>
+                        <Skeleton variant="rectangular" />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              : paperPages?.map((page, idx) => {
+                  return (
+                    <TableRow>
+                      <TableCell align="center" sx={{ maxWidth: "100px" }}>
+                        <Box
+                          sx={{
+                            display: "inline-block",
+                            width: "120px",
+                            height: "90px",
+                          }}
+                        >
+                          <Box
+                            component="img"
+                            src={page?.image}
+                            sx={{ width: 1, height: 1, borderRadius: "5px" }}
+                          />
+                        </Box>
+                      </TableCell>
+                      <TableCell align="center">Page {page?.page_no}</TableCell>
+                      <TableCell align="center">
+                        {page?.page_category}
+                      </TableCell>
+                      <TableCell align="center">
+                        <Box
+                          sx={{
+                            display: "inline-flex",
+                            gap: "12px",
+                          }}
+                        >
+                          <IconButton sx={{ p: 0, color: "textBlack" }}>
+                            <VisibilityOutlinedIcon />
+                          </IconButton>
+                          <IconButton sx={{ p: 0, color: "textBlack" }}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </Box>
+                      </TableCell>
+                      <TableCell align="center" sx={{ maxWidth: "100px" }}>
+                        <Button
+                          sx={{
+                            gap: "8.25px",
+                            bgcolor: "#D9D9D9",
+                            px: "10px",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          <EditIcon
+                            sx={{
+                              width: "13.5px",
+                              height: "13.5px",
+                            }}
+                          />
+                          <Box component="span">Create Area Map</Box>
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
           </TableBody>
         </Table>
+        {Boolean(!paperPages?.length && !isLoading) && (
+          <Alert severity="info">No page found!</Alert>
+        )}
       </TableContainer>
     </Box>
   );

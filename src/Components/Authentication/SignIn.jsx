@@ -135,7 +135,7 @@ const SignIn = () => {
                         borderRadius: "5px",
 
                         "& input": {
-                          py: "6px !important",
+                          py: "6.5px !important",
                         },
                       }}
                       error={Boolean(error)}
@@ -185,7 +185,7 @@ const SignIn = () => {
         sx={{
           fontSize: "16px",
           fontWeight: 600,
-          py: "15px",
+          my: "20px",
         }}
       >
         or
@@ -197,7 +197,6 @@ const SignIn = () => {
         to={`/auth/password-reset`}
         sx={{
           width: 1,
-          my: "30px",
           display: "block",
           fontWeight: 500,
           textDecoration: "unset",

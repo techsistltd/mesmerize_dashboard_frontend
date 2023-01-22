@@ -1,12 +1,25 @@
 import { Box, Container, TextField, Typography } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
+import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import EpaperPageList from "../Components/Epaper/EpaperPageList";
 import EpaperUpload from "../Components/Epaper/EpaperUpload";
+import ErrorAlert from "../Components/Shared/ErrorAlert";
 
 const Epaper = () => {
   const [date, setDate] = useState(moment());
+
+  const {
+    data: paper = {},
+    isLoading,
+    error,
+  } = useQuery([
+    `/epaper/papers/${moment(date).format("YYYY")}/${moment(date).format(
+      "MM"
+    )}/${moment(date).format("DD")}/`,
+    date,
+  ]);
 
   return (
     <Box
@@ -52,8 +65,17 @@ const Epaper = () => {
             )}
           />
         </Box>
-        <EpaperUpload date={date} />
-        <EpaperPageList />
+        {Boolean(error) ? (
+          <ErrorAlert error={error} />
+        ) : (
+          <Fragment>
+            <EpaperUpload date={date} />
+            <EpaperPageList
+              isLoading={isLoading}
+              paperPages={paper?.page_paper}
+            />
+          </Fragment>
+        )}
       </Container>
     </Box>
   );
