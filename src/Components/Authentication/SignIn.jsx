@@ -70,9 +70,7 @@ const SignIn = () => {
   return (
     <Box
       sx={{
-        bgcolor: "primary.main",
         padding: "45px",
-        borderRadius: "4px",
         minWidth: "425px",
       }}
     >
@@ -135,7 +133,7 @@ const SignIn = () => {
                         borderRadius: "5px",
 
                         "& input": {
-                          py: "6px !important",
+                          py: "6.5px !important",
                         },
                       }}
                       error={Boolean(error)}
@@ -151,9 +149,8 @@ const SignIn = () => {
 
         <LoadingButton
           loading={singInLoading}
-          variant="contained"
+          variant="button3"
           type="submit"
-          color="color14"
           sx={{
             width: 1,
             height: "40px",
@@ -186,7 +183,7 @@ const SignIn = () => {
         sx={{
           fontSize: "16px",
           fontWeight: 600,
-          py: "15px",
+          my: "20px",
         }}
       >
         or
@@ -198,7 +195,6 @@ const SignIn = () => {
         to={`/auth/password-reset`}
         sx={{
           width: 1,
-          my: "30px",
           display: "block",
           fontWeight: 500,
           textDecoration: "unset",

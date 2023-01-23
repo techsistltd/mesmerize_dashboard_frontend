@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { axiosRaw } from "../../Utils/axiosApi";
 
 const PasswordReset = () => {
@@ -36,9 +36,7 @@ const PasswordReset = () => {
       component="form"
       onSubmit={handleSubmit(resetEmailMutation)}
       sx={{
-        bgcolor: "primary.main",
         padding: "45px",
-        borderRadius: "4px",
         minWidth: "425px",
       }}
     >
@@ -83,7 +81,7 @@ const PasswordReset = () => {
                 borderRadius: "5px",
 
                 "& input": {
-                  py: "6px !important",
+                  py: "6.5px !important",
                 },
               }}
               error={Boolean(error)}
@@ -96,8 +94,7 @@ const PasswordReset = () => {
       <LoadingButton
         loading={isLoading}
         type="submit"
-        variant="contained"
-        color="color14"
+        variant="button3"
         sx={{
           width: 1,
           height: "40px",
@@ -110,6 +107,34 @@ const PasswordReset = () => {
       >
         Reset My Password
       </LoadingButton>
+      <Typography
+        align="center"
+        color="textWhite"
+        sx={{
+          fontSize: "16px",
+          fontWeight: 600,
+          my: "20px",
+        }}
+      >
+        or
+      </Typography>
+      <Typography
+        component={Link}
+        align="center"
+        color="textWhite"
+        to={`/auth`}
+        sx={{
+          width: 1,
+          display: "block",
+          fontWeight: 500,
+          textDecoration: "unset",
+          "&:hover": {
+            textDecoration: "underline",
+          },
+        }}
+      >
+        Sign In Again?
+      </Typography>
     </Box>
   );
 };

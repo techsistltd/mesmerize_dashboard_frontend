@@ -134,7 +134,7 @@ const UpdatePassword = () => {
                       borderRadius: "5px",
 
                       "& input": {
-                        py: "6px !important",
+                        py: "6.5px !important",
                       },
                     }}
                     error={Boolean(error)}

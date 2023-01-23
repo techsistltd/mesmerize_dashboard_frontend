@@ -12,7 +12,15 @@ import LoadingIndicator from "./Components/Shared/LoadingIndicator";
 import { useGlobalContext } from "./Global/GlobalContext";
 import AuthenticationLayout from "./Layouts/AuthenticationLayout";
 import MainLayout from "./Layouts/MainLayout";
+import Epaper from "./Pages/Epaper";
 import Home from "./Pages/Home";
+import AddNews from "./Pages/News/AddNews";
+import AddVideos from "./Pages/News/AddVideos";
+import Comments from "./Pages/News/Comments";
+import ViewNews from "./Pages/News/ViewNews";
+import ViewVideos from "./Pages/News/ViewVideos";
+import Notification from "./Pages/Notification";
+import Settings from "./Pages/Settings";
 
 function App() {
   const { currentUser, userLoading } = useGlobalContext();
@@ -30,10 +38,75 @@ function App() {
           ) : (
             <Navigate to="/auth" />
           ),
+          handle: {
+            crumb: { to: "/", title: "home" },
+          },
           children: [
             {
               path: "",
               element: <Home />,
+            },
+            {
+              path: "news",
+              element: <Outlet />,
+              handle: {
+                crumb: { to: "/news", title: "News" },
+              },
+              children: [
+                {
+                  path: "",
+                  element: <ViewNews />,
+                },
+                {
+                  path: "add",
+                  element: <AddNews />,
+                  handle: {
+                    crumb: { to: "/news/add", title: "Add News" },
+                  },
+                },
+                {
+                  path: "videos",
+                  element: <ViewVideos />,
+                  handle: {
+                    crumb: { to: "/news/videos", title: "Videos" },
+                  },
+                },
+                {
+                  path: "add-videos",
+                  element: <AddVideos />,
+                  handle: {
+                    crumb: { to: "/news/add-videos", title: "Add Videos" },
+                  },
+                },
+                {
+                  path: "comments",
+                  element: <Comments />,
+                  handle: {
+                    crumb: { to: "/news/comments", title: "Comments" },
+                  },
+                },
+              ],
+            },
+            {
+              path: "e-paper",
+              element: <Epaper />,
+              handle: {
+                crumb: { to: "/e-paper", title: "E-Paper" },
+              },
+            },
+            {
+              path: "notification",
+              element: <Notification />,
+              handle: {
+                crumb: { to: "/notification", title: "Notification" },
+              },
+            },
+            {
+              path: "settings",
+              element: <Settings />,
+              handle: {
+                crumb: { to: "/settings", title: "Settings" },
+              },
             },
           ],
         },
