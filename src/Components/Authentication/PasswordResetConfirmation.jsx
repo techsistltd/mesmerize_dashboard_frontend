@@ -7,9 +7,7 @@ const PasswordResetConfirmation = () => {
   return (
     <Box
       sx={{
-        bgcolor: "primary.main",
         padding: "45px",
-        borderRadius: "4px",
         minWsidth: "425px",
       }}
     >
