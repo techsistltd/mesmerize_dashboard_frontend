@@ -44,14 +44,7 @@ const EpaperPageList = ({ paperPages = [], isLoading = false }) => {
 
       <TableContainer sx={{ mt: "20px", overflowX: "auto" }}>
         <Table sx={{ minWidth: "898px" }}>
-          <TableHead
-            sx={{
-              "& .MuiTableCell-root": {
-                color: "textWhite",
-                bgcolor: "color3.main",
-              },
-            }}
-          >
+          <TableHead>
             <TableRow>
               <TableCell align="center">Image</TableCell>
               <TableCell align="center">Page No</TableCell>
@@ -60,19 +53,7 @@ const EpaperPageList = ({ paperPages = [], isLoading = false }) => {
               <TableCell align="center">Mapping</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody
-            sx={{
-              "& .MuiTableCell-root": {
-                color: "textBlack",
-                bgcolor: "color6.main",
-              },
-              "&>*:nth-of-type(even)": {
-                "& .MuiTableCell-root": {
-                  bgcolor: "color5.main",
-                },
-              },
-            }}
-          >
+          <TableBody>
             {Boolean(isLoading)
               ? new Array(3).fill(null).map((_, idx) => {
                   return (

@@ -248,6 +248,31 @@ const ThemeLayout = ({ children }) => {
           },
         ],
       },
+      MuiTableHead: {
+        styleOverrides: {
+          root: {
+            "& .MuiTableCell-root": {
+              color: "#FFFFFF",
+              backgroundColor: "#3B7197",
+            },
+          },
+        },
+      },
+      MuiTableBody: {
+        styleOverrides: {
+          root: {
+            "& .MuiTableCell-root": {
+              color: "#0B0B0B",
+              backgroundColor: "#FCFCFC",
+            },
+            "&>*:nth-of-type(even)": {
+              "& .MuiTableCell-root": {
+                backgroundColor: "#EFF1F4",
+              },
+            },
+          },
+        },
+      },
       MuiTextField: {
         styleOverrides: {
           root: {
