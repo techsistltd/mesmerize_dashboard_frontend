@@ -17,11 +17,18 @@ const DashboardStats = ({ title = "", count = "" }) => {
         "&:hover": {
           backgroundColor: "color3.main",
           color: "textWhite",
+          transition: ".3s ease",
         },
       }}
     >
-      <Typography>{title}</Typography>
-      <Typography>{count}</Typography>
+      <Typography sx={{ fontSize: "16px", lineHeight: "24px" }}>
+        {title}
+      </Typography>
+      <Typography
+        sx={{ fontSize: "22px", fontWeight: 700, lineHeight: "33px" }}
+      >
+        {count}
+      </Typography>
     </Box>
   );
 };
