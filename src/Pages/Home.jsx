@@ -3,8 +3,11 @@ import React, { Fragment } from "react";
 import DashboardStats from "../Components/Dashboadrs/DashboardStats";
 import DashboardTable from "../Components/Dashboadrs/DashboardTable";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const statsData = [
     {
       title: "Total Content",
@@ -41,6 +44,7 @@ const Home = () => {
       >
         <Typography variant="body4">News List</Typography>
         <Button
+          onClick={() => navigate("/news/add")}
           variant="button3"
           sx={{
             display: "flex",

@@ -12,19 +12,11 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment, useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-const DashboardTable = () => {
-  const [select, setSelect] = useState({});
-  const toggleBtn = (key) => {
-    setSelect((prevState) =>
-      Boolean(prevState[key])
-        ? { ...prevState, [key]: false }
-        : { ...prevState, [key]: true }
-    );
-  };
+const DashboardTable = ({ setViewNewsPost, setEditNews }) => {
   return (
     <Fragment>
       <TableContainer sx={{ my: "20px" }}>
@@ -101,14 +93,8 @@ const DashboardTable = () => {
                       cursor: "pointer",
                     }}
                   >
-                    <Box onClick={() => toggleBtn(idx)}>
-                      {select[idx] ? (
-                        <AiOutlineEye />
-                      ) : (
-                        <AiOutlineEyeInvisible />
-                      )}
-                    </Box>
-                    <FaPen />
+                    <AiOutlineEye onClick={() => setViewNewsPost(idx + 1)} />
+                    <FaPen onClick={() => setEditNews(idx + 1)} />
                     <MdDelete />
                   </Box>
                 </TableCell>

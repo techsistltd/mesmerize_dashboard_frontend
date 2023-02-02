@@ -1,9 +1,11 @@
-import { Box, MenuItem, TextField, Typography } from "@mui/material";
+import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { categories, newsType, status } from "../../data/AddNewsData";
 import TextEditor from "../Shared/TextEditor";
 
 const CreateNews = () => {
+  const { pathname } = useLocation();
   const [value, setValue] = useState("");
 
   return (
@@ -144,6 +146,17 @@ const CreateNews = () => {
         </Box>
       </Box>
       {/* 2nd selection end */}
+      <Button
+        variant="button3"
+        sx={{
+          fontWeight: 600,
+          fontSize: "16px",
+          mt: "40px",
+          display: pathname === "/news" ? "none" : "block",
+        }}
+      >
+        Create
+      </Button>
     </Box>
   );
 };
