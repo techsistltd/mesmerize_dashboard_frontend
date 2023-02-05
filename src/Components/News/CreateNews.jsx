@@ -22,8 +22,12 @@ const CreateNews = () => {
             border: 1,
             borderColor: "primary.main",
             width: 1,
+            height: "40px",
             borderRadius: "5px",
             mt: "10px",
+            "& .MuiInputBase-input": {
+              padding: "8px",
+            },
           }}
         />
       </Box>
@@ -41,13 +45,17 @@ const CreateNews = () => {
           <TextField
             id="outlined-basic"
             variant="outlined"
-            placeholder="Type here... "
+            placeholder="Enter your name "
             sx={{
               border: 1,
               borderColor: "primary.main",
               width: "295px",
+              height: "40px",
               borderRadius: "5px",
               mt: "10px",
+              "& .MuiInputBase-input": {
+                padding: "8px",
+              },
             }}
           />
         </Box>
@@ -64,8 +72,12 @@ const CreateNews = () => {
               border: 1,
               borderColor: "primary.main",
               width: "295px",
+              height: "40px",
               borderRadius: "5px",
               mt: "10px",
+              "& .MuiInputBase-input": {
+                padding: "8px",
+              },
             }}
           >
             {categories.map((option) => (
@@ -89,6 +101,10 @@ const CreateNews = () => {
               width: "295px",
               borderRadius: "5px",
               mt: "10px",
+              height: "40px",
+              "& .MuiInputBase-input": {
+                padding: "8px",
+              },
             }}
           ></TextField>
         </Box>
@@ -111,6 +127,10 @@ const CreateNews = () => {
               width: "295px",
               borderRadius: "5px",
               mt: "10px",
+              height: "40px",
+              "& .MuiInputBase-input": {
+                padding: "8px",
+              },
             }}
           >
             {newsType.map((option) => (
@@ -135,6 +155,10 @@ const CreateNews = () => {
               width: "295px",
               borderRadius: "5px",
               mt: "10px",
+              height: "40px",
+              "& .MuiInputBase-input": {
+                padding: "8px",
+              },
             }}
           >
             {status.map((option) => (

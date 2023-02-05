@@ -1,9 +1,11 @@
 import { Box, Button, MenuItem, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { categories } from "../../data/AddNewsData";
 
 const ViewNewsStats = () => {
   const [selected, setSelected] = useState(0);
+  const { pathname } = useLocation();
   const buttonData = [
     {
       text: "All",
@@ -79,6 +81,7 @@ const ViewNewsStats = () => {
             width: "300px",
             height: "35px",
             borderRadius: "5px",
+            display: pathname === "/news/video" ? "block" : "none",
             "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
               {
                 padding: "5px 10px",

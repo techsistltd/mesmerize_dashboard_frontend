@@ -15,12 +15,22 @@ import { Fragment, useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import DeleteDialog from "../Shared/DeleteDialog";
 
 const DashboardTable = ({ setViewNewsPost, setEditNews }) => {
+  const [deleteProduct, setDeleteProduct] = useState(false);
   return (
     <Fragment>
       <TableContainer sx={{ my: "20px" }}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{
+            minWidth: 650,
+            "& .MuiTableHead-root": {
+              textTransform: "uppercase",
+            },
+          }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCell align="left">ID</TableCell>
@@ -95,7 +105,11 @@ const DashboardTable = ({ setViewNewsPost, setEditNews }) => {
                   >
                     <AiOutlineEye onClick={() => setViewNewsPost(idx + 1)} />
                     <FaPen onClick={() => setEditNews(idx + 1)} />
-                    <MdDelete />
+                    <MdDelete onClick={() => setDeleteProduct(true)} />
+                    <DeleteDialog
+                      open={deleteProduct}
+                      handleClose={() => setDeleteProduct(null)}
+                    />
                   </Box>
                 </TableCell>
               </TableRow>

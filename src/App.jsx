@@ -8,6 +8,7 @@ import PasswordReset from "./Components/Authentication/PasswordReset";
 import PasswordResetConfirmation from "./Components/Authentication/PasswordResetConfirmation";
 import SignIn from "./Components/Authentication/SignIn";
 import UpdatePassword from "./Components/Authentication/UpdatePassword";
+import ViewComments from "./Components/Comments/ViewComments";
 import LoadingIndicator from "./Components/Shared/LoadingIndicator";
 import { useGlobalContext } from "./Global/GlobalContext";
 import AuthenticationLayout from "./Layouts/AuthenticationLayout";
@@ -83,6 +84,17 @@ function App() {
                   element: <Comments />,
                   handle: {
                     crumb: { to: "/news/comments", title: "Comments" },
+                  },
+                },
+                //view comments
+                {
+                  path: "view-comments",
+                  element: <ViewComments />,
+                  handle: {
+                    crumb: {
+                      to: "/news/view-comments",
+                      title: "View Comments",
+                    },
                   },
                 },
               ],
