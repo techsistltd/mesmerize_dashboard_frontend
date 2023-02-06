@@ -53,23 +53,7 @@ const DashboardTable = ({ setViewNewsPost, setEditNews }) => {
           >
             {new Array(5).fill(null).map((row, idx) => (
               <TableRow key={idx}>
-                <TableCell align="left">
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "6px" }}
-                  >
-                    <Checkbox
-                      defaultChecked
-                      sx={{
-                        color: "black",
-                        padding: 0,
-                        "&.Mui-checked": {
-                          color: "color3.main",
-                        },
-                      }}
-                    />
-                    #225
-                  </Box>
-                </TableCell>
+                <TableCell align="left">#225</TableCell>
                 <TableCell align="left">Forhad Ibn Haque</TableCell>
                 <TableCell align="left">
                   Lorem Ipsum is simply dummy text of the printing and text...
