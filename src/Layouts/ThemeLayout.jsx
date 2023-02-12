@@ -56,6 +56,9 @@ const ThemeLayout = ({ children }) => {
       color15: {
         main: "#0858F7CC",
       },
+      color16: {
+        main: "#007098",
+      },
       textBlack: "#0B0B0B",
       textTan: "#928888",
       textWhite: "#FFFFFF",

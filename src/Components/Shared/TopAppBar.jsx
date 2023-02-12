@@ -20,6 +20,8 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../Global/GlobalContext";
+import BrandLogo from "../../Assets/BrandLogo.svg";
+import { MdMessage } from "react-icons/md";
 
 const profileMenus = [
   {
@@ -49,122 +51,160 @@ const TopAppBar = ({ drawerWidth }) => {
       color="color6"
       position="fixed"
       sx={{
-        width: `calc(100% - ${drawerWidth}px)`,
-        ml: `${drawerWidth}px`,
+        // width: `calc(100% - ${drawerWidth}px)`,
+        // ml: `${drawerWidth}px`,
         color: "textBlack",
         boxShadow: 2,
+        zIndex: 99999,
       }}
     >
       <Toolbar
         sx={{
           padding: "12px 24px !important",
-          justifyContent: "flex-end",
-          gap: "35px",
+          justifyContent: "space-between",
+          // gap: "35px",
         }}
       >
-        <Badge
-          badgeContent={17}
-          overlap="circular"
-          color="primary"
-          sx={{
-            "& .MuiBadge-badge": {
-              height: "20px",
-              width: "20px",
-            },
-          }}
-        >
-          <IconButton
-            onClick={() => navigate("/notification")}
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-            sx={{ bgcolor: "color5.main", height: "45px", width: "45px" }}
-          >
-            <NotificationsIcon sx={{ fontSize: "26px" }} />
-          </IconButton>
-        </Badge>
+        <Box sx={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <Link to="/">
+            <Box component="img" src={BrandLogo} />
+          </Link>
+          <Typography sx={{ fontSize: "16px", color: "color16.main" }}>
+            DASHBOARD
+          </Typography>
+        </Box>
         <Box
           sx={{
             display: "flex",
+            gap: "35px",
             alignItems: "center",
-            gap: "20px",
           }}
         >
-          <Box
-            component={Link}
-            to="/profile"
+          <Badge
+            badgeContent={17}
+            overlap="circular"
+            color="primary"
             sx={{
-              height: "40px",
-              width: "40px",
-              border: "1px solid",
-              borderColor: "primary.main",
-              borderRadius: "50%",
+              "& .MuiBadge-badge": {
+                height: "20px",
+                width: "20px",
+              },
             }}
           >
-            <Avatar
-              sx={{
-                height: 1,
-                width: 1,
-              }}
-            />
-          </Box>
-          <Button
-            onClick={(event) => setAnchorEl(event.currentTarget)}
+            <IconButton
+              // onClick={() => navigate("/notification")}
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+              sx={{ bgcolor: "color5.main", height: "45px", width: "45px" }}
+            >
+              <MdMessage sx={{ fontSize: "26px" }} />
+            </IconButton>
+          </Badge>
+          <Badge
+            badgeContent={17}
+            overlap="circular"
+            color="primary"
             sx={{
-              flexDirection: "column",
+              "& .MuiBadge-badge": {
+                height: "20px",
+                width: "20px",
+              },
+            }}
+          >
+            <IconButton
+              onClick={() => navigate("/notification")}
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+              sx={{ bgcolor: "color5.main", height: "45px", width: "45px" }}
+            >
+              <NotificationsIcon sx={{ fontSize: "26px" }} />
+            </IconButton>
+          </Badge>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
             }}
           >
             <Box
+              component={Link}
+              to="/profile"
               sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: 1,
+                height: "40px",
+                width: "40px",
+                border: "1px solid",
+                borderColor: "primary.main",
+                borderRadius: "50%",
               }}
             >
-              <Typography
+              <Avatar
                 sx={{
-                  fontWeight: 500,
-                  fontSize: "16px",
+                  height: 1,
+                  width: 1,
+                }}
+              />
+            </Box>
+            <Button
+              onClick={(event) => setAnchorEl(event.currentTarget)}
+              sx={{
+                flexDirection: "column",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: 1,
                 }}
               >
-                {currentUser?.fullname ?? "Admin"}
+                <Typography
+                  sx={{
+                    fontWeight: 500,
+                    fontSize: "16px",
+                  }}
+                >
+                  {currentUser?.fullname ?? "Admin"}
+                </Typography>
+                <ArrowDropDownIcon />
+              </Box>
+              <Typography sx={{ fontSize: "14px" }}>
+                {currentUser?.email}
               </Typography>
-              <ArrowDropDownIcon />
-            </Box>
-            <Typography sx={{ fontSize: "14px" }}>
-              {currentUser?.email}
-            </Typography>
-          </Button>
+            </Button>
+          </Box>
         </Box>
-
-        {/* profile menu */}
-        <Menu
-          id="demo-positioned-menu"
-          aria-labelledby="demo-positioned-button"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-          }}
-        >
-          {profileMenus.map(({ title, icon: Icon, color }, idx) => {
-            return (
-              <MenuItem
-                onClick={() => setAnchorEl(null)}
-                key={`profile-menus-${idx}`}
-              >
-                <ListItemIcon>
-                  <Icon sx={{ color }} />
-                </ListItemIcon>
-                <ListItemText sx={{ color }}>{title}</ListItemText>
-              </MenuItem>
-            );
-          })}
-        </Menu>
       </Toolbar>
+
+      {/* profile menu */}
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        {profileMenus.map(({ title, icon: Icon, color }, idx) => {
+          return (
+            <MenuItem
+              onClick={() => setAnchorEl(null)}
+              key={`profile-menus-${idx}`}
+            >
+              <ListItemIcon>
+                <Icon sx={{ color }} />
+              </ListItemIcon>
+              <ListItemText sx={{ color }}>{title}</ListItemText>
+            </MenuItem>
+          );
+        })}
+      </Menu>
     </AppBar>
   );
 };

@@ -100,21 +100,15 @@ const SideDrawer = ({ drawerWidth }) => {
       variant="permanent"
       anchor="left"
     >
-      <Toolbar
-        sx={{
-          justifyContent: "center",
-        }}
-      >
-        <Link to="/">
-          <Box component="img" src={BrandLogo} />
-        </Link>
-      </Toolbar>
+      <Toolbar />
       <Box
         sx={{
           padding: "24px",
           display: "flex",
           flexDirection: "column",
           gap: "12px",
+          maxHeight: "calc(100vh - 75px)",
+          overflowY: "auto",
 
           // child styles
           "& .MuiButtonBase-root": {
