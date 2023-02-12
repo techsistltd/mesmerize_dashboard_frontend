@@ -19,7 +19,7 @@ const CreateVideos = () => {
       {Boolean(addVideo) ? (
         // Thumb image preview
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-          <ReactPlayer url={addVideo} />
+          <ReactPlayer controls url={addVideo} />
         </Grid>
       ) : (
         // youtube video preview

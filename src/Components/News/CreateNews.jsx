@@ -1,5 +1,13 @@
-import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputLabel,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import { categories, newsType, status } from "../../data/AddNewsData";
 import TextEditor from "../Shared/TextEditor";
@@ -8,105 +16,179 @@ const CreateNews = () => {
   const { pathname } = useLocation();
   const [value, setValue] = useState("");
 
+  const { control, handleSubmit, reset } = useForm();
+  const getData = (data) => {
+    console.log({ ...data });
+    reset();
+  };
+
   return (
-    <Box sx={{ width: "930px" }}>
+    <Box
+      component={"form"}
+      onSubmit={handleSubmit(getData)}
+      sx={{ width: "930px" }}
+    >
       <Box>
-        <Typography variant="body4" color="textBlack">
-          Title
-        </Typography>
-        <TextField
-          id="outlined-basic"
-          variant="outlined"
-          placeholder="Type here... "
+        <InputLabel
+          htmlFor="form-input-title"
           sx={{
-            border: 1,
-            borderColor: "primary.main",
-            width: 1,
-            height: "40px",
-            borderRadius: "5px",
-            mt: "10px",
-            "& .MuiInputBase-input": {
-              padding: "8px",
-            },
+            color: "textBlack",
+            fontSize: "16px",
           }}
+        >
+          Title
+        </InputLabel>
+        <Controller
+          name={"title"}
+          control={control}
+          defaultValue={""}
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              id="form-input-title"
+              type={"text"}
+              variant="outlined"
+              {...field}
+              placeholder="Type here... "
+              sx={{
+                border: 1,
+                borderColor: "primary.main",
+                width: 1,
+                height: "40px",
+                borderRadius: "5px",
+                mt: "10px",
+                "& .MuiInputBase-input": {
+                  padding: "8px",
+                },
+              }}
+            />
+          )}
         />
       </Box>
-      <TextEditor setValue={setValue} />
+      <Controller
+        name={"content"}
+        control={control}
+        defaultValue={""}
+        render={({ field }) => <TextEditor setValue={field.onChange} />}
+      />
       {/* 1st selection section author, category, file */}
       <Box
-        component="form"
         sx={{ display: "flex", justifyContent: "space-between", my: "30px" }}
       >
         {/* author */}
         <Box>
-          <Typography variant="body4" color="textBlack">
-            Author Name
-          </Typography>
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            placeholder="Enter your name "
+          <InputLabel
+            htmlFor="form-input-author"
             sx={{
-              border: 1,
-              borderColor: "primary.main",
-              width: "295px",
-              height: "40px",
-              borderRadius: "5px",
-              mt: "10px",
-              "& .MuiInputBase-input": {
-                padding: "8px",
-              },
+              color: "textBlack",
+              fontSize: "16px",
             }}
+          >
+            Author Name
+          </InputLabel>
+          <Controller
+            name={"author"}
+            control={control}
+            defaultValue={""}
+            render={({ field }) => (
+              <TextField
+                id="form-input-author"
+                type={"text"}
+                variant="outlined"
+                {...field}
+                placeholder="Type here... "
+                sx={{
+                  border: 1,
+                  borderColor: "primary.main",
+                  width: "295px",
+                  height: "40px",
+                  borderRadius: "5px",
+                  mt: "10px",
+                  "& .MuiInputBase-input": {
+                    padding: "8px",
+                  },
+                }}
+              />
+            )}
           />
         </Box>
         {/* categories */}
         <Box>
-          <Typography variant="body4" color="textBlack">
-            Categories
-          </Typography>
-          <TextField
-            id="outlined-select"
-            select
-            defaultValue="Bangladesh"
+          <InputLabel
+            htmlFor="form-input-categories"
             sx={{
-              border: 1,
-              borderColor: "primary.main",
-              width: "295px",
-              height: "40px",
-              borderRadius: "5px",
-              mt: "10px",
-              "& .MuiInputBase-input": {
-                padding: "8px",
-              },
+              color: "textBlack",
+              fontSize: "16px",
             }}
           >
-            {categories.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.value}
-              </MenuItem>
-            ))}
-          </TextField>
+            Categories
+          </InputLabel>
+          <Controller
+            name={"categories"}
+            control={control}
+            defaultValue={"Bangladesh"}
+            render={({ field }) => (
+              <TextField
+                id="form-input-categories"
+                variant="outlined"
+                select
+                {...field}
+                sx={{
+                  border: 1,
+                  borderColor: "primary.main",
+                  width: "295px",
+                  height: "40px",
+                  borderRadius: "5px",
+                  mt: "10px",
+                  "& .MuiInputBase-input": {
+                    padding: "8px",
+                  },
+                }}
+              >
+                {categories.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          />
         </Box>
         {/* file */}
         <Box>
-          <Typography variant="body4" color="textBlack">
-            Image
-          </Typography>
-          <TextField
-            id="outlined-select"
-            type="file"
+          <InputLabel
+            htmlFor="form-input-file"
             sx={{
-              border: 1,
-              borderColor: "primary.main",
-              width: "295px",
-              borderRadius: "5px",
-              mt: "10px",
-              height: "40px",
-              "& .MuiInputBase-input": {
-                padding: "8px",
-              },
+              color: "textBlack",
+              fontSize: "16px",
             }}
-          ></TextField>
+          >
+            Image
+          </InputLabel>
+          <Controller
+            name={"file"}
+            control={control}
+            defaultValue={""}
+            render={({ field }) => (
+              <TextField
+                id="form-input-file"
+                variant="outlined"
+                type="file"
+                {...field}
+                sx={{
+                  border: 1,
+                  borderColor: "primary.main",
+                  width: "295px",
+                  borderRadius: "5px",
+                  mt: "10px",
+                  height: "40px",
+                  "& .MuiInputBase-input": {
+                    padding: "8px",
+                  },
+                }}
+              ></TextField>
+            )}
+          />
         </Box>
       </Box>
       {/* 1st selection end */}
@@ -114,64 +196,93 @@ const CreateNews = () => {
       <Box sx={{ display: "flex", gap: "24px" }}>
         {/* news Type */}
         <Box>
-          <Typography variant="body4" color="textBlack">
-            News Type
-          </Typography>
-          <TextField
-            id="outlined-select"
-            select
-            defaultValue="Top News"
+          <InputLabel
+            htmlFor="form-input-newsType"
             sx={{
-              border: 1,
-              borderColor: "primary.main",
-              width: "295px",
-              borderRadius: "5px",
-              mt: "10px",
-              height: "40px",
-              "& .MuiInputBase-input": {
-                padding: "8px",
-              },
+              color: "textBlack",
+              fontSize: "16px",
             }}
           >
-            {newsType.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.value}
-              </MenuItem>
-            ))}
-          </TextField>
+            News Type
+          </InputLabel>
+          <Controller
+            name={"news"}
+            control={control}
+            defaultValue={"Top News"}
+            render={({ field }) => (
+              <TextField
+                id="form-input-newsType"
+                select
+                variant="outlined"
+                {...field}
+                sx={{
+                  border: 1,
+                  borderColor: "primary.main",
+                  width: "295px",
+                  borderRadius: "5px",
+                  mt: "10px",
+                  height: "40px",
+                  "& .MuiInputBase-input": {
+                    padding: "8px",
+                  },
+                }}
+              >
+                {newsType.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          />
         </Box>
         {/* status */}
         <Box>
-          <Typography variant="body4" color="textBlack">
-            Status
-          </Typography>
-          <TextField
-            id="outlined-select"
-            select
-            defaultValue="Draft"
+          <InputLabel
+            htmlFor="form-input-status"
             sx={{
-              border: 1,
-              borderColor: "primary.main",
-              width: "295px",
-              borderRadius: "5px",
-              mt: "10px",
-              height: "40px",
-              "& .MuiInputBase-input": {
-                padding: "8px",
-              },
+              color: "textBlack",
+              fontSize: "16px",
             }}
           >
-            {status.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.value}
-              </MenuItem>
-            ))}
-          </TextField>
+            Status
+          </InputLabel>
+          <Controller
+            name={"status"}
+            control={control}
+            defaultValue={"Draft"}
+            render={({ field }) => (
+              <TextField
+                id="form-input-status"
+                select
+                variant="outlined"
+                {...field}
+                sx={{
+                  border: 1,
+                  borderColor: "primary.main",
+                  width: "295px",
+                  borderRadius: "5px",
+                  mt: "10px",
+                  height: "40px",
+                  "& .MuiInputBase-input": {
+                    padding: "8px",
+                  },
+                }}
+              >
+                {status.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          />
         </Box>
       </Box>
       {/* 2nd selection end */}
       <Button
         variant="button3"
+        type="submit"
         sx={{
           fontWeight: 600,
           fontSize: "16px",

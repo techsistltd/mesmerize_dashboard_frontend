@@ -35,7 +35,6 @@ const PasswordAndSecurity = () => {
   };
 
   // email state
-  const inputRef = useRef(null);
 
   const [updated, setUpdated] = useState("");
 
