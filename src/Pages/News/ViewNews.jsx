@@ -1,9 +1,9 @@
 import { Box, Paper } from "@mui/material";
 import React, { useState } from "react";
-import DashboardTable from "../../Components/Dashboadrs/DashboardTable";
 import EditNews from "../../Components/News/EditNews";
 import ViewNewsPost from "../../Components/News/ViewNewsPost";
 import ViewNewsStats from "../../Components/News/ViewNewsStats";
+import DataTable from "../../Components/Shared/DataTable";
 
 const ViewNews = () => {
   const [viewNewsPost, setViewNewsPost] = useState(null);
@@ -15,7 +15,7 @@ const ViewNews = () => {
   ) : (
       <Box>
         <ViewNewsStats />
-        <DashboardTable
+        <DataTable
           setViewNewsPost={setViewNewsPost}
           setEditNews={setEditNews}
         />
@@ -27,7 +27,7 @@ const ViewNews = () => {
   ) : (
     <Box>
       <ViewNewsStats />
-      <DashboardTable
+      <DataTable
         setViewNewsPost={setViewNewsPost}
         setEditNews={setEditNews}
       />

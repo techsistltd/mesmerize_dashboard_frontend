@@ -4,6 +4,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person2Icon from "@mui/icons-material/Person2";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import {
+  alpha,
   AppBar,
   Avatar,
   Badge,
@@ -22,6 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../Global/GlobalContext";
 import BrandLogo from "../../Assets/BrandLogo.svg";
 import { MdMessage } from "react-icons/md";
+import SearchField from "./SearchField";
 
 const profileMenus = [
   {
@@ -72,6 +74,7 @@ const TopAppBar = ({ drawerWidth }) => {
           <Typography sx={{ fontSize: "16px", color: "color16.main" }}>
             DASHBOARD
           </Typography>
+          <SearchField />
         </Box>
         <Box
           sx={{

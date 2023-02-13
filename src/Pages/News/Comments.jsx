@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
-import DashboardTable from "../../Components/Dashboadrs/DashboardTable";
+import DataTable from "../../Components/Shared/DataTable";
 
 const Comments = () => {
   return (
     <Box>
-      <DashboardTable />
+      <DataTable />
     </Box>
   );
 };

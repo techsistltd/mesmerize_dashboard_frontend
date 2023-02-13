@@ -1,28 +1,28 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { Fragment } from "react";
 import DashboardStats from "../Components/Dashboadrs/DashboardStats";
-import DashboardTable from "../Components/Dashboadrs/DashboardTable";
-import { IoIosAddCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import SearchField from "../Components/Shared/SearchField";
+import DataTable from "../Components/Shared/DataTable";
 
 const Home = () => {
   const navigate = useNavigate();
 
   const statsData = [
     {
-      title: "Total Content",
+      title: "Total Products",
       count: "150",
     },
     {
-      title: "Total Published",
+      title: "Total Orders",
       count: "70",
     },
     {
-      title: "Today View",
+      title: "Confirmed Orders",
       count: "180",
     },
     {
-      title: "Total Comment",
+      title: "Delivered Order",
       count: "170",
     },
   ];
@@ -42,22 +42,10 @@ const Home = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="body4">News List</Typography>
-        <Button
-          onClick={() => navigate("/news/add")}
-          variant="button3"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "10px",
-          }}
-        >
-          <IoIosAddCircleOutline style={{ padding: 0, fontSize: "20px" }} /> Add
-          Post
-        </Button>
+        <Typography variant="body4">Best Selling Products</Typography>
+        <SearchField borderVariant />
       </Box>
-      <DashboardTable />
+      <DataTable />
     </Fragment>
   );
 };
