@@ -187,6 +187,13 @@ const ThemeLayout = ({ children }) => {
               fontSize: "12px",
             },
           },
+          {
+            props: { variant: "body6" },
+            style: {
+              display: "block",
+              fontSize: "14px",
+            },
+          },
         ],
       },
       MuiButton: {

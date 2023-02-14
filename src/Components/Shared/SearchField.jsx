@@ -13,7 +13,7 @@ const SearchField = ({ borderVariant }) => {
     "&:hover": {
       backgroundColor: borderVariant ? "#F0F0F0" : "#EFF1F4",
     },
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(0),
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {

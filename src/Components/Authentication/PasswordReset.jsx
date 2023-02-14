@@ -44,7 +44,7 @@ const PasswordReset = () => {
         Forgot Password
       </Typography>
       <Typography variant="body1" color="textWhite" paddingTop="10px">
-        Continue to Notun Asha Dashboard
+        Continue to Mesmerize Dashboard
       </Typography>
       <Controller
         name="email"

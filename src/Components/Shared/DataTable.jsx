@@ -42,44 +42,11 @@ function CustomPagination(props) {
   return <GridPagination ActionsComponent={Pagination} {...props} />;
 }
 
-const DataTable = () => {
-  const [pageSize, setPageSize] = useState(5);
-
-  const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 90,
-    },
-    {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    },
-  ];
-
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
+const DataTable = ({ columns = [], rows = [], isLoading = false }) => {
+  const [pageSize, setPageSize] = useState(6);
 
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
+    <Box sx={{ height: 635, width: "100%" }}>
       <DataGrid
         sx={{
           border: 0,
@@ -88,19 +55,41 @@ const DataTable = () => {
             color: "white",
             textTransform: "uppercase",
           },
-          "& .MuiDataGrid-footerContainer": {
-            border: 0,
-          },
           "& .MuiDataGrid-iconSeparator": {
             display: "none",
           },
           "& .MuiDataGrid-main": {
             border: "1px solid rgba(224, 224, 224, 1)",
+            marginTop: "20px",
+          },
+          "& .MuiDataGrid-cell": {
+            border: 0,
+            "&:focus": {
+              outline: "none",
+            },
+          },
+          "& .MuiDataGrid-row": {
+            "&:hover": {
+              backgroundColor: "unset",
+            },
+            "&:nth-of-type(even)": {
+              backgroundColor: "color5.main",
+            },
+          },
+          "& .MuiDataGrid-cellContent": {
+            color: "textBlack",
+            fontSize: "14px",
           },
         }}
         rows={rows}
+        loading={isLoading}
         columns={columns}
         pageSize={pageSize}
+        disableSelectionOnClick
+        disableColumnFilter
+        rowHeight={80}
+        // hideFooterPagination
+        hideFooterSelectedRowCount
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
         rowsPerPageOptions={[5, 7, 10, 20, 35, 50, 70, 100, 200]}
         pagination

@@ -8,11 +8,11 @@ import {
 
 const onProd = Boolean(process.env.NODE_ENV === "production");
 
-// const baseURL = onProd
-//   ? "https://api.notunasha.com"
-//   : "http://192.168.1.101:8000";
+const baseURL = onProd
+  ? "https://mesmerize-dev.techsistltd.com"
+  : "http://192.168.1.101:8000";
 
-const baseURL = "https://api.notunasha.com";
+// const baseURL = "https://mesmerize-apis.techsistltd.com";
 
 const axiosApi = axios.create({ baseURL });
 export const axiosRaw = axios.create({ baseURL });

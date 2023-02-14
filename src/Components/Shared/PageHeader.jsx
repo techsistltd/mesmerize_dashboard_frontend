@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useMatches } from "react-router-dom";
 
 const PageHeader = () => {
-  const [pageTitle, setPageTitle] = useState("Notun Asha");
+  const [pageTitle, setPageTitle] = useState("Mesmerize");
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const { pathname } = useLocation();
   let matches = useMatches();
@@ -48,7 +48,7 @@ const PageHeader = () => {
 
     return () => {
       setBreadcrumbs([]);
-      setPageTitle("Notun Asha");
+      setPageTitle("Mesmerize");
     };
   }, [pathname]);
 

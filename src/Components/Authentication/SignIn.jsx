@@ -84,7 +84,7 @@ const SignIn = () => {
         paddingTop="10px"
         marginBottom="40px"
       >
-        Continue to Notun Asha Dashboard
+        Continue to Mesmerize Dashboard
       </Typography>
 
       <Box
