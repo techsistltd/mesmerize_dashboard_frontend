@@ -91,7 +91,7 @@ const DataTable = ({ columns = [], rows = [], isLoading = false }) => {
         // hideFooterPagination
         hideFooterSelectedRowCount
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[5, 7, 10, 20, 35, 50, 70, 100, 200]}
+        rowsPerPageOptions={[5, 6, 7, 10, 20, 35, 50, 70, 100, 200]}
         pagination
         components={{
           Pagination: CustomPagination,
