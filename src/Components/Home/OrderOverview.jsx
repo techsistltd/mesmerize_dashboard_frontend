@@ -3,13 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import DataTable from "../Shared/DataTable";
 import SearchField from "../Shared/SearchField";
-import { AiFillStar, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 import { TbCurrencyTaka } from "react-icons/tb";
-import { FaPen } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import { GridActionsCellItem } from "@mui/x-data-grid";
+import moment from "moment/moment";
 
-const OrderOverview = ({ title = "", count = "" }) => {
+const OrderOverview = () => {
   const { data: orders = [], isLoading: productLoading } = useQuery([
     "/mesmerize/orders/",
   ]);
@@ -78,7 +77,7 @@ const OrderOverview = ({ title = "", count = "" }) => {
       field: "customer",
       headerName: "Customer Name",
       flex: 1,
-      minWidth: 250,
+      minWidth: 220,
       renderCell: ({ value }) => {
         return (
           <Box
@@ -105,119 +104,63 @@ const OrderOverview = ({ title = "", count = "" }) => {
       field: "status",
       headerName: "Status",
       flex: 1,
-      width: 130,
+      width: 120,
       renderCell: ({ value }) => renderButton(value),
     },
     {
       field: "created_at",
       headerName: "Date",
       flex: 1,
-      minWidth: 130,
+      minWidth: 120,
       align: "center",
       headerAlign: "center",
+      valueFormatter: ({ value }) => moment(value).format("ll"),
     },
-    // {
-    //   field: "price",
-    //   headerName: "Price",
-    //   flex: 1,
-    //   minWidth: 100,
-    //   align: "center",
-    //   headerAlign: "center",
-    //   renderCell: ({ value }) => (
-    //     <Box sx={{ display: "flex", alignItems: "end" }}>
-    //       <Box
-    //         component={TbCurrencyTaka}
-    //         sx={{
-    //           color: "primary.main",
-    //           fontSize: "21px",
-    //         }}
-    //       />
-    //       {value}
-    //     </Box>
-    //   ),
-    // },
-    // {
-    //   field: "stock",
-    //   headerName: "Stock",
-    //   flex: 1,
-    //   minWidth: 100,
-    //   align: "center",
-    //   headerAlign: "center",
-    // },
-    // {
-    //   field: "rating",
-    //   headerName: "Rating",
-    //   align: "center",
-    //   headerAlign: "center",
-    //   flex: 1,
-    //   minWidth: 100,
-    //   renderCell: ({ value }) => (
-    //     <Box sx={{ display: "flex", alignItems: "center", gap: "7px" }}>
-    //       <Box
-    //         component={AiFillStar}
-    //         sx={{ color: "primary.main", fontSize: "15px" }}
-    //       />
-    //       {value}
-    //     </Box>
-    //   ),
-    // },
-    // {
-    //   field: "actions",
-    //   type: "actions",
-    //   headerName: "Actions",
-    //   width: 120,
-    //   getActions: ({ row }) => {
-    //     return [
-    //       <Tooltip title="View" placement="top">
-    //         <GridActionsCellItem
-    //           icon={
-    //             <Box
-    //               component={AiOutlineEye}
-    //               sx={{
-    //                 fontSize: "15px",
-    //                 color: "textBlack",
-    //               }}
-    //             />
-    //           }
-    //           label="View"
-    //           onClick={() => console.log(row)}
-    //         />
-    //       </Tooltip>,
-    //       <Tooltip title="Edit" placement="top">
-    //         <GridActionsCellItem
-    //           icon={
-    //             <Box
-    //               component={FaPen}
-    //               sx={{
-    //                 fontSize: "15px",
-    //                 color: "textBlack",
-    //               }}
-    //             />
-    //           }
-    //           label="Edit"
-    //           onClick={() => console.log(row)}
-    //         />
-    //       </Tooltip>,
-    //       <Tooltip title="Delete" placement="top">
-    //         <GridActionsCellItem
-    //           icon={
-    //             <Box
-    //               component={MdDelete}
-    //               sx={{
-    //                 fontSize: "15px",
-    //                 color: "textBlack",
-    //               }}
-    //             />
-    //           }
-    //           label="Delete"
-    //           onClick={() => console.log(row)}
-    //         />
-    //       </Tooltip>,
-    //     ];
-    //   },
-    // },
-    // { field: "order", headerName: "Order", flex: 1, minWidth: 100 },
-    // { field: "sale", headerName: "Sale", flex: 1, minWidth: 100 },
+    {
+      field: "payable_amount",
+      headerName: "Price",
+      flex: 1,
+      minWidth: 100,
+      align: "center",
+      headerAlign: "center",
+      renderCell: ({ value }) => (
+        <Box sx={{ display: "flex", alignItems: "end" }}>
+          <Box
+            component={TbCurrencyTaka}
+            sx={{
+              color: "primary.main",
+              fontSize: "21px",
+            }}
+          />
+          {value}
+        </Box>
+      ),
+    },
+    {
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
+      width: 180,
+      getActions: ({ row }) => {
+        return [
+          <Tooltip title="View" placement="top">
+            <GridActionsCellItem
+              icon={
+                <Box
+                  component={AiOutlineEye}
+                  sx={{
+                    fontSize: "15px",
+                    color: "textBlack",
+                  }}
+                />
+              }
+              label="View"
+              onClick={() => console.log(row)}
+            />
+          </Tooltip>,
+        ];
+      },
+    },
   ];
 
   const orderOverviewData = [
@@ -307,11 +250,22 @@ const OrderOverview = ({ title = "", count = "" }) => {
         <SearchField borderVariant />
       </Box>
       {/* typography and search end */}
-      <DataTable
-        columns={tableColumn}
-        rows={orders}
-        isLoading={productLoading}
-      />
+      <Box
+        sx={{
+          "& .MuiDataGrid-virtualScrollerContent": {
+            padding: "0 25px 0 25px",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            padding: "0 25px 0 25px",
+          },
+        }}
+      >
+        <DataTable
+          columns={tableColumn}
+          rows={orders}
+          isLoading={productLoading}
+        />
+      </Box>
     </Box>
   );
 };

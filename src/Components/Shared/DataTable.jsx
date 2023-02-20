@@ -58,6 +58,9 @@ const DataTable = ({ columns = [], rows = [], isLoading = false }) => {
           "& .MuiDataGrid-iconSeparator": {
             display: "none",
           },
+          // "& .MuiDataGrid-virtualScrollerContent": {
+          //   padding: "15px",
+          // },
           "& .MuiDataGrid-main": {
             border: "1px solid rgba(224, 224, 224, 1)",
             marginTop: "20px",

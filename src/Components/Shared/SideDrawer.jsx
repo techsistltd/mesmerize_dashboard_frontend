@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { BsNewspaper } from "react-icons/bs";
-import { IoSnow } from "react-icons/io5";
+import { BiCategoryAlt } from "react-icons/bi";
+import { FaUser } from "react-icons/fa";
 import { MdNotifications, MdSettingsSuggest } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import BrandLogo from "../../Assets/BrandLogo.svg";
@@ -25,36 +25,34 @@ const drawerMenus = [
     path: "",
   },
   {
-    title: "Manage News",
-    icon: IoSnow,
-    path: "news",
+    title: "Customers",
+    icon: FaUser,
+    path: "customers",
     children: [
       {
-        title: "View All News",
+        title: "Customers List",
         path: "",
       },
       {
-        title: "Add News",
-        path: "add",
-      },
-      {
-        title: "View All Videos",
-        path: "videos",
-      },
-      {
-        title: "Add Video",
-        path: "add-videos",
-      },
-      {
-        title: "Comments",
-        path: "comments",
+        title: "Customer Profile",
+        path: "customer-profile",
       },
     ],
   },
   {
-    title: "E-Paper",
-    icon: BsNewspaper,
-    path: "e-paper",
+    title: "Manage Categories",
+    icon: BiCategoryAlt,
+    path: "categories",
+    children: [
+      {
+        title: "Categories List",
+        path: "",
+      },
+      {
+        title: "Add Categories",
+        path: "add",
+      },
+    ],
   },
   {
     title: "Notification",
@@ -85,6 +83,7 @@ const SideDrawer = ({ drawerWidth }) => {
   return (
     <Drawer
       sx={{
+        zIndex: 1000,
         width: drawerWidth,
         flexShrink: 0,
         "& .MuiDrawer-paper": {

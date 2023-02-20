@@ -57,7 +57,7 @@ const TopAppBar = ({ drawerWidth }) => {
         // ml: `${drawerWidth}px`,
         color: "textBlack",
         boxShadow: 2,
-        zIndex: 99999,
+        // zIndex: 99999,
       }}
     >
       <Toolbar

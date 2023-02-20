@@ -45,7 +45,7 @@ const BestSellingProducts = () => {
       field: "title",
       headerName: "Product",
       flex: 1,
-      minWidth: 250,
+      minWidth: 220,
       renderCell: ({ row }) => {
         return (
           <Box sx={{ display: "flex", gap: "12px", width: 1 }}>
@@ -66,14 +66,14 @@ const BestSellingProducts = () => {
       field: "category",
       headerName: "Category",
       flex: 1,
-      width: 130,
+      width: 120,
       valueGetter: ({ value }) => value?.title,
     },
     {
       field: "sub_category",
       headerName: "Sub Category",
       flex: 1,
-      minWidth: 130,
+      minWidth: 120,
       align: "center",
       headerAlign: "center",
     },
@@ -81,7 +81,7 @@ const BestSellingProducts = () => {
       field: "price",
       headerName: "Price",
       flex: 1,
-      minWidth: 100,
+      minWidth: 120,
       align: "center",
       headerAlign: "center",
       renderCell: ({ value }) => (
@@ -101,7 +101,7 @@ const BestSellingProducts = () => {
       field: "stock",
       headerName: "Stock",
       flex: 1,
-      minWidth: 100,
+      minWidth: 120,
       align: "center",
       headerAlign: "center",
     },
@@ -111,7 +111,7 @@ const BestSellingProducts = () => {
       align: "center",
       headerAlign: "center",
       flex: 1,
-      minWidth: 100,
+      minWidth: 120,
       renderCell: ({ value }) => (
         <Box sx={{ display: "flex", alignItems: "center", gap: "7px" }}>
           <Box
@@ -126,7 +126,7 @@ const BestSellingProducts = () => {
       field: "actions",
       type: "actions",
       headerName: "Actions",
-      width: 120,
+      width: 150,
       getActions: ({ row }) => {
         return [
           <Tooltip title="View" placement="top">
@@ -234,11 +234,22 @@ const BestSellingProducts = () => {
       {/* typography and search field end */}
 
       {/* data table */}
-      <DataTable
-        columns={tableColumn}
-        rows={products}
-        isLoading={productLoading}
-      />
+      <Box
+        sx={{
+          "& .MuiDataGrid-virtualScrollerContent": {
+            padding: "0 15px 0 15px",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            padding: "0 15px 0 15px",
+          },
+        }}
+      >
+        <DataTable
+          columns={tableColumn}
+          rows={products}
+          isLoading={productLoading}
+        />
+      </Box>
       {/* data table end */}
     </Box>
   );

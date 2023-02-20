@@ -8,18 +8,16 @@ import PasswordReset from "./Components/Authentication/PasswordReset";
 import PasswordResetConfirmation from "./Components/Authentication/PasswordResetConfirmation";
 import SignIn from "./Components/Authentication/SignIn";
 import UpdatePassword from "./Components/Authentication/UpdatePassword";
-import ViewComments from "./Components/Comments/ViewComments";
+// import ViewComments from "./Components/Comments/ViewComments";
 import LoadingIndicator from "./Components/Shared/LoadingIndicator";
 import { useGlobalContext } from "./Global/GlobalContext";
 import AuthenticationLayout from "./Layouts/AuthenticationLayout";
 import MainLayout from "./Layouts/MainLayout";
-import Epaper from "./Pages/Epaper";
+import AddCategories from "./Pages/Categories/AddCategories";
+import CategoriesList from "./Pages/Categories/CategoriesList";
+import CustomerProfile from "./Pages/Customers/CustomerProfile";
+import CustomersList from "./Pages/Customers/CustomersList";
 import Home from "./Pages/Home";
-import AddNews from "./Pages/News/AddNews";
-import AddVideos from "./Pages/News/AddVideos";
-import Comments from "./Pages/News/Comments";
-import ViewNews from "./Pages/News/ViewNews";
-import ViewVideos from "./Pages/News/ViewVideos";
 import Notification from "./Pages/Notification";
 import Settings from "./Pages/Settings";
 
@@ -48,63 +46,50 @@ function App() {
               element: <Home />,
             },
             {
-              path: "news",
+              path: "categories",
               element: <Outlet />,
               handle: {
-                crumb: { to: "/news", title: "News" },
+                crumb: { to: "/categories", title: "Categories" },
               },
               children: [
                 {
                   path: "",
-                  element: <ViewNews />,
+                  element: <CategoriesList />,
                 },
                 {
                   path: "add",
-                  element: <AddNews />,
-                  handle: {
-                    crumb: { to: "/news/add", title: "Add News" },
-                  },
-                },
-                {
-                  path: "videos",
-                  element: <ViewVideos />,
-                  handle: {
-                    crumb: { to: "/news/videos", title: "Videos" },
-                  },
-                },
-                {
-                  path: "add-videos",
-                  element: <AddVideos />,
-                  handle: {
-                    crumb: { to: "/news/add-videos", title: "Add Videos" },
-                  },
-                },
-                {
-                  path: "comments",
-                  element: <Comments />,
-                  handle: {
-                    crumb: { to: "/news/comments", title: "Comments" },
-                  },
-                },
-                //view comments
-                {
-                  path: "view-comments",
-                  element: <ViewComments />,
+                  element: <AddCategories />,
                   handle: {
                     crumb: {
-                      to: "/news/view-comments",
-                      title: "View Comments",
+                      to: "/categories/add",
+                      title: "Add Categories",
                     },
                   },
                 },
               ],
             },
             {
-              path: "e-paper",
-              element: <Epaper />,
+              path: "customers",
+              element: <Outlet />,
               handle: {
-                crumb: { to: "/e-paper", title: "E-Paper" },
+                crumb: { to: "/customers", title: "Customers" },
               },
+              children: [
+                {
+                  path: "",
+                  element: <CustomersList />,
+                },
+                {
+                  path: "customer-profile/:userId",
+                  element: <CustomerProfile />,
+                  // handle: {
+                  //   crumb: {
+                  //     to: "/customers/customer-profile",
+                  //     title: "Customer Profile",
+                  //   },
+                  // },
+                },
+              ],
             },
             {
               path: "notification",
