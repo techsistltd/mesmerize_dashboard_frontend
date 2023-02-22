@@ -10,7 +10,7 @@ import moment from "moment/moment";
 
 const OrderOverview = () => {
   const { data: orders = [], isLoading: productLoading } = useQuery([
-    "/mesmerize/orders/",
+    "/dashboard/orders/",
   ]);
   console.log(orders);
   // order status button style condition

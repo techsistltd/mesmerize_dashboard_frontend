@@ -1,4 +1,5 @@
 import DeleteIcon from "@mui/icons-material/Delete";
+import { LoadingButton } from "@mui/lab";
 import {
   Button,
   Dialog,
@@ -8,9 +9,29 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
+import { useMutation } from "@tanstack/react-query";
 import React from "react";
+import axiosApi from "../../Utils/axiosApi";
 
-const DeleteDialog = ({ open = false, handleClose = () => null }) => {
+const DeleteDialog = ({
+  open = false,
+  deleteURL = "",
+  handleClose = () => null,
+  successRefetch = () => null,
+}) => {
+  const { mutate: deleteMutation, isLoading } = useMutation(
+    () => axiosApi.delete(deleteURL),
+    {
+      onSuccess: () => {
+        successRefetch();
+        handleClose();
+      },
+      onError: (e) => {
+        alert("failed");
+      },
+    }
+  );
+
   return (
     <Dialog
       open={open}
@@ -19,6 +40,7 @@ const DeleteDialog = ({ open = false, handleClose = () => null }) => {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle
+        component="div"
         id="alert-dialog-title"
         sx={{
           display: "flex",
@@ -54,9 +76,10 @@ const DeleteDialog = ({ open = false, handleClose = () => null }) => {
         >
           Cancel
         </Button>
-        <Button
+        <LoadingButton
           variant="contained"
-          onClick={() => handleClose(true)}
+          loading={isLoading}
+          onClick={deleteMutation}
           autoFocus
           sx={{
             color: "textWhite",
@@ -68,7 +91,7 @@ const DeleteDialog = ({ open = false, handleClose = () => null }) => {
           }}
         >
           Delete
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   );

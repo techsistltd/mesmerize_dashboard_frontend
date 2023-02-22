@@ -13,7 +13,6 @@ import LoadingIndicator from "./Components/Shared/LoadingIndicator";
 import { useGlobalContext } from "./Global/GlobalContext";
 import AuthenticationLayout from "./Layouts/AuthenticationLayout";
 import MainLayout from "./Layouts/MainLayout";
-import AddCategories from "./Pages/Categories/AddCategories";
 import CategoriesList from "./Pages/Categories/CategoriesList";
 import CustomerProfile from "./Pages/Customers/CustomerProfile";
 import CustomersList from "./Pages/Customers/CustomersList";
@@ -47,26 +46,10 @@ function App() {
             },
             {
               path: "categories",
-              element: <Outlet />,
+              element: <CategoriesList />,
               handle: {
                 crumb: { to: "/categories", title: "Categories" },
               },
-              children: [
-                {
-                  path: "",
-                  element: <CategoriesList />,
-                },
-                {
-                  path: "add",
-                  element: <AddCategories />,
-                  handle: {
-                    crumb: {
-                      to: "/categories/add",
-                      title: "Add Categories",
-                    },
-                  },
-                },
-              ],
             },
             {
               path: "customers",
@@ -82,12 +65,11 @@ function App() {
                 {
                   path: "customer-profile/:userId",
                   element: <CustomerProfile />,
-                  // handle: {
-                  //   crumb: {
-                  //     to: "/customers/customer-profile",
-                  //     title: "Customer Profile",
-                  //   },
-                  // },
+                  handle: {
+                    crumb: {
+                      title: "Customer Profile",
+                    },
+                  },
                 },
               ],
             },

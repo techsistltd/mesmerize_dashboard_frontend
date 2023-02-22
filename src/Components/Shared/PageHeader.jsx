@@ -23,7 +23,7 @@ const PageHeader = () => {
       return (
         <Typography
           key={`route-for=${to}`}
-          component={Link}
+          component={Boolean(to) ? Link : "p"}
           to={to}
           sx={{
             fontSize: "16px",

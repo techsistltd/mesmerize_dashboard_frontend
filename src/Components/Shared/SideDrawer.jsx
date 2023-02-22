@@ -40,19 +40,9 @@ const drawerMenus = [
     ],
   },
   {
-    title: "Manage Categories",
+    title: "Categories List",
     icon: BiCategoryAlt,
     path: "categories",
-    children: [
-      {
-        title: "Categories List",
-        path: "",
-      },
-      {
-        title: "Add Categories",
-        path: "add",
-      },
-    ],
   },
   {
     title: "Notification",

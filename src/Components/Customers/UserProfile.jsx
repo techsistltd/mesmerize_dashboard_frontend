@@ -20,7 +20,7 @@ import DataTable from "../Shared/DataTable";
 const UserProfile = () => {
   const { userId } = useParams();
   const { data: userOrders = {}, isLoading: productLoading } = useQuery([
-    `/mesmerize/user-orders/?user=${userId}`,
+    `/dashboard/user-orders/?user=${userId}`,
   ]);
 
   console.log(userOrders);
@@ -236,7 +236,7 @@ const UserProfile = () => {
               alignItems: "center",
             }}
           >
-            <Typography variant="body4">Registered Customer</Typography>
+            <Typography variant="body4">Order Information</Typography>
             <Typography>Total orders {userOrders?.orders?.length}</Typography>
           </Box>
           <Box

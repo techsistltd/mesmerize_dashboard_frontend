@@ -11,7 +11,7 @@ import { GridActionsCellItem } from "@mui/x-data-grid";
 
 const BestSellingProducts = () => {
   const { data: products = [], isLoading: productLoading } = useQuery([
-    "/mesmerize/best-selling-products/",
+    "/dashboard/best-selling-products/",
   ]);
   const statsData = [
     {
