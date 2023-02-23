@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 import { FaUser } from "react-icons/fa";
+import { IoMdMove } from "react-icons/io";
 import { MdNotifications, MdSettingsSuggest } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import BrandLogo from "../../Assets/BrandLogo.svg";
@@ -43,6 +44,21 @@ const drawerMenus = [
     title: "Categories List",
     icon: BiCategoryAlt,
     path: "categories",
+  },
+  {
+    title: "Products",
+    icon: IoMdMove,
+    path: "products",
+    children: [
+      {
+        title: "Manage Products",
+        path: "",
+      },
+      {
+        title: "Add Products",
+        path: "add-products",
+      },
+    ],
   },
   {
     title: "Notification",

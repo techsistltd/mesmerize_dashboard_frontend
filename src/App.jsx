@@ -18,6 +18,8 @@ import CustomerProfile from "./Pages/Customers/CustomerProfile";
 import CustomersList from "./Pages/Customers/CustomersList";
 import Home from "./Pages/Home";
 import Notification from "./Pages/Notification";
+import AddProducts from "./Pages/Products/AddProducts";
+import ManageProducts from "./Pages/Products/ManageProducts";
 import Settings from "./Pages/Settings";
 
 function App() {
@@ -68,6 +70,29 @@ function App() {
                   handle: {
                     crumb: {
                       title: "Customer Profile",
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              path: "products",
+              element: <Outlet />,
+              handle: {
+                crumb: { to: "/products", title: "products" },
+              },
+              children: [
+                {
+                  path: "",
+                  element: <ManageProducts />,
+                },
+                {
+                  path: "add-products",
+                  element: <AddProducts />,
+                  handle: {
+                    crumb: {
+                      to: "/products/add-products",
+                      title: "Add Products",
                     },
                   },
                 },
