@@ -11,7 +11,6 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import React from "react";
-import { useEffect } from "react";
 import { useState } from "react";
 import axiosApi from "../../Utils/axiosApi";
 

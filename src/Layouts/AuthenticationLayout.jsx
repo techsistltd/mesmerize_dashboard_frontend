@@ -1,7 +1,7 @@
 import { Box, Container } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
-import BrandLogo from "../Assets/BrandLogo.svg";
+// import BrandLogo from "../Assets/BrandLogo.svg";
 
 const AuthenticationLayout = () => {
   return (
@@ -18,17 +18,17 @@ const AuthenticationLayout = () => {
         sx={{
           bgcolor: "primary.main",
           borderRadius: "4px",
-          paddingTop: "45px",
+          // paddingTop: "45px",
         }}
       >
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             justifyContent: "center",
           }}
         >
           <Box component="img" src={BrandLogo} />
-        </Box>
+        </Box> */}
         <Outlet />
       </Box>
     </Container>
