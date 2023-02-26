@@ -58,6 +58,10 @@ const drawerMenus = [
         title: "Add Products",
         path: "add-products",
       },
+      {
+        title: "Manage Package",
+        path: "manage-package",
+      },
     ],
   },
   {

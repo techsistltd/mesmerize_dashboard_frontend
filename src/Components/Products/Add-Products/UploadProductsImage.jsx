@@ -9,18 +9,12 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
-import UploadImage from "../Shared/UploadImage";
+import UploadImage from "../../Shared/UploadImage";
 
-const UploadProductsImage = () => {
+const UploadProductsImage = ({ control }) => {
   const { data: products = [] } = useQuery(["/dashboard/products/"]);
-
-  const { control, handleSubmit, reset } = useForm();
-  const getData = (data) => {
-    console.log({ ...data });
-    reset();
-  };
 
   return (
     <Paper sx={{ padding: "45px" }}>
@@ -59,8 +53,6 @@ const UploadProductsImage = () => {
         {/* -------end------- */}
         {/* input field */}
         <Box
-          component={"form"}
-          onSubmit={handleSubmit(getData)}
           sx={{
             display: "flex",
             gap: "35px",
@@ -155,19 +147,6 @@ const UploadProductsImage = () => {
           </Box>
         </Box>
         {/* -----end------ */}
-        {/* submit button */}
-        {/* <Button
-          variant="button3"
-          type="submit"
-          sx={{
-            fontWeight: 600,
-            fontSize: "16px",
-            height: "40px",
-            width: 1,
-          }}
-        >
-          Search
-        </Button> */}
       </Box>
     </Paper>
   );

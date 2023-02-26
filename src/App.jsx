@@ -18,7 +18,9 @@ import CustomerProfile from "./Pages/Customers/CustomerProfile";
 import CustomersList from "./Pages/Customers/CustomersList";
 import Home from "./Pages/Home";
 import Notification from "./Pages/Notification";
+import AddPackage from "./Pages/Products/AddPackage";
 import AddProducts from "./Pages/Products/AddProducts";
+import ManagePackage from "./Pages/Products/ManagePackage";
 import ManageProducts from "./Pages/Products/ManageProducts";
 import Settings from "./Pages/Settings";
 
@@ -93,6 +95,26 @@ function App() {
                     crumb: {
                       to: "/products/add-products",
                       title: "Add Products",
+                    },
+                  },
+                },
+                {
+                  path: "manage-package",
+                  element: <ManagePackage />,
+                  handle: {
+                    crumb: {
+                      to: "/products/manage-package",
+                      title: "Manage Package",
+                    },
+                  },
+                },
+                {
+                  path: "add-package",
+                  element: <AddPackage />,
+                  handle: {
+                    crumb: {
+                      to: "/products/add-package",
+                      title: "Add Package",
                     },
                   },
                 },

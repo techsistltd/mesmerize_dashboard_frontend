@@ -6,7 +6,7 @@ import { AiFillStar, AiOutlineEye } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
-import DataTable from "../Shared/DataTable";
+import DataTable from "../../Shared/DataTable";
 
 const ManageProductsTable = () => {
   const { data: products = [], isLoading: productLoading } = useQuery([

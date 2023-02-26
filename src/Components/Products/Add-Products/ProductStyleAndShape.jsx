@@ -7,17 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import UploadImage from "../Shared/UploadImage";
-import { useForm, Controller } from "react-hook-form";
-import { useQuery } from "@tanstack/react-query";
+import UploadImage from "../../Shared/UploadImage";
+import { Controller } from "react-hook-form";
 
-const ProductStyleAndShape = () => {
-  const { control, handleSubmit, reset } = useForm();
-  const getData = (data) => {
-    console.log({ ...data });
-    reset();
-  };
-
+const ProductStyleAndShape = ({ control }) => {
   return (
     <Paper
       sx={{
@@ -34,7 +27,7 @@ const ProductStyleAndShape = () => {
             "&:after": {
               content: `""`,
               position: "absolute",
-              width: "72px",
+              width: "50px",
               height: "2px",
               bgcolor: "textBlack",
               bottom: "-10px",
@@ -56,7 +49,7 @@ const ProductStyleAndShape = () => {
             "&:after": {
               content: `""`,
               position: "absolute",
-              width: "72px",
+              width: "50px",
               height: "2px",
               bgcolor: "textBlack",
               bottom: "-10px",
@@ -70,8 +63,6 @@ const ProductStyleAndShape = () => {
         <UploadImage />
       </Box>
       <Box
-        component={"form"}
-        onSubmit={handleSubmit(getData)}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -82,7 +73,7 @@ const ProductStyleAndShape = () => {
           },
         }}
       >
-        {/* productName */}
+        {/* size */}
         <Box>
           <InputLabel
             htmlFor="form-input-size"
@@ -119,7 +110,7 @@ const ProductStyleAndShape = () => {
             )}
           />
         </Box>
-        {/* categories */}
+        {/* color */}
         <Box>
           <InputLabel
             htmlFor="form-input-color"
@@ -161,9 +152,10 @@ const ProductStyleAndShape = () => {
             )}
           />
         </Box>
+        {/* flavor */}
         <Box>
           <InputLabel
-            htmlFor="form-input-size"
+            htmlFor="form-input-flavor"
             sx={{
               color: "textBlack",
               fontSize: "16px",
@@ -172,12 +164,12 @@ const ProductStyleAndShape = () => {
             Flavor
           </InputLabel>
           <Controller
-            name={"size"}
+            name={"flavor"}
             control={control}
             defaultValue={""}
             render={({ field }) => (
               <TextField
-                id="form-input-size"
+                id="form-input-flavor"
                 variant="outlined"
                 type="text"
                 placeholder="Enter Product Flavor "
