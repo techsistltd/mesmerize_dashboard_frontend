@@ -14,15 +14,15 @@ const UploadImage = () => {
     }
   };
   return (
-    <Grid container columnGap={"30px"} rowGap={"30px"}>
+    <Grid container columnGap={"35px"} rowGap={"35px"}>
       {files?.map((file, index) => (
         <Grid
           item
-          xs={2}
+          xs={1}
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "left",
           }}
         >
           <Box
@@ -41,11 +41,11 @@ const UploadImage = () => {
       ))}
       <Grid
         item
-        xs={2}
+        xs={1}
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "left",
         }}
       >
         <Button

@@ -1,9 +1,9 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
-import ProductDetails from "../../Components/Products/Add-Products/ProductDetails";
-import RichTextProduct from "../../Components/Products/Add-Products/RichTextProduct";
-import ProductStyleAndShape from "../../Components/Products/Add-Products/ProductStyleAndShape";
-import UploadProductsImage from "../../Components/Products/Add-Products/UploadProductsImage";
+import ProductDetails from "../../../Components/Products/Add-Products/ProductDetails";
+import RichTextProduct from "../../../Components/Products/Add-Products/RichTextProduct";
+import ProductStyleAndShape from "../../../Components/Products/Add-Products/ProductStyleAndShape";
+import UploadProductsImage from "../../../Components/Products/Add-Products/UploadProductsImage";
 import { useForm } from "react-hook-form";
 
 const AddProducts = () => {

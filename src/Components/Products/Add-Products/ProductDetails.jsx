@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
 
 const ProductDetails = ({ control }) => {
@@ -103,7 +103,7 @@ const ProductDetails = ({ control }) => {
         {/* status */}
         <Grid item xs={4}>
           <InputLabel
-            htmlFor="form-input-category"
+            htmlFor="form-input-status"
             sx={{
               color: "textBlack",
               fontSize: "16px",
@@ -112,12 +112,13 @@ const ProductDetails = ({ control }) => {
             status
           </InputLabel>
           <Controller
-            name={"categories"}
+            name={"status"}
             control={control}
             defaultValue=""
             render={({ field: { value, ...field } }) => (
               <TextField
-                id="form-input-category"
+                fullWidth
+                id="form-input-status"
                 variant="outlined"
                 select
                 value={Boolean(value) ? value : "default"}
@@ -125,7 +126,6 @@ const ProductDetails = ({ control }) => {
                 sx={{
                   border: 1,
                   borderColor: "primary.main",
-                  width: "350px",
                   height: "40px",
                   borderRadius: "5px",
                   mt: "10px",
@@ -137,11 +137,11 @@ const ProductDetails = ({ control }) => {
                 <MenuItem value="default" disabled>
                   status
                 </MenuItem>
-                {products.map((category) => (
+                {/* {products.map((category) => (
                   <MenuItem key={category?.slug} value={""}>
                     {}
                   </MenuItem>
-                ))}
+                ))} */}
               </TextField>
             )}
           />
@@ -192,9 +192,10 @@ const ProductDetails = ({ control }) => {
             )}
           />
         </Grid>
+        {/* tags */}
         <Grid item xs={8}>
           <Controller
-            name={"delivery-option-ss"}
+            name={"tags"}
             control={control}
             defaultValue={[]}
             render={({ field: { value = [], onChange } }) => {
@@ -205,7 +206,6 @@ const ProductDetails = ({ control }) => {
                   autoSelect
                   multiple
                   options={["option1"]}
-                  // getOptionLabel={(option) => option.inputValue}
                   value={value}
                   onChange={(_, newValue) => onChange(newValue)}
                   filterOptions={(options, params) => {
@@ -221,22 +221,51 @@ const ProductDetails = ({ control }) => {
 
                     return filtered;
                   }}
+                  sx={{
+                    "& .MuiAutocomplete-tag": {
+                      backgroundColor: "color12.main",
+                      borderRadius: "5px",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      padding: 0,
+                    },
+                    "& .MuiChip-label": {
+                      color: "textWhite",
+                    },
+
+                    "& .MuiMenuList-root": {
+                      boxShadow: "0px 4px 10px 5px rgba(0, 0, 0, 0.87)",
+                    },
+                  }}
                   renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      margin="normal"
-                      variant="outlined"
-                      sx={{
-                        border: 1,
-                        borderColor: "primary.main",
-                        //   height: "40px",
-                        borderRadius: "5px",
-                        mt: "10px",
-                        "& .MuiInputBase-input": {
-                          padding: "8px",
-                        },
-                      }}
-                    />
+                    <Fragment>
+                      <InputLabel
+                        htmlFor="form-input-tags"
+                        sx={{
+                          color: "textBlack",
+                          fontSize: "16px",
+                        }}
+                      >
+                        Tags
+                      </InputLabel>
+                      <TextField
+                        {...params}
+                        fullWidth
+                        id="form-input-tags"
+                        margin="normal"
+                        variant="outlined"
+                        sx={{
+                          border: 1,
+                          borderColor: "primary.main",
+                          height: "40px",
+                          borderRadius: "5px",
+                          mt: "10px",
+                          "& .MuiInputBase-input": {
+                            padding: "8px",
+                          },
+                        }}
+                      />
+                    </Fragment>
                   )}
                 />
               );

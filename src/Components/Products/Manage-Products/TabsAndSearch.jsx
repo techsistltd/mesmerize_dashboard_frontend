@@ -134,7 +134,7 @@ const TabsAndSearch = () => {
                   type={"text"}
                   variant="outlined"
                   {...field}
-                  placeholder="Type here... "
+                  placeholder="Product ID"
                   sx={{
                     border: 1,
                     borderColor: "primary.main",

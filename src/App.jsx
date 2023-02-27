@@ -18,10 +18,11 @@ import CustomerProfile from "./Pages/Customers/CustomerProfile";
 import CustomersList from "./Pages/Customers/CustomersList";
 import Home from "./Pages/Home";
 import Notification from "./Pages/Notification";
-import AddPackage from "./Pages/Products/AddPackage";
-import AddProducts from "./Pages/Products/AddProducts";
-import ManagePackage from "./Pages/Products/ManagePackage";
-import ManageProducts from "./Pages/Products/ManageProducts";
+import AddPackage from "./Pages/Products/Add-Package/AddPackage";
+import AddProducts from "./Pages/Products/Add-Products/AddProducts";
+import Archive from "./Pages/Products/Archive/Archive";
+import ManageProducts from "./Pages/Products/Managa-Products/ManageProducts";
+import ManagePackage from "./Pages/Products/Manage-Package/ManagePackage";
 import Settings from "./Pages/Settings";
 
 function App() {
@@ -98,28 +99,45 @@ function App() {
                     },
                   },
                 },
+              ],
+            },
+            {
+              path: "manage-package",
+              element: <Outlet />,
+              handle: {
+                crumb: {
+                  to: "/manage-package",
+                  title: "Manage Package",
+                },
+              },
+              children: [
                 {
-                  path: "manage-package",
+                  path: "",
                   element: <ManagePackage />,
-                  handle: {
-                    crumb: {
-                      to: "/products/manage-package",
-                      title: "Manage Package",
-                    },
-                  },
                 },
                 {
                   path: "add-package",
                   element: <AddPackage />,
                   handle: {
                     crumb: {
-                      to: "/products/add-package",
+                      to: "/manage-package/add-package",
                       title: "Add Package",
+                    },
+                  },
+                },
+                {
+                  path: "archive",
+                  element: <Archive />,
+                  handle: {
+                    crumb: {
+                      to: "/manage-package/archive",
+                      title: "Archive",
                     },
                   },
                 },
               ],
             },
+
             {
               path: "notification",
               element: <Notification />,

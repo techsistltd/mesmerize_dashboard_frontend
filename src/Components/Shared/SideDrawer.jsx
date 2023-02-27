@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { BiCategoryAlt } from "react-icons/bi";
+import { BiCategoryAlt, BiPackage } from "react-icons/bi";
 import { FaUser } from "react-icons/fa";
 import { IoMdMove } from "react-icons/io";
 import { MdNotifications, MdSettingsSuggest } from "react-icons/md";
@@ -58,11 +58,12 @@ const drawerMenus = [
         title: "Add Products",
         path: "add-products",
       },
-      {
-        title: "Manage Package",
-        path: "manage-package",
-      },
     ],
+  },
+  {
+    title: "Manage Package",
+    icon: BiPackage,
+    path: "manage-package",
   },
   {
     title: "Notification",

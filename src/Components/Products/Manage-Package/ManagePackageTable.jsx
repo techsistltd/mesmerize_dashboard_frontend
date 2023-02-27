@@ -4,9 +4,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import DataTable from "../../Shared/DataTable";
 
-const ProductPackageTable = () => {
+const ManagePackageTable = () => {
   const navigate = useNavigate();
-
   const tableColumn = [
     {
       field: "id",
@@ -23,14 +22,28 @@ const ProductPackageTable = () => {
       minWidth: 220,
       renderCell: ({ row }) => {
         return (
-          <Box sx={{ display: "flex", gap: "12px", width: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "12px",
+              width: 1,
+            }}
+          >
             <Avatar
               variant="rounded"
               src={row?.thumbnail}
               alt={row.title}
-              sx={{ height: "50px", width: "50px" }}
+              sx={{
+                height: "50px",
+                width: "50px",
+              }}
             />
-            <Typography variant="body6" sx={{ whiteSpace: "break-spaces" }}>
+            <Typography
+              variant="body6"
+              sx={{
+                whiteSpace: "break-spaces",
+              }}
+            >
               {row?.title}
             </Typography>
           </Box>
@@ -52,7 +65,12 @@ const ProductPackageTable = () => {
       align: "center",
       headerAlign: "center",
       renderCell: ({ value }) => (
-        <Box sx={{ display: "flex", alignItems: "end" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "end",
+          }}
+        >
           <Box
             component={TbCurrencyTaka}
             sx={{
@@ -91,9 +109,19 @@ const ProductPackageTable = () => {
           }}
         >
           {Boolean(value) ? (
-            <Chip label="Active" sx={{ bgcolor: "#67A13E" }} />
+            <Chip
+              label="Active"
+              sx={{
+                bgcolor: "#67A13E",
+              }}
+            />
           ) : (
-            <Chip label="Inactive" sx={{ bgcolor: "#EA5046" }} />
+            <Chip
+              label="Inactive"
+              sx={{
+                bgcolor: "#EA5046",
+              }}
+            />
           )}
         </Box>
       ),
@@ -154,7 +182,6 @@ const ProductPackageTable = () => {
       },
     },
   ];
-
   return (
     <Box>
       <Box
@@ -165,16 +192,30 @@ const ProductPackageTable = () => {
         }}
       >
         <Typography variant="body3">Package List</Typography>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "25px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "25px",
+          }}
+        >
           <Button
-            onClick={() => navigate("/products/add-package/")}
+            onClick={() => navigate("/manage-package/add-package")}
             variant="button3"
-            sx={{ gap: "10px" }}
+            sx={{
+              gap: "10px",
+            }}
           >
             <AiOutlinePlus />
             Add New Package
           </Button>
-          <Button variant="button4" sx={{ color: "textWhite" }}>
+          <Button
+            onClick={() => navigate("/manage-package/archive")}
+            variant="button4"
+            sx={{
+              color: "textWhite",
+            }}
+          >
             Archive
           </Button>
         </Box>
@@ -190,8 +231,7 @@ const ProductPackageTable = () => {
         }}
       >
         <DataTable
-          columns={tableColumn}
-          rows={""}
+          columns={tableColumn} // rows={""}
           //    isLoading={productLoading}
         />
       </Box>
@@ -199,4 +239,4 @@ const ProductPackageTable = () => {
   );
 };
 
-export default ProductPackageTable;
+export default ManagePackageTable;

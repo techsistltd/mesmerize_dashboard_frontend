@@ -83,7 +83,7 @@ const TopAppBar = ({ drawerWidth }) => {
             alignItems: "center",
           }}
         >
-          <Badge
+          {/* <Badge
             badgeContent={17}
             overlap="circular"
             color="primary"
@@ -103,7 +103,7 @@ const TopAppBar = ({ drawerWidth }) => {
             >
               <MdMessage sx={{ fontSize: "26px" }} />
             </IconButton>
-          </Badge>
+          </Badge> */}
           <Badge
             badgeContent={17}
             overlap="circular"
