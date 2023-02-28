@@ -5,8 +5,10 @@ import RichTextProduct from "../../../Components/Products/Add-Products/RichTextP
 import ProductStyleAndShape from "../../../Components/Products/Add-Products/ProductStyleAndShape";
 import UploadProductsImage from "../../../Components/Products/Add-Products/UploadProductsImage";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 const AddProducts = () => {
+  const { productSlug } = useParams();
   const { control, handleSubmit, reset } = useForm();
 
   const getData = (data) => {

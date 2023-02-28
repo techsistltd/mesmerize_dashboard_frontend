@@ -8,15 +8,21 @@ import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import { GridActionsCellItem } from "@mui/x-data-grid";
+import { useNavigate } from "react-router-dom";
 
 const BestSellingProducts = () => {
+  const navigate = useNavigate();
+
   const { data: products = [], isLoading: productLoading } = useQuery([
     "/dashboard/best-selling-products/",
   ]);
+
+  const { data: { summary = {} } = {} } = useQuery(["/dashboard/summary/"]);
+
   const statsData = [
     {
       title: "Total Products",
-      count: products.length,
+      count: summary?.total_products ?? 0,
     },
     {
       title: "Total Orders",
@@ -141,7 +147,7 @@ const BestSellingProducts = () => {
                 />
               }
               label="View"
-              onClick={() => console.log(row)}
+              onClick={() => navigate(`/products/${row?.slug}`)}
             />
           </Tooltip>,
           <Tooltip title="Edit" placement="top">
@@ -156,7 +162,7 @@ const BestSellingProducts = () => {
                 />
               }
               label="Edit"
-              onClick={() => console.log(row)}
+              onClick={() => navigate(`/products/${row?.slug}/edit`)}
             />
           </Tooltip>,
           <Tooltip title="Delete" placement="top">

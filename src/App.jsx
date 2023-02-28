@@ -8,6 +8,7 @@ import PasswordReset from "./Components/Authentication/PasswordReset";
 import PasswordResetConfirmation from "./Components/Authentication/PasswordResetConfirmation";
 import SignIn from "./Components/Authentication/SignIn";
 import UpdatePassword from "./Components/Authentication/UpdatePassword";
+import ViewProduct from "./Pages/Products/View-Products/ViewProduct";
 // import ViewComments from "./Components/Comments/ViewComments";
 import LoadingIndicator from "./Components/Shared/LoadingIndicator";
 import { useGlobalContext } from "./Global/GlobalContext";
@@ -97,6 +98,20 @@ function App() {
                       to: "/products/add-products",
                       title: "Add Products",
                     },
+                  },
+                },
+                {
+                  path: ":productSlug",
+                  element: <ViewProduct />,
+                  handle: {
+                    crumb: { title: "Product Details" },
+                  },
+                },
+                {
+                  path: ":productSlug/edit",
+                  element: <AddProducts />,
+                  handle: {
+                    crumb: { title: "Edit Product" },
                   },
                 },
               ],

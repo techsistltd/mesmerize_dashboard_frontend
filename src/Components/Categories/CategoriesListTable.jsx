@@ -46,14 +46,12 @@ const CategoriesListTable = ({ handleEdit }) => {
       flex: 1,
       minWidth: 100,
     },
-
     {
       field: "created_at",
       headerName: "Date",
       width: 200,
       valueFormatter: ({ value }) => moment(value).format("ll"),
     },
-
     {
       field: "actions",
       type: "actions",

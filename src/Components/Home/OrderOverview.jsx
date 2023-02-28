@@ -1,4 +1,4 @@
-import { Box, Typography, Avatar, Tooltip, Button } from "@mui/material";
+import { Box, Typography, Avatar, Tooltip, Button, Chip } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import DataTable from "../Shared/DataTable";
@@ -13,56 +13,6 @@ const OrderOverview = () => {
     "/dashboard/orders/",
   ]);
   console.log(orders);
-  // order status button style condition
-  const renderButton = (type) => {
-    switch (type) {
-      case "DELIVERED":
-        return (
-          <Button variant="button1" sx={{ color: "textWhite" }}>
-            Completed
-          </Button>
-        );
-        break;
-      case "PREPARING":
-        return (
-          <Button variant="button4" sx={{ color: "textWhite" }}>
-            Preparing
-          </Button>
-        );
-        break;
-      case "PICKED":
-        return (
-          <Button variant="button5" sx={{ color: "textWhite" }}>
-            Picked Up
-          </Button>
-        );
-        break;
-      case "ON_THE_WAY":
-        return (
-          <Button variant="button6" sx={{ color: "textWhite" }}>
-            On the Way
-          </Button>
-        );
-        break;
-      case "ORDER_CONFIRM":
-        return (
-          <Button variant="button3" sx={{ color: "textWhite" }}>
-            Order Confirm
-          </Button>
-        );
-        break;
-      case "CANCELLED":
-        return (
-          <Button variant="button2" sx={{ color: "textWhite" }}>
-            Cancelled
-          </Button>
-        );
-        break;
-
-      default:
-        break;
-    }
-  };
   // -------end------
   const tableColumn = [
     {
@@ -105,7 +55,24 @@ const OrderOverview = () => {
       headerName: "Status",
       flex: 1,
       width: 120,
-      renderCell: ({ value }) => renderButton(value),
+      renderCell: ({ value }) => (
+        <Box
+          sx={{
+            "& .MuiChip-root": {
+              borderRadius: "6px",
+            },
+            "& .MuiChip-label": {
+              color: "textWhite",
+            },
+          }}
+        >
+          {Boolean(value) ? (
+            <Chip label="Active" sx={{ bgcolor: "#67A13E" }} />
+          ) : (
+            <Chip label="Inactive" sx={{ bgcolor: "#EA5046" }} />
+          )}
+        </Box>
+      ),
     },
     {
       field: "created_at",
@@ -117,7 +84,7 @@ const OrderOverview = () => {
       valueFormatter: ({ value }) => moment(value).format("ll"),
     },
     {
-      field: "payable_amount",
+      field: "grand_total",
       headerName: "Price",
       flex: 1,
       minWidth: 100,

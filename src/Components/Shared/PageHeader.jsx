@@ -31,9 +31,11 @@ const PageHeader = () => {
             textDecoration: "none",
             color: "textBlack",
             textTransform: "capitalize",
-            "&:hover": {
-              textDecoration: "underline",
-            },
+            "&:hover": Boolean(to)
+              ? {
+                  textDecoration: "underline",
+                }
+              : {},
             "&:visited": {
               color: "primary.main",
             },
