@@ -12,6 +12,7 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import UploadImage from "../../Shared/UploadImage";
+import { Fragment } from "react";
 
 const UploadProductsImage = ({ control }) => {
   const { data: products = [] } = useQuery(["/dashboard/products/"]);
@@ -49,7 +50,7 @@ const UploadProductsImage = ({ control }) => {
         </Box>
         {/* ------end------ */}
         {/* upload section */}
-        <UploadImage />
+        <UploadImage control={control} fieldName={"product_image"} required />
         {/* -------end------- */}
         {/* input field */}
         <Box
@@ -64,84 +65,111 @@ const UploadProductsImage = ({ control }) => {
         >
           {/* productName */}
           <Box>
-            <InputLabel
-              htmlFor="form-input-productName"
-              sx={{
-                color: "textBlack",
-                fontSize: "16px",
-              }}
-            >
-              Product Name
-            </InputLabel>
             <Controller
-              name={"productName"}
+              name={"title"}
               control={control}
               defaultValue={""}
-              render={({ field }) => (
-                <TextField
-                  id="form-input-productName"
-                  variant="outlined"
-                  type="text"
-                  placeholder="Product Name"
-                  {...field}
-                  sx={{
-                    border: 1,
-                    borderColor: "primary.main",
-                    width: "350px",
-                    borderRadius: "5px",
-                    mt: "10px",
-                    height: "40px",
-                    "& .MuiInputBase-input": {
-                      padding: "8px",
-                    },
-                  }}
-                ></TextField>
+              rules={{
+                required: {
+                  value: true,
+                  message: "Product name is required",
+                },
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <Fragment>
+                  <InputLabel
+                    required
+                    error={Boolean(error)}
+                    htmlFor="form-input-productName"
+                    sx={{
+                      color: "textBlack",
+                      fontSize: "16px",
+                    }}
+                  >
+                    Product Name
+                  </InputLabel>
+                  <TextField
+                    id="form-input-productName"
+                    variant="outlined"
+                    type="text"
+                    placeholder="Product Name"
+                    {...field}
+                    error={Boolean(error)}
+                    helperText={Boolean(error) && error?.message}
+                    sx={{
+                      border: 1,
+                      borderColor: "primary.main",
+                      width: "350px",
+                      borderRadius: "5px",
+                      mt: "10px",
+                      height: "40px",
+                      "& .MuiInputBase-input": {
+                        padding: "8px",
+                      },
+                    }}
+                  />
+                </Fragment>
               )}
             />
           </Box>
           {/* categories */}
           <Box>
-            <InputLabel
-              htmlFor="form-input-category"
-              sx={{
-                color: "textBlack",
-                fontSize: "16px",
-              }}
-            >
-              Category
-            </InputLabel>
             <Controller
-              name={"categories"}
+              name={"category"}
               control={control}
               defaultValue=""
-              render={({ field: { value, ...field } }) => (
-                <TextField
-                  id="form-input-category"
-                  variant="outlined"
-                  select
-                  value={Boolean(value) ? value : "default"}
-                  {...field}
-                  sx={{
-                    border: 1,
-                    borderColor: "primary.main",
-                    width: "350px",
-                    height: "40px",
-                    borderRadius: "5px",
-                    mt: "10px",
-                    "& .MuiInputBase-input": {
-                      padding: "8px",
-                    },
-                  }}
-                >
-                  <MenuItem value="default" disabled>
+              rules={{
+                required: {
+                  value: true,
+                  message: "Category is required",
+                },
+              }}
+              render={({
+                field: { value, ...field },
+                fieldState: { error },
+              }) => (
+                <Fragment>
+                  <InputLabel
+                    required
+                    error={Boolean(error)}
+                    htmlFor="form-input-category"
+                    sx={{
+                      color: "textBlack",
+                      fontSize: "16px",
+                    }}
+                  >
                     Category
-                  </MenuItem>
-                  {products.map((category) => (
-                    <MenuItem key={category?.slug} value={category?.title}>
-                      {category?.title}
+                  </InputLabel>
+                  <TextField
+                    id="form-input-category"
+                    variant="outlined"
+                    select
+                    error={Boolean(error)}
+                    helperText={Boolean(error) && error?.message}
+                    value={Boolean(value) ? value : "default"}
+                    {...field}
+                    sx={{
+                      border: 1,
+                      borderColor: "primary.main",
+                      width: "350px",
+                      height: "40px",
+                      borderRadius: "5px",
+                      mt: "10px",
+                      "& .MuiInputBase-input": {
+                        padding: "8px",
+                      },
+                    }}
+                  >
+                    <MenuItem value="default" disabled>
+                      Category
                     </MenuItem>
-                  ))}
-                </TextField>
+                    {products.map((category) => (
+                      <MenuItem key={category?.slug} value={category?.id}>
+                        {category?.title}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Fragment>
               )}
             />
           </Box>

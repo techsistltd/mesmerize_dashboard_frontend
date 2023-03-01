@@ -13,6 +13,8 @@ const ViewProduct = () => {
     `/dashboard/products/${productSlug}/`,
   ]);
 
+  console.log(product);
+
   return (
     <Box>
       {/* button */}

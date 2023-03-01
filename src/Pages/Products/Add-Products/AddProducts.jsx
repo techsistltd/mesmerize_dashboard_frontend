@@ -9,11 +9,11 @@ import { useParams } from "react-router-dom";
 
 const AddProducts = () => {
   const { productSlug } = useParams();
-  const { control, handleSubmit, reset } = useForm();
+  const { control, handleSubmit, reset, formState } = useForm();
 
   const getData = (data) => {
     console.log({ ...data });
-    reset();
+    // reset();
   };
 
   return (
