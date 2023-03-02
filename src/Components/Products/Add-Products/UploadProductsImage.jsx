@@ -50,7 +50,12 @@ const UploadProductsImage = ({ control }) => {
         </Box>
         {/* ------end------ */}
         {/* upload section */}
-        <UploadImage control={control} fieldName={"product_image"} required />
+        <UploadImage
+          control={control}
+          fieldName={"product_image"}
+          helperText="Product image"
+          required
+        />
         {/* -------end------- */}
         {/* input field */}
         <Box
@@ -75,7 +80,10 @@ const UploadProductsImage = ({ control }) => {
                   message: "Product name is required",
                 },
               }}
-              render={({ field, fieldState: { error } }) => (
+              render={({
+                field: { onChange, value, ...field },
+                fieldState: { error },
+              }) => (
                 <Fragment>
                   <InputLabel
                     required
@@ -93,6 +101,8 @@ const UploadProductsImage = ({ control }) => {
                     variant="outlined"
                     type="text"
                     placeholder="Product Name"
+                    onChange={onChange}
+                    value={value}
                     {...field}
                     error={Boolean(error)}
                     helperText={Boolean(error) && error?.message}
@@ -125,13 +135,13 @@ const UploadProductsImage = ({ control }) => {
                 },
               }}
               render={({
-                field: { value, ...field },
+                field: { onChange, value, ...field },
                 fieldState: { error },
               }) => (
                 <Fragment>
                   <InputLabel
-                    required
                     error={Boolean(error)}
+                    required
                     htmlFor="form-input-category"
                     sx={{
                       color: "textBlack",
@@ -144,6 +154,7 @@ const UploadProductsImage = ({ control }) => {
                     id="form-input-category"
                     variant="outlined"
                     select
+                    onChange={onChange}
                     error={Boolean(error)}
                     helperText={Boolean(error) && error?.message}
                     value={Boolean(value) ? value : "default"}

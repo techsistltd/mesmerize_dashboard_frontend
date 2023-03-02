@@ -38,7 +38,10 @@ const ProductDetails = ({ control }) => {
               },
             }}
             defaultValue={""}
-            render={({ field, fieldState: { error } }) => (
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
               <Fragment>
                 <InputLabel
                   required
@@ -55,6 +58,8 @@ const ProductDetails = ({ control }) => {
                   fullWidth
                   error={Boolean(error)}
                   helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
+                  value={value}
                   id="form-input-price"
                   variant="outlined"
                   type="text"
@@ -87,7 +92,10 @@ const ProductDetails = ({ control }) => {
               },
             }}
             defaultValue=""
-            render={({ field, fieldState: { error } }) => (
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
               <Fragment>
                 <InputLabel
                   required
@@ -105,6 +113,8 @@ const ProductDetails = ({ control }) => {
                   id="form-input-stock"
                   error={Boolean(error)}
                   helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
+                  value={value}
                   variant="outlined"
                   type="text"
                   placeholder="Enter Product Stock "
@@ -136,7 +146,10 @@ const ProductDetails = ({ control }) => {
               },
             }}
             defaultValue=""
-            render={({ field: { value, ...field }, fieldState: { error } }) => (
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
               <Fragment>
                 <InputLabel
                   required
@@ -154,6 +167,7 @@ const ProductDetails = ({ control }) => {
                   id="form-input-status"
                   error={Boolean(error)}
                   helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
                   variant="outlined"
                   select
                   value={Boolean(value) ? value : "default"}
@@ -194,7 +208,10 @@ const ProductDetails = ({ control }) => {
               },
             }}
             defaultValue=""
-            render={({ field: { value, ...field }, fieldState: { error } }) => (
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
               <Fragment>
                 <InputLabel
                   required
@@ -212,6 +229,7 @@ const ProductDetails = ({ control }) => {
                   id="form-input-delivery-option"
                   error={Boolean(error)}
                   helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
                   variant="outlined"
                   select
                   value={Boolean(value) ? value : "default"}

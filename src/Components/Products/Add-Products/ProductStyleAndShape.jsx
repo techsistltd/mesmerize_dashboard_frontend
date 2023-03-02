@@ -39,7 +39,11 @@ const ProductStyleAndShape = ({ control }) => {
         >
           Style
         </Typography>
-        <UploadImage control={control} fieldName="product_style" required />
+        <UploadImage
+          control={control}
+          fieldName="product_style"
+          helperText="Style"
+        />
       </Box>
       <Box sx={{ mt: "45px" }}>
         <Typography
@@ -61,7 +65,11 @@ const ProductStyleAndShape = ({ control }) => {
         >
           Shape
         </Typography>
-        <UploadImage control={control} fieldName="product_shape" required />
+        <UploadImage
+          control={control}
+          fieldName="product_shape"
+          helperText="Shape"
+        />
       </Box>
       <Box
         sx={{
@@ -86,7 +94,10 @@ const ProductStyleAndShape = ({ control }) => {
             //   },
             // }}
             defaultValue={""}
-            render={({ field, fieldState: { error } }) => (
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
               <Fragment>
                 <InputLabel
                   // required
@@ -103,6 +114,8 @@ const ProductStyleAndShape = ({ control }) => {
                   id="form-input-size"
                   variant="outlined"
                   type="text"
+                  onChange={onChange}
+                  value={value}
                   // error={Boolean(error)}
                   // helperText={Boolean(error) && error?.message}
                   placeholder="Enter Product Size "
@@ -135,7 +148,10 @@ const ProductStyleAndShape = ({ control }) => {
             //     message: "Color is required",
             //   },
             // }}
-            render={({ field: { value, ...field }, fieldState: { error } }) => (
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
               <Fragment>
                 <InputLabel
                   // required
@@ -152,6 +168,7 @@ const ProductStyleAndShape = ({ control }) => {
                   id="form-input-color"
                   variant="outlined"
                   select
+                  onChange={onChange}
                   // error={Boolean(error)}
                   // helperText={Boolean(error) && error?.message}
                   value={Boolean(value) ? value : "default"}
@@ -172,6 +189,11 @@ const ProductStyleAndShape = ({ control }) => {
                     color
                   </MenuItem>
                   <MenuItem value={"color"}>color</MenuItem>
+                  {/* {products?.product_color?.map(({ code }, index) => (
+                    <MenuItem key={index} value={code}>
+                      {code}
+                    </MenuItem>
+                  ))} */}
                 </TextField>
               </Fragment>
             )}
@@ -189,7 +211,10 @@ const ProductStyleAndShape = ({ control }) => {
             //   },
             // }}
             defaultValue={""}
-            render={({ field, fieldState: { error } }) => (
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
               <Fragment>
                 <InputLabel
                   // error={Boolean(error)}
@@ -207,6 +232,8 @@ const ProductStyleAndShape = ({ control }) => {
                   variant="outlined"
                   // error={Boolean(error)}
                   // helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
+                  value={value}
                   type="text"
                   placeholder="Enter Product flavour "
                   {...field}

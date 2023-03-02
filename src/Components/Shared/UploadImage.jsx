@@ -1,10 +1,14 @@
 import { Box, Button, FormHelperText, Grid } from "@mui/material";
 import React from "react";
 import cloudUpload from "../../Assets/cloudUpload.png";
-import { useState } from "react";
 import { Controller } from "react-hook-form";
 
-const UploadImage = ({ control, fieldName = "", required = false }) => {
+const UploadImage = ({
+  control,
+  fieldName = "",
+  required = false,
+  helperText = "",
+}) => {
   if (!Boolean(control)) {
     return;
   }
@@ -16,36 +20,39 @@ const UploadImage = ({ control, fieldName = "", required = false }) => {
       rules={{
         required: {
           value: required,
-          message: `Product ${fieldName} are required`,
+          message: `${helperText} are required`,
         },
       }}
       defaultValue={[]}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <Grid container columnGap={"35px"} rowGap={"35px"}>
-          {value?.map((file, index) => (
-            <Grid
-              item
-              xs={1}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "left",
-              }}
-            >
-              <Box
-                kay={index}
-                component="img"
-                src={URL.createObjectURL(file)}
-                sx={{
-                  height: "99px",
-                  width: "109px",
-                  borderRadius: "5px",
-                  boxShadow: "0px 1px 4px",
-                  bgcolor: "#FCFCFC",
-                }}
-              />
-            </Grid>
-          ))}
+          {value?.map(
+            (file, index) =>
+              Boolean(file) && (
+                <Grid
+                  kay={index}
+                  item
+                  xs={1}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "left",
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={URL.createObjectURL(file)}
+                    sx={{
+                      height: "99px",
+                      width: "109px",
+                      borderRadius: "5px",
+                      boxShadow: "0px 1px 4px",
+                      bgcolor: "#FCFCFC",
+                    }}
+                  />
+                </Grid>
+              )
+          )}
           <Grid
             item
             xs={1}
