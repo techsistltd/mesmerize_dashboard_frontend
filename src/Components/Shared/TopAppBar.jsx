@@ -144,6 +144,7 @@ const TopAppBar = ({ drawerWidth }) => {
               }}
             >
               <Avatar
+                src={currentUser?.profile_pic}
                 sx={{
                   height: 1,
                   width: 1,
@@ -170,7 +171,7 @@ const TopAppBar = ({ drawerWidth }) => {
                     fontSize: "16px",
                   }}
                 >
-                  {currentUser?.fullname ?? "Admin"}
+                  {currentUser?.full_name ?? "Admin"}
                 </Typography>
                 <ArrowDropDownIcon />
               </Box>
