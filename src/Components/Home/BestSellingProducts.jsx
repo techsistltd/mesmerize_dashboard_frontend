@@ -9,13 +9,19 @@ import { MdDelete } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import DeleteDialog from "../Shared/DeleteDialog";
 
 const BestSellingProducts = () => {
   const navigate = useNavigate();
 
-  const { data: products = [], isLoading: productLoading } = useQuery([
-    "/dashboard/best-selling-products/",
-  ]);
+  const {
+    data: products = [],
+    isLoading: productLoading,
+    refetch,
+  } = useQuery(["/dashboard/best-selling-products/"]);
+
+  const [deleteId, setDeleteId] = useState(null);
 
   const { data: { summary = {} } = {} } = useQuery(["/dashboard/summary/"]);
 
@@ -177,7 +183,7 @@ const BestSellingProducts = () => {
                 />
               }
               label="Delete"
-              onClick={() => console.log(row)}
+              onClick={() => setDeleteId(row?.slug)}
             />
           </Tooltip>,
         ];
@@ -257,6 +263,13 @@ const BestSellingProducts = () => {
         />
       </Box>
       {/* data table end */}
+      {/* delete product */}
+      <DeleteDialog
+        open={Boolean(deleteId)}
+        handleClose={() => setDeleteId(null)}
+        successRefetch={refetch}
+        deleteURL={`/dashboard/products/${deleteId}/`}
+      />
     </Box>
   );
 };

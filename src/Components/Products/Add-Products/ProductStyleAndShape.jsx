@@ -94,10 +94,7 @@ const ProductStyleAndShape = ({ control }) => {
             //   },
             // }}
             defaultValue={""}
-            render={({
-              field: { onChange, value, ...field },
-              fieldState: { error },
-            }) => (
+            render={({ field, fieldState: { error } }) => (
               <Fragment>
                 <InputLabel
                   // required
@@ -114,8 +111,6 @@ const ProductStyleAndShape = ({ control }) => {
                   id="form-input-size"
                   variant="outlined"
                   type="text"
-                  onChange={onChange}
-                  value={value}
                   // error={Boolean(error)}
                   // helperText={Boolean(error) && error?.message}
                   placeholder="Enter Product Size "
@@ -148,10 +143,7 @@ const ProductStyleAndShape = ({ control }) => {
             //     message: "Color is required",
             //   },
             // }}
-            render={({
-              field: { onChange, value, ...field },
-              fieldState: { error },
-            }) => (
+            render={({ field: { value, ...field }, fieldState: { error } }) => (
               <Fragment>
                 <InputLabel
                   // required
@@ -168,7 +160,6 @@ const ProductStyleAndShape = ({ control }) => {
                   id="form-input-color"
                   variant="outlined"
                   select
-                  onChange={onChange}
                   // error={Boolean(error)}
                   // helperText={Boolean(error) && error?.message}
                   value={Boolean(value) ? value : "default"}
@@ -211,10 +202,7 @@ const ProductStyleAndShape = ({ control }) => {
             //   },
             // }}
             defaultValue={""}
-            render={({
-              field: { onChange, value, ...field },
-              fieldState: { error },
-            }) => (
+            render={({ field, fieldState: { error } }) => (
               <Fragment>
                 <InputLabel
                   // error={Boolean(error)}
@@ -232,8 +220,6 @@ const ProductStyleAndShape = ({ control }) => {
                   variant="outlined"
                   // error={Boolean(error)}
                   // helperText={Boolean(error) && error?.message}
-                  onChange={onChange}
-                  value={value}
                   type="text"
                   placeholder="Enter Product flavour "
                   {...field}

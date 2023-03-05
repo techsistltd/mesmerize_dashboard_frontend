@@ -37,13 +37,9 @@ const RichTextProduct = ({ control }) => {
             },
           }}
           defaultValue={""}
-          render={({
-            field: { onChange, value, ...field },
-            fieldState: { error },
-          }) => (
+          render={({ field, fieldState: { error } }) => (
             <Fragment>
               <Typography
-                error={Boolean(error)}
                 variant="body4"
                 sx={{
                   position: "relative",
@@ -63,13 +59,7 @@ const RichTextProduct = ({ control }) => {
               >
                 Product Discription*
               </Typography>
-              <JoditEditor
-                onChange={onChange}
-                value={value}
-                ref={editor}
-                {...field}
-                config={config}
-              />
+              <JoditEditor ref={editor} {...field} config={config} />
               <FormHelperText
                 sx={{
                   mt: "15px",

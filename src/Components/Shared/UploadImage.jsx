@@ -30,7 +30,7 @@ const UploadImage = ({
             (file, index) =>
               Boolean(file) && (
                 <Grid
-                  kay={index}
+                  key={index}
                   item
                   xs={1}
                   sx={{
