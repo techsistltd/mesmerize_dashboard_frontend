@@ -9,6 +9,7 @@ import {
 import React from "react";
 import UploadImage from "../../Shared/UploadImage";
 import { Controller } from "react-hook-form";
+import { Fragment } from "react";
 
 const ProductStyleAndShape = ({ control }) => {
   return (
@@ -38,7 +39,11 @@ const ProductStyleAndShape = ({ control }) => {
         >
           Style
         </Typography>
-        <UploadImage />
+        <UploadImage
+          control={control}
+          fieldName="product_style"
+          helperText="Style"
+        />
       </Box>
       <Box sx={{ mt: "45px" }}>
         <Typography
@@ -60,7 +65,11 @@ const ProductStyleAndShape = ({ control }) => {
         >
           Shape
         </Typography>
-        <UploadImage />
+        <UploadImage
+          control={control}
+          fieldName="product_shape"
+          helperText="Shape"
+        />
       </Box>
       <Box
         sx={{
@@ -75,117 +84,172 @@ const ProductStyleAndShape = ({ control }) => {
       >
         {/* size */}
         <Box>
-          <InputLabel
-            htmlFor="form-input-size"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            Size
-          </InputLabel>
           <Controller
-            name={"size"}
+            name={"product_size"}
             control={control}
+            // rules={{
+            //   required: {
+            //     value: true,
+            //     message: "Size is required",
+            //   },
+            // }}
             defaultValue={""}
-            render={({ field }) => (
-              <TextField
-                id="form-input-size"
-                variant="outlined"
-                type="text"
-                placeholder="Enter Product Size "
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  width: "350px",
-                  borderRadius: "5px",
-                  mt: "10px",
-                  height: "40px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              ></TextField>
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
+              <Fragment>
+                <InputLabel
+                  // required
+                  // error={Boolean(error)}
+                  htmlFor="form-input-size"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Size
+                </InputLabel>
+                <TextField
+                  id="form-input-size"
+                  variant="outlined"
+                  type="text"
+                  onChange={onChange}
+                  value={value}
+                  // error={Boolean(error)}
+                  // helperText={Boolean(error) && error?.message}
+                  placeholder="Enter Product Size "
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    width: "350px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    height: "40px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                />
+              </Fragment>
             )}
           />
         </Box>
         {/* color */}
         <Box>
-          <InputLabel
-            htmlFor="form-input-color"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            color
-          </InputLabel>
           <Controller
-            name={"color"}
+            name={"product_color"}
             control={control}
             defaultValue=""
-            render={({ field: { value, ...field } }) => (
-              <TextField
-                id="form-input-color"
-                variant="outlined"
-                select
-                value={Boolean(value) ? value : "default"}
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  width: "350px",
-                  height: "40px",
-                  borderRadius: "5px",
-                  mt: "10px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              >
-                <MenuItem value="default" disabled>
+            // rules={{
+            //   required: {
+            //     value: true,
+            //     message: "Color is required",
+            //   },
+            // }}
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
+              <Fragment>
+                <InputLabel
+                  // required
+                  // error={Boolean(error)}
+                  htmlFor="form-input-color"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
                   color
-                </MenuItem>
-                <MenuItem value={"color"}>color</MenuItem>
-              </TextField>
+                </InputLabel>
+                <TextField
+                  id="form-input-color"
+                  variant="outlined"
+                  select
+                  onChange={onChange}
+                  // error={Boolean(error)}
+                  // helperText={Boolean(error) && error?.message}
+                  value={Boolean(value) ? value : "default"}
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    width: "350px",
+                    height: "40px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                >
+                  <MenuItem value="default" disabled>
+                    color
+                  </MenuItem>
+                  <MenuItem value={"color"}>color</MenuItem>
+                  {/* {products?.product_color?.map(({ code }, index) => (
+                    <MenuItem key={index} value={code}>
+                      {code}
+                    </MenuItem>
+                  ))} */}
+                </TextField>
+              </Fragment>
             )}
           />
         </Box>
-        {/* flavor */}
+        {/* flavour */}
         <Box>
-          <InputLabel
-            htmlFor="form-input-flavor"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            Flavor
-          </InputLabel>
           <Controller
-            name={"flavor"}
+            name={"product_flavour"}
             control={control}
+            // rules={{
+            //   required: {
+            //     value: true,
+            //     message: "Flavour is required",
+            //   },
+            // }}
             defaultValue={""}
-            render={({ field }) => (
-              <TextField
-                id="form-input-flavor"
-                variant="outlined"
-                type="text"
-                placeholder="Enter Product Flavor "
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  width: "350px",
-                  borderRadius: "5px",
-                  mt: "10px",
-                  height: "40px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              ></TextField>
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
+              <Fragment>
+                <InputLabel
+                  // error={Boolean(error)}
+                  // required
+                  htmlFor="form-input-flavour"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Flavour
+                </InputLabel>
+                <TextField
+                  id="form-input-flavour"
+                  variant="outlined"
+                  // error={Boolean(error)}
+                  // helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
+                  value={value}
+                  type="text"
+                  placeholder="Enter Product flavour "
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    width: "350px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    height: "40px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                />
+              </Fragment>
             )}
           />
         </Box>

@@ -28,167 +28,233 @@ const ProductDetails = ({ control }) => {
       <Grid container columnSpacing={"40px"} rowGap={"30px"}>
         {/* price */}
         <Grid item xs={4}>
-          <InputLabel
-            htmlFor="form-input-price"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            Price
-          </InputLabel>
           <Controller
             name={"price"}
             control={control}
+            rules={{
+              required: {
+                value: true,
+                message: "Price is required",
+              },
+            }}
             defaultValue={""}
-            render={({ field }) => (
-              <TextField
-                fullWidth
-                id="form-input-price"
-                variant="outlined"
-                type="text"
-                placeholder="Enter Price"
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  borderRadius: "5px",
-                  height: "40px",
-                  mt: "10px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              />
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
+              <Fragment>
+                <InputLabel
+                  required
+                  error={Boolean(error)}
+                  htmlFor="form-input-price"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Price
+                </InputLabel>
+                <TextField
+                  fullWidth
+                  error={Boolean(error)}
+                  helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
+                  value={value}
+                  id="form-input-price"
+                  variant="outlined"
+                  type="text"
+                  placeholder="Enter Price"
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    borderRadius: "5px",
+                    height: "40px",
+                    mt: "10px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                />
+              </Fragment>
             )}
           />
         </Grid>
         {/* stock */}
         <Grid item xs={4}>
-          <InputLabel
-            htmlFor="form-input-stock"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            Stock
-          </InputLabel>
           <Controller
             name={"stock"}
             control={control}
+            rules={{
+              required: {
+                value: true,
+                message: "Stock is required",
+              },
+            }}
             defaultValue=""
-            render={({ field }) => (
-              <TextField
-                fullWidth
-                id="form-input-stock"
-                variant="outlined"
-                type="text"
-                placeholder="Enter Product Stock "
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  height: "40px",
-                  mt: " 10px",
-                  borderRadius: "5px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              />
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
+              <Fragment>
+                <InputLabel
+                  required
+                  error={Boolean(error)}
+                  htmlFor="form-input-stock"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Stock
+                </InputLabel>
+                <TextField
+                  fullWidth
+                  id="form-input-stock"
+                  error={Boolean(error)}
+                  helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
+                  value={value}
+                  variant="outlined"
+                  type="text"
+                  placeholder="Enter Product Stock "
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    height: "40px",
+                    mt: " 10px",
+                    borderRadius: "5px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                />
+              </Fragment>
             )}
           />
         </Grid>
         {/* status */}
         <Grid item xs={4}>
-          <InputLabel
-            htmlFor="form-input-status"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            status
-          </InputLabel>
           <Controller
             name={"status"}
             control={control}
+            rules={{
+              required: {
+                value: true,
+                message: "Status is required",
+              },
+            }}
             defaultValue=""
-            render={({ field: { value, ...field } }) => (
-              <TextField
-                fullWidth
-                id="form-input-status"
-                variant="outlined"
-                select
-                value={Boolean(value) ? value : "default"}
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  height: "40px",
-                  borderRadius: "5px",
-                  mt: "10px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              >
-                <MenuItem value="default" disabled>
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
+              <Fragment>
+                <InputLabel
+                  required
+                  error={Boolean(error)}
+                  htmlFor="form-input-status"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
                   status
-                </MenuItem>
-                {/* {products.map((category) => (
+                </InputLabel>
+                <TextField
+                  fullWidth
+                  id="form-input-status"
+                  error={Boolean(error)}
+                  helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
+                  variant="outlined"
+                  select
+                  value={Boolean(value) ? value : "default"}
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    height: "40px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                >
+                  <MenuItem value="default" disabled>
+                    status
+                  </MenuItem>
+                  {/* {products.map((category) => (
                   <MenuItem key={category?.slug} value={""}>
                     {}
                   </MenuItem>
                 ))} */}
-              </TextField>
+                </TextField>
+              </Fragment>
             )}
           />
         </Grid>
         {/* delivery option */}
         <Grid item xs={4}>
-          <InputLabel
-            htmlFor="form-input-delivery-option"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            Delivery Option
-          </InputLabel>
           <Controller
-            name={"delivery-option"}
+            name={"delivery_option"}
             control={control}
+            rules={{
+              required: {
+                value: true,
+                message: "Delivery option is required",
+              },
+            }}
             defaultValue=""
-            render={({ field: { value, ...field } }) => (
-              <TextField
-                fullWidth
-                id="form-input-delivery-option"
-                variant="outlined"
-                select
-                value={Boolean(value) ? value : "default"}
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  height: "40px",
-                  borderRadius: "5px",
-                  mt: "10px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              >
-                <MenuItem value="default" disabled>
-                  All
-                </MenuItem>
-                {deliveryOption.map((row) => (
-                  <MenuItem key={row?.name} value={row?.name}>
-                    {row?.name}
+            render={({
+              field: { onChange, value, ...field },
+              fieldState: { error },
+            }) => (
+              <Fragment>
+                <InputLabel
+                  required
+                  error={Boolean(error)}
+                  htmlFor="form-input-delivery-option"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Delivery Option
+                </InputLabel>
+                <TextField
+                  fullWidth
+                  id="form-input-delivery-option"
+                  error={Boolean(error)}
+                  helperText={Boolean(error) && error?.message}
+                  onChange={onChange}
+                  variant="outlined"
+                  select
+                  value={Boolean(value) ? value : "default"}
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    height: "40px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                >
+                  <MenuItem value="default" disabled>
+                    All
                   </MenuItem>
-                ))}
-              </TextField>
+                  {deliveryOption.map((row) => (
+                    <MenuItem key={row?.name} value={row?.name}>
+                      {row?.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Fragment>
             )}
           />
         </Grid>

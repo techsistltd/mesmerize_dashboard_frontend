@@ -12,7 +12,7 @@ const baseURL = onProd
   ? "https://mesmerize-apis.techsistltd.com"
   : "https://mesmerize-dev.techsistltd.com";
 
-// const baseURL = "https://mesmerize-apis.techsistltd.com";
+// const baseURL = "https://mesmerize-dev.techsistltd.com";
 
 const axiosApi = axios.create({ baseURL });
 export const axiosRaw = axios.create({ baseURL });

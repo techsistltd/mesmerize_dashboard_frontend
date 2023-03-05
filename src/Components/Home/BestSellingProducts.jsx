@@ -26,15 +26,15 @@ const BestSellingProducts = () => {
     },
     {
       title: "Total Orders",
-      count: "70",
+      count: summary?.total_order ?? 0,
     },
     {
       title: "Confirmed Orders",
-      count: "180",
+      count: summary?.confirmed_orders ?? 0,
     },
     {
       title: "Delivered Order",
-      count: "170",
+      count: summary?.delivered_orders ?? 0,
     },
   ];
 
