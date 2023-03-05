@@ -8,6 +8,8 @@ const ViewUserProfile = () => {
   const { currentUser } = useGlobalContext();
   const navigate = useNavigate();
 
+  console.log(currentUser);
+
   return (
     <Grid
       container
@@ -124,7 +126,7 @@ const ViewUserProfile = () => {
                   Password :
                 </Typography>
                 <Typography variant="body6" color={"textBlack"}>
-                  {currentUser?.password}
+                  {/* {currentUser?.password} */}
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", gap: " 6px" }}>
@@ -159,7 +161,7 @@ const ViewUserProfile = () => {
                   Status :
                 </Typography>
                 <Typography variant="body6" color={"textBlack"}>
-                  {currentUser?.is_active}
+                  {currentUser?.is_active ? "Active" : "Inactive"}
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", gap: " 6px" }}>

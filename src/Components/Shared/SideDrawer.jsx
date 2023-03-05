@@ -10,14 +10,13 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { BiCategoryAlt, BiPackage } from "react-icons/bi";
 import { FaUser } from "react-icons/fa";
 import { IoMdMove } from "react-icons/io";
 import { MdNotifications, MdSettingsSuggest } from "react-icons/md";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import BrandLogo from "../../Assets/BrandLogo.svg";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const drawerMenus = [
   {
@@ -90,6 +89,19 @@ const SideDrawer = ({ drawerWidth }) => {
     setExpanded(null);
     navigate(path);
   };
+
+  useEffect(() => {
+    const pathNames = pathname?.split("/");
+    const parentNav = pathNames[1] ?? "";
+    if (Boolean(parentNav)) {
+      drawerMenus?.forEach((item, index) => {
+        if (Boolean(item?.path === parentNav)) {
+          setExpanded(`panel${index}`);
+        }
+      });
+    }
+    return () => {};
+  }, []);
 
   return (
     <Drawer
