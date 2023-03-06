@@ -9,7 +9,7 @@ import {
 const onProd = Boolean(process.env.NODE_ENV === "production");
 
 const baseURL = onProd
-  ? "https://mesmerize-dev.techsistltd.com"
+  ? "https://mesmerize-apis.techsistltd.com"
   : "http://192.168.1.100:8000";
 
 // const baseURL = "https://mesmerize-dev.techsistltd.com";
