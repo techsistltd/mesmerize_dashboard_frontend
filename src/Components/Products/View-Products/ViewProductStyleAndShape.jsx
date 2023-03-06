@@ -32,33 +32,31 @@ const ViewProductStyleAndShape = ({ product }) => {
             Style
           </Typography>
           <Grid container columnGap={"35px"} rowGap={"35px"}>
-            {product?.product_style?.image_style?.map(
-              ({ image = "" }, index) => (
-                <Grid
-                  key={index}
-                  item
-                  xs={1}
+            {product?.product_style?.map(({ image = "" }, index) => (
+              <Grid
+                key={index}
+                item
+                xs={1}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Box
+                  kay={index}
+                  component="img"
+                  src={image}
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    height: "99px",
+                    width: "109px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 1px 4px",
+                    bgcolor: "#FCFCFC",
                   }}
-                >
-                  <Box
-                    kay={index}
-                    component="img"
-                    src={image}
-                    sx={{
-                      height: "99px",
-                      width: "109px",
-                      borderRadius: "5px",
-                      boxShadow: "0px 1px 4px",
-                      bgcolor: "#FCFCFC",
-                    }}
-                  />
-                </Grid>
-              )
-            )}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Box>
       )}
@@ -86,33 +84,31 @@ const ViewProductStyleAndShape = ({ product }) => {
             Shape
           </Typography>
           <Grid container columnGap={"35px"} rowGap={"35px"}>
-            {product?.product_shape?.image_shape?.map(
-              ({ image = "" }, index) => (
-                <Grid
-                  key={index}
-                  item
-                  xs={1}
+            {product?.product_shape?.map(({ image = "" }, index) => (
+              <Grid
+                key={index}
+                item
+                xs={1}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Box
+                  kay={index}
+                  component="img"
+                  src={image}
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    height: "99px",
+                    width: "109px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 1px 4px",
+                    bgcolor: "#FCFCFC",
                   }}
-                >
-                  <Box
-                    kay={index}
-                    component="img"
-                    src={image}
-                    sx={{
-                      height: "99px",
-                      width: "109px",
-                      borderRadius: "5px",
-                      boxShadow: "0px 1px 4px",
-                      bgcolor: "#FCFCFC",
-                    }}
-                  />
-                </Grid>
-              )
-            )}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Box>
       )}

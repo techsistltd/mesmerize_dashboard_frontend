@@ -1,5 +1,5 @@
 import { Box, Button, FormHelperText, Grid } from "@mui/material";
-import React from "react";
+import React, { Fragment } from "react";
 import cloudUpload from "../../Assets/cloudUpload.png";
 import { Controller } from "react-hook-form";
 
@@ -25,12 +25,12 @@ const UploadImage = ({
       }}
       defaultValue={[]}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <Grid container columnGap={"35px"} rowGap={"35px"}>
+        <Fragment>
           {value?.map(
             (file, index) =>
               Boolean(file) && (
                 <Grid
-                  kay={index}
+                  key={index}
                   item
                   xs={1}
                   sx={{
@@ -96,7 +96,7 @@ const UploadImage = ({
               </FormHelperText>
             </Grid>
           )}
-        </Grid>
+        </Fragment>
       )}
     />
   );

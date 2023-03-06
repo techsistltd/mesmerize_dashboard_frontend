@@ -20,11 +20,7 @@ const ManageCategories = ({ handleClose, item }) => {
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
 
-  const {
-    mutate: postCategory,
-    isLoading: mutationLoading,
-    isError,
-  } = useMutation(
+  const { mutate: postCategory, isLoading: mutationLoading } = useMutation(
     (payload) =>
       axiosApi[Boolean(item?.id) ? "patch" : "post"](
         `/dashboard/categories${Boolean(item?.id) ? "/" + item?.slug : ""}/`,

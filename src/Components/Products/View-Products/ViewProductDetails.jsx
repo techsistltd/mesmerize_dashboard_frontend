@@ -158,7 +158,9 @@ const ViewProductDetails = ({ product }) => {
                 borderRadius: "5px",
                 mt: "10px",
               }}
-            ></Typography>
+            >
+              {product?.tag}
+            </Typography>
           </Grid>
         </Grid>
       </Paper>

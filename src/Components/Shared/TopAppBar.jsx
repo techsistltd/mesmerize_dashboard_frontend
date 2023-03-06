@@ -24,29 +24,39 @@ import { useGlobalContext } from "../../Global/GlobalContext";
 import BrandLogo from "../../Assets/BrandLogo.svg";
 import { MdMessage } from "react-icons/md";
 import SearchField from "./SearchField";
-
-const profileMenus = [
-  {
-    title: "My account",
-    icon: Person2Icon,
-    color: "primary.main",
-  },
-  {
-    title: "Reset Password",
-    icon: VerifiedUserIcon,
-    color: "primary.main",
-  },
-  {
-    title: "Logout",
-    icon: LockIcon,
-    color: "#FF304F",
-  },
-];
+import { useQueryClient } from "@tanstack/react-query";
+import { removeTokens } from "../../Utils/localStorage";
 
 const TopAppBar = ({ drawerWidth }) => {
   const { currentUser } = useGlobalContext();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const queryClient = useQueryClient();
+
+  const profileMenus = [
+    {
+      title: "My account",
+      icon: Person2Icon,
+      color: "primary.main",
+      action: () => {
+        navigate("/profile");
+      },
+    },
+    {
+      title: "Reset Password",
+      icon: VerifiedUserIcon,
+      color: "primary.main",
+    },
+    {
+      title: "Logout",
+      icon: LockIcon,
+      color: "#FF304F",
+      action: () => {
+        removeTokens();
+        queryClient.resetQueries();
+      },
+    },
+  ];
 
   return (
     <AppBar
@@ -195,19 +205,24 @@ const TopAppBar = ({ drawerWidth }) => {
           horizontal: "right",
         }}
       >
-        {profileMenus.map(({ title, icon: Icon, color }, idx) => {
-          return (
-            <MenuItem
-              onClick={() => setAnchorEl(null)}
-              key={`profile-menus-${idx}`}
-            >
-              <ListItemIcon>
-                <Icon sx={{ color }} />
-              </ListItemIcon>
-              <ListItemText sx={{ color }}>{title}</ListItemText>
-            </MenuItem>
-          );
-        })}
+        {profileMenus.map(
+          ({ title, icon: Icon, color, action = () => null }, idx) => {
+            return (
+              <MenuItem
+                onClick={() => {
+                  setAnchorEl(null);
+                  action();
+                }}
+                key={`profile-menus-${idx}`}
+              >
+                <ListItemIcon>
+                  <Icon sx={{ color }} />
+                </ListItemIcon>
+                <ListItemText sx={{ color }}>{title}</ListItemText>
+              </MenuItem>
+            );
+          }
+        )}
       </Menu>
     </AppBar>
   );

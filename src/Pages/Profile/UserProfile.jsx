@@ -1,12 +1,20 @@
-import { Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
-import ViewUserProfile from "../../Components/Profile/ViewUserProfile";
+import UserImageAndName from "../../Components/Profile/View-profile/UserImageAndName";
+import UserInformation from "../../Components/Profile/View-profile/UserInformation";
+import { useGlobalContext } from "../../Global/GlobalContext";
 
 const UserProfile = () => {
+  const { currentUser } = useGlobalContext();
   return (
-    <Box>
-      <ViewUserProfile />
-    </Box>
+    <Grid
+      container
+      columnSpacing={"30px"}
+      sx={{ display: "flex", justifyContent: "center" }}
+    >
+      <UserImageAndName currentUser={currentUser} />
+      <UserInformation currentUser={currentUser} />
+    </Grid>
   );
 };
 

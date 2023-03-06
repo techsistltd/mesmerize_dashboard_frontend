@@ -14,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import UploadImage from "../../Shared/UploadImage";
 import { Fragment } from "react";
 
-const UploadProductsImage = ({ control }) => {
+const UploadProductsImage = ({ control, previousImage = [] }) => {
   const { data: products = [] } = useQuery(["/dashboard/products/"]);
 
   return (
@@ -50,12 +50,40 @@ const UploadProductsImage = ({ control }) => {
         </Box>
         {/* ------end------ */}
         {/* upload section */}
-        <UploadImage
-          control={control}
-          fieldName={"product_image"}
-          helperText="Product image"
-          required
-        />
+
+        <Grid container columnGap={"35px"} rowGap={"35px"}>
+          {Boolean(previousImage?.length) &&
+            previousImage?.map((file, index) => (
+              <Grid
+                key={index}
+                item
+                xs={1}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "left",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={file?.image}
+                  sx={{
+                    height: "99px",
+                    width: "109px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 1px 4px",
+                    bgcolor: "#FCFCFC",
+                  }}
+                />
+              </Grid>
+            ))}
+          <UploadImage
+            control={control}
+            fieldName={"images"}
+            helperText="Product image"
+            required
+          />
+        </Grid>
         {/* -------end------- */}
         {/* input field */}
         <Box
@@ -80,10 +108,7 @@ const UploadProductsImage = ({ control }) => {
                   message: "Product name is required",
                 },
               }}
-              render={({
-                field: { onChange, value, ...field },
-                fieldState: { error },
-              }) => (
+              render={({ field, fieldState: { error } }) => (
                 <Fragment>
                   <InputLabel
                     required
@@ -101,8 +126,6 @@ const UploadProductsImage = ({ control }) => {
                     variant="outlined"
                     type="text"
                     placeholder="Product Name"
-                    onChange={onChange}
-                    value={value}
                     {...field}
                     error={Boolean(error)}
                     helperText={Boolean(error) && error?.message}
@@ -135,7 +158,7 @@ const UploadProductsImage = ({ control }) => {
                 },
               }}
               render={({
-                field: { onChange, value, ...field },
+                field: { value, ...field },
                 fieldState: { error },
               }) => (
                 <Fragment>
@@ -154,7 +177,6 @@ const UploadProductsImage = ({ control }) => {
                     id="form-input-category"
                     variant="outlined"
                     select
-                    onChange={onChange}
                     error={Boolean(error)}
                     helperText={Boolean(error) && error?.message}
                     value={Boolean(value) ? value : "default"}
@@ -174,7 +196,7 @@ const UploadProductsImage = ({ control }) => {
                     <MenuItem value="default" disabled>
                       Category
                     </MenuItem>
-                    {products.map((category) => (
+                    {products?.map((category) => (
                       <MenuItem key={category?.slug} value={category?.id}>
                         {category?.title}
                       </MenuItem>

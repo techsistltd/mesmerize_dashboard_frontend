@@ -27,6 +27,7 @@ import ManagePackage from "./Pages/Products/Manage-Package/ManagePackage";
 import Settings from "./Pages/Settings";
 import UserProfile from "./Pages/Profile/UserProfile";
 import EditProfile from "./Pages/Profile/EditProfile";
+import EditProduct from "./Pages/Products/Edit-Product/Edit-Product";
 
 function App() {
   const { currentUser, userLoading } = useGlobalContext();
@@ -132,7 +133,7 @@ function App() {
                 },
                 {
                   path: ":productSlug/edit",
-                  element: <AddProducts />,
+                  element: <EditProduct />,
                   handle: {
                     crumb: { title: "Edit Product" },
                   },

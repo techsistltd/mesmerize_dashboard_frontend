@@ -12,7 +12,11 @@ const OrderOverview = () => {
   const { data: orders = [], isLoading: productLoading } = useQuery([
     "/dashboard/orders/",
   ]);
-  console.log(orders);
+
+  const { data: { order_summary = {} } = {} } = useQuery([
+    "/dashboard/summary/",
+  ]);
+  console.log(order_summary, orders);
   // -------end------
   const tableColumn = [
     {
@@ -133,19 +137,19 @@ const OrderOverview = () => {
   const orderOverviewData = [
     {
       title: "Pending",
-      count: "547",
+      count: order_summary?.pending_orders ?? 0,
     },
     {
       title: "Shipped",
-      count: "247",
+      count: order_summary?.shipped_orders ?? 0,
     },
     {
       title: "Delivered",
-      count: "447",
+      count: order_summary?.delivered_orders ?? 0,
     },
     {
       title: "Cancelled",
-      count: "447",
+      count: order_summary?.canceled_orders ?? 0,
     },
   ];
 
