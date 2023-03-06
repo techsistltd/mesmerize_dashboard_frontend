@@ -25,6 +25,9 @@ import Archive from "./Pages/Products/Archive/Archive";
 import ManageProducts from "./Pages/Products/Managa-Products/ManageProducts";
 import ManagePackage from "./Pages/Products/Manage-Package/ManagePackage";
 import Settings from "./Pages/Settings";
+import UserProfile from "./Pages/Profile/UserProfile";
+import EditProfile from "./Pages/Profile/EditProfile";
+import EditProduct from "./Pages/Products/Edit-Product/Edit-Product";
 
 function App() {
   const { currentUser, userLoading } = useGlobalContext();
@@ -50,6 +53,27 @@ function App() {
               path: "",
               element: <Home />,
             },
+            {
+              path: "profile",
+              element: <Outlet />,
+              handle: {
+                crumb: { to: "/profile", title: "My Profile" },
+              },
+              children: [
+                {
+                  path: "",
+                  element: <UserProfile />,
+                },
+                {
+                  path: "edit",
+                  element: <EditProfile />,
+                  handle: {
+                    crumb: { to: "/profile/edit", title: "Edit Profile" },
+                  },
+                },
+              ],
+            },
+
             {
               path: "categories",
               element: <CategoriesList />,
@@ -109,7 +133,7 @@ function App() {
                 },
                 {
                   path: ":productSlug/edit",
-                  element: <AddProducts />,
+                  element: <EditProduct />,
                   handle: {
                     crumb: { title: "Edit Product" },
                   },

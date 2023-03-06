@@ -2,13 +2,15 @@ import { Avatar, Box, Chip, Tooltip, Typography } from "@mui/material";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { AiFillStar, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 import DataTable from "../../Shared/DataTable";
 
 const ManageProductsTable = () => {
+  const navigate = useNavigate();
   const { data: products = [], isLoading: productLoading } = useQuery([
     "/dashboard/products/",
   ]);
@@ -131,7 +133,7 @@ const ManageProductsTable = () => {
                 />
               }
               label="View"
-              onClick={() => console.log(row)}
+              onClick={() => navigate(`/products/${row?.slug}`)}
             />
           </Tooltip>,
           <Tooltip title="Edit" placement="top">
@@ -146,7 +148,7 @@ const ManageProductsTable = () => {
                 />
               }
               label="Edit"
-              onClick={() => console.log(row)}
+              onClick={() => navigate(`/products/${row?.slug}/edit`)}
             />
           </Tooltip>,
           <Tooltip title="Delete" placement="top">
