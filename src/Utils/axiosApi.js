@@ -97,7 +97,7 @@ export const defaultQueryFn = async ({ queryKey }) => {
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: onProd,
+      retry: false,
       refetchOnWindowFocus: onProd,
       refetchOnMount: onProd,
       refetchOnReconnect: onProd,
