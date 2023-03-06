@@ -1,8 +1,8 @@
 import { LoadingButton } from "@mui/lab";
 import { Box } from "@mui/material";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import ProductDetails from "../../../Components/Products/Add-Products/ProductDetails";
@@ -12,13 +12,35 @@ import UploadProductsImage from "../../../Components/Products/Add-Products/Uploa
 import axiosApi from "../../../Utils/axiosApi";
 
 const EditProduct = () => {
-  const { control, handleSubmit, reset } = useForm();
+  const { control, handleSubmit, reset, setValue } = useForm();
 
   const queryClient = useQueryClient();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { productSlug } = useParams;
+  const { productSlug } = useParams();
+
+  const { data: product = {} } = useQuery([
+    `/dashboard/products/${productSlug}/`,
+  ]);
+
+  useEffect(() => {
+    if (product?.id) {
+      setValue("title", product?.title);
+      setValue("category", product?.category);
+      setValue("styles", product?.styles);
+      setValue("shapes", product?.shapes);
+      setValue("sizes", product?.sizes);
+      setValue("colors", product?.colors);
+      setValue("flavours", product?.flavours);
+      setValue("description", product?.description);
+      setValue("price", product?.price);
+      setValue("stock", product?.stock);
+      setValue("status", product?.status);
+      setValue("delivery_option", product?.delivery_option);
+      setValue("tag", product?.tag);
+    }
+  }, [product]);
 
   const { mutate: patchProduct, isLoading: mutationLoading } = useMutation(
     (payload) => axiosApi.patch(`/dashboard/products/${productSlug}/`, payload),
@@ -37,15 +59,23 @@ const EditProduct = () => {
     }
   );
 
+  const patchData = (data) => {
+    patchProduct(data);
+  };
+
   return (
-    <Box>
-      <UploadProductsImage control={control} patchProduct={patchProduct} />
-      <ProductStyleAndShape control={control} />
+    <Box component={"form"} onSubmit={handleSubmit(patchData)}>
+      <UploadProductsImage previousImage={product?.images} control={control} />
+      <ProductStyleAndShape
+        previousStyleImage={product?.styles}
+        previousShapeImage={product?.shapes}
+        control={control}
+      />
       <RichTextProduct control={control} />
       <ProductDetails control={control} />
       {/* submit button */}
       <LoadingButton
-        // loading={mutationLoading}
+        loading={mutationLoading}
         variant="button3"
         type="submit"
         sx={{

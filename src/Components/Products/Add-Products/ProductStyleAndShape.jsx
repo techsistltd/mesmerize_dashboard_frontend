@@ -1,5 +1,6 @@
 import {
   Box,
+  Grid,
   InputLabel,
   MenuItem,
   Paper,
@@ -10,8 +11,15 @@ import React from "react";
 import UploadImage from "../../Shared/UploadImage";
 import { Controller } from "react-hook-form";
 import { Fragment } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-const ProductStyleAndShape = ({ control }) => {
+const ProductStyleAndShape = ({
+  control,
+  previousStyleImage = [],
+  previousShapeImage = [],
+}) => {
+  const { data: products = {} } = useQuery([`/dashboard/products/`]);
+
   return (
     <Paper
       sx={{
@@ -39,11 +47,35 @@ const ProductStyleAndShape = ({ control }) => {
         >
           Style
         </Typography>
-        <UploadImage
-          control={control}
-          fieldName="product_style"
-          helperText="Style"
-        />
+
+        <Grid container columnGap={"35px"} rowGap={"35px"}>
+          {Boolean(previousStyleImage?.length) &&
+            previousStyleImage?.map((file, index) => (
+              <Grid
+                key={index}
+                item
+                xs={1}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "left",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={file?.image}
+                  sx={{
+                    height: "99px",
+                    width: "109px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 1px 4px",
+                    bgcolor: "#FCFCFC",
+                  }}
+                />
+              </Grid>
+            ))}
+          <UploadImage control={control} fieldName={"styles"} />
+        </Grid>
       </Box>
       <Box sx={{ mt: "45px" }}>
         <Typography
@@ -65,11 +97,34 @@ const ProductStyleAndShape = ({ control }) => {
         >
           Shape
         </Typography>
-        <UploadImage
-          control={control}
-          fieldName="product_shape"
-          helperText="Shape"
-        />
+        <Grid container columnGap={"35px"} rowGap={"35px"}>
+          {Boolean(previousShapeImage?.length) &&
+            previousShapeImage?.map((file, index) => (
+              <Grid
+                key={index}
+                item
+                xs={1}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "left",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={file?.image}
+                  sx={{
+                    height: "99px",
+                    width: "109px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 1px 4px",
+                    bgcolor: "#FCFCFC",
+                  }}
+                />
+              </Grid>
+            ))}
+          <UploadImage control={control} fieldName={"shapes"} />
+        </Grid>
       </Box>
       <Box
         sx={{
@@ -85,7 +140,7 @@ const ProductStyleAndShape = ({ control }) => {
         {/* size */}
         <Box>
           <Controller
-            name={"product_size"}
+            name={"sizes"}
             control={control}
             // rules={{
             //   required: {
@@ -134,7 +189,7 @@ const ProductStyleAndShape = ({ control }) => {
         {/* color */}
         <Box>
           <Controller
-            name={"product_color"}
+            name={"colors"}
             control={control}
             defaultValue=""
             // rules={{
@@ -180,11 +235,11 @@ const ProductStyleAndShape = ({ control }) => {
                     color
                   </MenuItem>
                   <MenuItem value={"color"}>color</MenuItem>
-                  {/* {products?.product_color?.map(({ code }, index) => (
+                  {products?.product_color?.map(({ code }, index) => (
                     <MenuItem key={index} value={code}>
                       {code}
                     </MenuItem>
-                  ))} */}
+                  ))}
                 </TextField>
               </Fragment>
             )}
@@ -193,7 +248,7 @@ const ProductStyleAndShape = ({ control }) => {
         {/* flavour */}
         <Box>
           <Controller
-            name={"product_flavour"}
+            name={"flavours"}
             control={control}
             // rules={{
             //   required: {

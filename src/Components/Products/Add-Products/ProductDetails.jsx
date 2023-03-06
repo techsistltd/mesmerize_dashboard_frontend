@@ -172,7 +172,8 @@ const ProductDetails = ({ control }) => {
                   <MenuItem value="default" disabled>
                     status
                   </MenuItem>
-                  <MenuItem value="active">active</MenuItem>
+                  <MenuItem value="ACTIVE">ACTIVE</MenuItem>
+                  <MenuItem value="DEACTIVE">DEACTIVE</MenuItem>
                   {/* {products.map((category) => (
                   <MenuItem key={category?.slug} value={""}>
                     {}
@@ -244,7 +245,7 @@ const ProductDetails = ({ control }) => {
         {/* tags */}
         <Grid item xs={8}>
           <Controller
-            name={"tags"}
+            name={"tag"}
             control={control}
             defaultValue={[]}
             render={({ field: { value = [], onChange } }) => {
