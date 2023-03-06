@@ -1,5 +1,6 @@
 import {
   Box,
+  Grid,
   InputLabel,
   MenuItem,
   Paper,
@@ -9,8 +10,16 @@ import {
 import React from "react";
 import UploadImage from "../../Shared/UploadImage";
 import { Controller } from "react-hook-form";
+import { Fragment } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-const ProductStyleAndShape = ({ control }) => {
+const ProductStyleAndShape = ({
+  control,
+  previousStyleImage = [],
+  previousShapeImage = [],
+}) => {
+  const { data: products = {} } = useQuery([`/dashboard/products/`]);
+
   return (
     <Paper
       sx={{
@@ -38,7 +47,35 @@ const ProductStyleAndShape = ({ control }) => {
         >
           Style
         </Typography>
-        <UploadImage />
+
+        <Grid container columnGap={"35px"} rowGap={"35px"}>
+          {Boolean(previousStyleImage?.length) &&
+            previousStyleImage?.map((file, index) => (
+              <Grid
+                key={index}
+                item
+                xs={1}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "left",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={file?.image}
+                  sx={{
+                    height: "99px",
+                    width: "109px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 1px 4px",
+                    bgcolor: "#FCFCFC",
+                  }}
+                />
+              </Grid>
+            ))}
+          <UploadImage control={control} fieldName={"styles"} />
+        </Grid>
       </Box>
       <Box sx={{ mt: "45px" }}>
         <Typography
@@ -60,7 +97,34 @@ const ProductStyleAndShape = ({ control }) => {
         >
           Shape
         </Typography>
-        <UploadImage />
+        <Grid container columnGap={"35px"} rowGap={"35px"}>
+          {Boolean(previousShapeImage?.length) &&
+            previousShapeImage?.map((file, index) => (
+              <Grid
+                key={index}
+                item
+                xs={1}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "left",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={file?.image}
+                  sx={{
+                    height: "99px",
+                    width: "109px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 1px 4px",
+                    bgcolor: "#FCFCFC",
+                  }}
+                />
+              </Grid>
+            ))}
+          <UploadImage control={control} fieldName={"shapes"} />
+        </Grid>
       </Box>
       <Box
         sx={{
@@ -75,117 +139,158 @@ const ProductStyleAndShape = ({ control }) => {
       >
         {/* size */}
         <Box>
-          <InputLabel
-            htmlFor="form-input-size"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            Size
-          </InputLabel>
           <Controller
-            name={"size"}
+            name={"sizes"}
             control={control}
+            // rules={{
+            //   required: {
+            //     value: true,
+            //     message: "Size is required",
+            //   },
+            // }}
             defaultValue={""}
-            render={({ field }) => (
-              <TextField
-                id="form-input-size"
-                variant="outlined"
-                type="text"
-                placeholder="Enter Product Size "
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  width: "350px",
-                  borderRadius: "5px",
-                  mt: "10px",
-                  height: "40px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              ></TextField>
+            render={({ field, fieldState: { error } }) => (
+              <Fragment>
+                <InputLabel
+                  // required
+                  // error={Boolean(error)}
+                  htmlFor="form-input-size"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Size
+                </InputLabel>
+                <TextField
+                  id="form-input-size"
+                  variant="outlined"
+                  type="text"
+                  // error={Boolean(error)}
+                  // helperText={Boolean(error) && error?.message}
+                  placeholder="Enter Product Size "
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    width: "350px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    height: "40px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                />
+              </Fragment>
             )}
           />
         </Box>
         {/* color */}
         <Box>
-          <InputLabel
-            htmlFor="form-input-color"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            color
-          </InputLabel>
           <Controller
-            name={"color"}
+            name={"colors"}
             control={control}
             defaultValue=""
-            render={({ field: { value, ...field } }) => (
-              <TextField
-                id="form-input-color"
-                variant="outlined"
-                select
-                value={Boolean(value) ? value : "default"}
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  width: "350px",
-                  height: "40px",
-                  borderRadius: "5px",
-                  mt: "10px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              >
-                <MenuItem value="default" disabled>
+            // rules={{
+            //   required: {
+            //     value: true,
+            //     message: "Color is required",
+            //   },
+            // }}
+            render={({ field: { value, ...field }, fieldState: { error } }) => (
+              <Fragment>
+                <InputLabel
+                  // required
+                  // error={Boolean(error)}
+                  htmlFor="form-input-color"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
                   color
-                </MenuItem>
-                <MenuItem value={"color"}>color</MenuItem>
-              </TextField>
+                </InputLabel>
+                <TextField
+                  id="form-input-color"
+                  variant="outlined"
+                  select
+                  // error={Boolean(error)}
+                  // helperText={Boolean(error) && error?.message}
+                  value={Boolean(value) ? value : "default"}
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    width: "350px",
+                    height: "40px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                >
+                  <MenuItem value="default" disabled>
+                    color
+                  </MenuItem>
+                  <MenuItem value={"color"}>color</MenuItem>
+                  {products?.product_color?.map(({ code }, index) => (
+                    <MenuItem key={index} value={code}>
+                      {code}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Fragment>
             )}
           />
         </Box>
-        {/* flavor */}
+        {/* flavour */}
         <Box>
-          <InputLabel
-            htmlFor="form-input-flavor"
-            sx={{
-              color: "textBlack",
-              fontSize: "16px",
-            }}
-          >
-            Flavor
-          </InputLabel>
           <Controller
-            name={"flavor"}
+            name={"flavours"}
             control={control}
+            // rules={{
+            //   required: {
+            //     value: true,
+            //     message: "Flavour is required",
+            //   },
+            // }}
             defaultValue={""}
-            render={({ field }) => (
-              <TextField
-                id="form-input-flavor"
-                variant="outlined"
-                type="text"
-                placeholder="Enter Product Flavor "
-                {...field}
-                sx={{
-                  border: 1,
-                  borderColor: "primary.main",
-                  width: "350px",
-                  borderRadius: "5px",
-                  mt: "10px",
-                  height: "40px",
-                  "& .MuiInputBase-input": {
-                    padding: "8px",
-                  },
-                }}
-              ></TextField>
+            render={({ field, fieldState: { error } }) => (
+              <Fragment>
+                <InputLabel
+                  // error={Boolean(error)}
+                  // required
+                  htmlFor="form-input-flavour"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Flavour
+                </InputLabel>
+                <TextField
+                  id="form-input-flavour"
+                  variant="outlined"
+                  // error={Boolean(error)}
+                  // helperText={Boolean(error) && error?.message}
+                  type="text"
+                  placeholder="Enter Product flavour "
+                  {...field}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    width: "350px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    height: "40px",
+                    "& .MuiInputBase-input": {
+                      padding: "8px",
+                    },
+                  }}
+                />
+              </Fragment>
             )}
           />
         </Box>

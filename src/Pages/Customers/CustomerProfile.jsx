@@ -1,10 +1,10 @@
 import React from "react";
-import UserProfile from "../../Components/Customers/UserProfile";
+import ViewCustomerProfile from "../../Components/Customers/ViewCustomerProfile";
 
 const CustomerProfile = () => {
   return (
     <div>
-      <UserProfile />
+      <ViewCustomerProfile />
     </div>
   );
 };

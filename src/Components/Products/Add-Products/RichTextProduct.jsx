@@ -1,7 +1,8 @@
-import { Paper, Typography, Box } from "@mui/material";
+import { Paper, Typography, Box, FormHelperText } from "@mui/material";
 import React, { useRef } from "react";
 import JoditEditor, { Jodit } from "jodit-react";
 import { Controller } from "react-hook-form";
+import { Fragment } from "react";
 
 const RichTextProduct = ({ control }) => {
   const editor = useRef(null);
@@ -12,25 +13,6 @@ const RichTextProduct = ({ control }) => {
 
   return (
     <Paper sx={{ padding: "45px", mt: "24px" }}>
-      <Typography
-        variant="body4"
-        sx={{
-          position: "relative",
-          mb: "30px",
-          "&:after": {
-            content: `""`,
-            position: "absolute",
-            width: "72px",
-            height: "2px",
-            bgcolor: "textBlack",
-            bottom: "-10px",
-            left: 0,
-            mx: "auto",
-          },
-        }}
-      >
-        Product Discription
-      </Typography>
       <Box
         sx={{
           "& .jodit-status-bar .jodit-status-bar__item a ": {
@@ -46,11 +28,47 @@ const RichTextProduct = ({ control }) => {
         }}
       >
         <Controller
-          name={"details"}
+          name={"description"}
           control={control}
+          rules={{
+            required: {
+              value: true,
+              message: "Discription is required",
+            },
+          }}
           defaultValue={""}
-          render={({ field }) => (
-            <JoditEditor ref={editor} {...field} config={config} />
+          render={({ field, fieldState: { error } }) => (
+            <Fragment>
+              <Typography
+                variant="body4"
+                sx={{
+                  position: "relative",
+                  color: error ? "#d32f2f" : "textBlack",
+                  mb: "30px",
+                  "&:after": {
+                    content: `""`,
+                    position: "absolute",
+                    width: "72px",
+                    height: "2px",
+                    bgcolor: error ? "#d32f2f" : "textBlack",
+                    bottom: "-10px",
+                    left: 0,
+                    mx: "auto",
+                  },
+                }}
+              >
+                Product Discription*
+              </Typography>
+              <JoditEditor ref={editor} {...field} config={config} />
+              <FormHelperText
+                sx={{
+                  mt: "15px",
+                  color: "error.main",
+                }}
+              >
+                {error?.message}
+              </FormHelperText>
+            </Fragment>
           )}
         />
       </Box>

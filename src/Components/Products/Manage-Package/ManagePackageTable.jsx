@@ -6,6 +6,7 @@ import DataTable from "../../Shared/DataTable";
 
 const ManagePackageTable = () => {
   const navigate = useNavigate();
+
   const tableColumn = [
     {
       field: "id",
@@ -133,9 +134,9 @@ const ManagePackageTable = () => {
       width: 150,
       getActions: ({ row }) => {
         return [
-          <Tooltip title="View" placement="top">
-            <GridActionsCellItem
-              icon={
+          <GridActionsCellItem
+            icon={
+              <Tooltip title="View" placement="top">
                 <Box
                   component={AiOutlineEye}
                   sx={{
@@ -143,14 +144,14 @@ const ManagePackageTable = () => {
                     color: "textBlack",
                   }}
                 />
-              }
-              label="View"
-              onClick={() => console.log(row)}
-            />
-          </Tooltip>,
-          <Tooltip title="Edit" placement="top">
-            <GridActionsCellItem
-              icon={
+              </Tooltip>
+            }
+            label="View"
+            onClick={() => console.log(row)}
+          />,
+          <GridActionsCellItem
+            icon={
+              <Tooltip title="Edit" placement="top">
                 <Box
                   component={FaPen}
                   sx={{
@@ -158,14 +159,14 @@ const ManagePackageTable = () => {
                     color: "textBlack",
                   }}
                 />
-              }
-              label="Edit"
-              onClick={() => console.log(row)}
-            />
-          </Tooltip>,
-          <Tooltip title="Delete" placement="top">
-            <GridActionsCellItem
-              icon={
+              </Tooltip>
+            }
+            label="Edit"
+            onClick={() => console.log(row)}
+          />,
+          <GridActionsCellItem
+            icon={
+              <Tooltip title="Delete" placement="top">
                 <Box
                   component={MdDelete}
                   sx={{
@@ -173,15 +174,16 @@ const ManagePackageTable = () => {
                     color: "textBlack",
                   }}
                 />
-              }
-              label="Delete"
-              onClick={() => console.log(row)}
-            />
-          </Tooltip>,
+              </Tooltip>
+            }
+            label="Delete"
+            onClick={() => console.log(row)}
+          />,
         ];
       },
     },
   ];
+
   return (
     <Box>
       <Box
