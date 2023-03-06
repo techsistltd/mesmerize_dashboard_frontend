@@ -118,6 +118,10 @@ const SideDrawer = ({ drawerWidth }) => {
         "& svg": {
           color: "white",
         },
+        // scrollbar
+        "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
+          width: "3px",
+        },
       }}
       variant="permanent"
       anchor="left"
