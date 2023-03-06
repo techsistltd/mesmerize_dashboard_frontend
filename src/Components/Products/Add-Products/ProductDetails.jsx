@@ -67,7 +67,7 @@ const ProductDetails = ({ control }) => {
                     height: "40px",
                     mt: "10px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 />
@@ -116,7 +116,7 @@ const ProductDetails = ({ control }) => {
                     mt: " 10px",
                     borderRadius: "5px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 />
@@ -165,7 +165,7 @@ const ProductDetails = ({ control }) => {
                     borderRadius: "5px",
                     mt: "10px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 >
@@ -225,7 +225,7 @@ const ProductDetails = ({ control }) => {
                     borderRadius: "5px",
                     mt: "10px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 >
@@ -307,11 +307,12 @@ const ProductDetails = ({ control }) => {
                         sx={{
                           border: 1,
                           borderColor: "primary.main",
+                          overflowX: "auto",
                           height: "40px",
                           borderRadius: "5px",
                           mt: "10px",
                           "& .MuiInputBase-input": {
-                            padding: "8px",
+                            padding: "7px",
                           },
                         }}
                       />

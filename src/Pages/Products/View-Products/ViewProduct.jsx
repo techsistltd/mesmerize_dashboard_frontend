@@ -2,13 +2,16 @@ import { Box, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaPen } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ViewProductDetails from "../../../Components/Products/View-Products/ViewProductDetails";
 import ViewProductImage from "../../../Components/Products/View-Products/ViewProductImage";
 import ViewProductStyleAndShape from "../../../Components/Products/View-Products/ViewProductStyleAndShape";
 
 const ViewProduct = () => {
   const { productSlug } = useParams();
+
+  const navigate = useNavigate();
+
   const { data: product = {} } = useQuery([
     `/dashboard/products/${productSlug}/`,
   ]);
@@ -26,6 +29,7 @@ const ViewProduct = () => {
         }}
       >
         <Button
+          onClick={() => navigate(`/products/${productSlug}/edit`)}
           variant="button3"
           sx={{
             gap: "8px",

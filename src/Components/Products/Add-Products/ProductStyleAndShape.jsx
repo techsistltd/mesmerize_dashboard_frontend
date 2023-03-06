@@ -1,5 +1,7 @@
 import {
+  Autocomplete,
   Box,
+  createFilterOptions,
   Grid,
   InputLabel,
   MenuItem,
@@ -19,6 +21,8 @@ const ProductStyleAndShape = ({
   previousShapeImage = [],
 }) => {
   const { data: products = {} } = useQuery([`/dashboard/products/`]);
+
+  const filter = createFilterOptions();
 
   return (
     <Paper
@@ -178,7 +182,7 @@ const ProductStyleAndShape = ({
                     mt: "10px",
                     height: "40px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 />
@@ -191,58 +195,87 @@ const ProductStyleAndShape = ({
           <Controller
             name={"colors"}
             control={control}
-            defaultValue=""
+            defaultValue={[]}
             // rules={{
             //   required: {
             //     value: true,
             //     message: "Color is required",
             //   },
             // }}
-            render={({ field: { value, ...field }, fieldState: { error } }) => (
-              <Fragment>
-                <InputLabel
-                  // required
-                  // error={Boolean(error)}
-                  htmlFor="form-input-color"
-                  sx={{
-                    color: "textBlack",
-                    fontSize: "16px",
+            render={({ field: { value = [], onChange } }) => {
+              return (
+                <Autocomplete
+                  id="autocomplete"
+                  freeSolo
+                  autoSelect
+                  multiple
+                  options={["Red", "Yellow", "Green", "Orange"]}
+                  value={value}
+                  onChange={(_, newValue) => onChange(newValue)}
+                  filterOptions={(options, params) => {
+                    const filtered = filter(options, params);
+
+                    const { inputValue } = params;
+                    const isExisting = options.some(
+                      (option) => inputValue === option
+                    );
+                    if (inputValue !== "" && !isExisting) {
+                      filtered.push(inputValue);
+                    }
+
+                    return filtered;
                   }}
-                >
-                  color
-                </InputLabel>
-                <TextField
-                  id="form-input-color"
-                  variant="outlined"
-                  select
-                  // error={Boolean(error)}
-                  // helperText={Boolean(error) && error?.message}
-                  value={Boolean(value) ? value : "default"}
-                  {...field}
                   sx={{
-                    border: 1,
-                    borderColor: "primary.main",
-                    width: "350px",
-                    height: "40px",
-                    borderRadius: "5px",
-                    mt: "10px",
-                    "& .MuiInputBase-input": {
-                      padding: "8px",
+                    "& .MuiAutocomplete-tag": {
+                      backgroundColor: "color12.main",
+                      borderRadius: "5px",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      padding: 0,
+                    },
+
+                    "& .MuiChip-label": {
+                      color: "textWhite",
+                    },
+
+                    "& .MuiMenuList-root": {
+                      boxShadow: "0px 4px 10px 5px rgba(0, 0, 0, 0.87)",
                     },
                   }}
-                >
-                  <MenuItem value="default" disabled>
-                    color
-                  </MenuItem>
-                  <MenuItem value={"color"}>color</MenuItem>
-                  {products?.product_color?.map(({ code }, index) => (
-                    <MenuItem key={index} value={code}>
-                      {code}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Fragment>
-            )}
+                  renderInput={(params) => (
+                    <Fragment>
+                      <InputLabel
+                        htmlFor="form-input-color"
+                        sx={{
+                          color: "textBlack",
+                          fontSize: "16px",
+                        }}
+                      >
+                        Color
+                      </InputLabel>
+                      <TextField
+                        {...params}
+                        id="form-input-color"
+                        margin="normal"
+                        variant="outlined"
+                        sx={{
+                          border: 1,
+                          borderColor: "primary.main",
+                          overflowX: "auto",
+                          height: "40px",
+                          width: "350px",
+                          borderRadius: "5px",
+                          mt: "10px",
+                          "& .MuiInputBase-input": {
+                            padding: "6px",
+                          },
+                        }}
+                      />
+                    </Fragment>
+                  )}
+                />
+              );
+            }}
           />
         </Box>
         {/* flavour */}
@@ -286,7 +319,7 @@ const ProductStyleAndShape = ({
                     mt: "10px",
                     height: "40px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 />

@@ -137,7 +137,7 @@ const UploadProductsImage = ({ control, previousImage = [] }) => {
                       mt: "10px",
                       height: "40px",
                       "& .MuiInputBase-input": {
-                        padding: "8px",
+                        padding: "7px",
                       },
                     }}
                   />
@@ -189,7 +189,7 @@ const UploadProductsImage = ({ control, previousImage = [] }) => {
                       borderRadius: "5px",
                       mt: "10px",
                       "& .MuiInputBase-input": {
-                        padding: "8px",
+                        padding: "7px",
                       },
                     }}
                   >

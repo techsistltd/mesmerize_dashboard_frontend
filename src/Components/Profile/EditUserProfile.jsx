@@ -137,7 +137,7 @@ const EditUserProfile = () => {
                     height: "40px",
                     mt: "10px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 />
@@ -186,7 +186,7 @@ const EditUserProfile = () => {
                     mt: " 10px",
                     borderRadius: "5px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 />
@@ -235,7 +235,7 @@ const EditUserProfile = () => {
                     mt: " 10px",
                     borderRadius: "5px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 />

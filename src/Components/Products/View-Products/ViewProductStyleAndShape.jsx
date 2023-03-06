@@ -138,7 +138,7 @@ const ViewProductStyleAndShape = ({ product }) => {
               padding: "7px 11px",
               height: "40px",
               "& .MuiInputBase-input": {
-                padding: "8px",
+                padding: "7px",
               },
             }}
           >
