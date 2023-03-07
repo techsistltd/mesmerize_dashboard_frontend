@@ -24,13 +24,14 @@ const AddProducts = () => {
     useMutation((payload) => axiosApi.post("/dashboard/products/", payload), {
       onSuccess: () => {
         reset();
+        queryClient.invalidateQueries(["/dashboard/products/"]);
         navigate("/products");
         enqueueSnackbar("Successfully Added Product", {
           variant: "success",
         });
-        queryClient.invalidateQueries(["/dashboard/products/"]);
       },
-      onError: () => {
+      onError: (err) => {
+        console.log(err);
         enqueueSnackbar("Something went wrong", {
           variant: "error",
         });

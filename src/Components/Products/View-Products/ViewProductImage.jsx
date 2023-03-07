@@ -75,6 +75,7 @@ const ViewProductImage = ({ product }) => {
               border: 1,
               borderColor: "primary.main",
               width: "350px",
+              overflowX: "auto",
               borderRadius: "5px",
               padding: "7px 11px",
               mt: "10px",

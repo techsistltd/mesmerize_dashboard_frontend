@@ -34,6 +34,7 @@ const ViewProduct = () => {
         }}
       >
         <Button
+          onClick={() => navigate(`/products/${productSlug}/edit`)}
           variant="button3"
           sx={{
             gap: "8px",

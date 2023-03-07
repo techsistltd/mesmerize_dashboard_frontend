@@ -5,7 +5,6 @@ import { Controller } from "react-hook-form";
 import { Fragment } from "react";
 
 const RichTextProduct = ({ control }) => {
-  const editor = useRef(null);
   const config = {
     buttons: ["align", "bold", "italic", "underline"],
     placeholder: "Type here.....",
@@ -36,7 +35,7 @@ const RichTextProduct = ({ control }) => {
               message: "Discription is required",
             },
           }}
-          defaultValue={""}
+          // defaultValue={""}
           render={({ field, fieldState: { error } }) => (
             <Fragment>
               <Typography
@@ -59,7 +58,14 @@ const RichTextProduct = ({ control }) => {
               >
                 Product Discription*
               </Typography>
-              <JoditEditor ref={editor} {...field} config={config} />
+              <JoditEditor
+                {...field}
+                // ref={ref}
+                config={config}
+                // value={value}
+                // onChange={(e) => onChange(e)}
+              />
+
               <FormHelperText
                 sx={{
                   mt: "15px",
