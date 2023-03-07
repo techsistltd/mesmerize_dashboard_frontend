@@ -4,16 +4,15 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { getCroppedImg } from "../../../../Utils/helper";
 
-const CROP = {
-  unit: "%",
-  x: 0,
-  y: 20,
-  height: 12,
-  width: 33,
-};
 const CustomizationAreaEditor = ({ customizationImage, setCustomArea }) => {
   const imgRef = useRef(null);
-  const [crop, setCrop] = useState(CROP);
+  const [crop, setCrop] = useState({
+    unit: "%",
+    x: 25,
+    y: 25,
+    width: 50,
+    height: 50,
+  });
   const [completedCrop, setCompletedCrop] = useState();
 
   const handleCropComplete = () => {
