@@ -12,7 +12,6 @@ import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
 
 const ProductDetails = ({ control }) => {
-  const { data: products = [] } = useQuery(["/dashboard/products/"]);
   const { data: deliveryOption = [] } = useQuery([
     "/dashboard/delivery-option/",
   ]);
@@ -57,7 +56,7 @@ const ProductDetails = ({ control }) => {
                   helperText={Boolean(error) && error?.message}
                   id="form-input-price"
                   variant="outlined"
-                  type="text"
+                  type="number"
                   placeholder="Enter Price"
                   {...field}
                   sx={{
@@ -106,7 +105,7 @@ const ProductDetails = ({ control }) => {
                   error={Boolean(error)}
                   helperText={Boolean(error) && error?.message}
                   variant="outlined"
-                  type="text"
+                  type="number"
                   placeholder="Enter Product Stock "
                   {...field}
                   sx={{
@@ -147,7 +146,7 @@ const ProductDetails = ({ control }) => {
                     fontSize: "16px",
                   }}
                 >
-                  status
+                  Status
                 </InputLabel>
                 <TextField
                   fullWidth
@@ -245,7 +244,7 @@ const ProductDetails = ({ control }) => {
         {/* tags */}
         <Grid item xs={8}>
           <Controller
-            name={"tag"}
+            name={"tags"}
             control={control}
             defaultValue={[]}
             render={({ field: { value = [], onChange } }) => {
@@ -301,6 +300,100 @@ const ProductDetails = ({ control }) => {
                       <TextField
                         {...params}
                         fullWidth
+                        id="form-input-tags"
+                        margin="normal"
+                        variant="outlined"
+                        sx={{
+                          border: 1,
+                          borderColor: "primary.main",
+                          overflowX: "auto",
+                          height: "40px",
+                          borderRadius: "5px",
+                          mt: "10px",
+                          "& .MuiInputBase-input": {
+                            padding: "7px",
+                          },
+                        }}
+                      />
+                    </Fragment>
+                  )}
+                />
+              );
+            }}
+          />
+        </Grid>
+        {/* occasions */}
+        <Grid item xs={12}>
+          <Controller
+            name={"occasions"}
+            control={control}
+            rules={{
+              required: {
+                value: true,
+                message: "Occasions is required",
+              },
+            }}
+            defaultValue={[]}
+            render={({
+              field: { value = [], onChange },
+              fieldState: { error },
+            }) => {
+              return (
+                <Autocomplete
+                  id="autocomplete"
+                  freeSolo
+                  autoSelect
+                  multiple
+                  options={["Birthday", "Wedding", "Anniversary", "Easter"]}
+                  value={value}
+                  onChange={(_, newValue) => onChange(newValue)}
+                  filterOptions={(options, params) => {
+                    const filtered = filter(options, params);
+
+                    const { inputValue } = params;
+                    const isExisting = options.some(
+                      (option) => inputValue === option
+                    );
+                    if (inputValue !== "" && !isExisting) {
+                      filtered.push(inputValue);
+                    }
+
+                    return filtered;
+                  }}
+                  sx={{
+                    "& .MuiAutocomplete-tag": {
+                      backgroundColor: "color12.main",
+                      borderRadius: "5px",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      padding: 0,
+                    },
+                    "& .MuiChip-label": {
+                      color: "textWhite",
+                    },
+
+                    "& .MuiMenuList-root": {
+                      boxShadow: "0px 4px 10px 5px rgba(0, 0, 0, 0.87)",
+                    },
+                  }}
+                  renderInput={(params) => (
+                    <Fragment>
+                      <InputLabel
+                        required
+                        error={Boolean(error)}
+                        htmlFor="form-input-tags"
+                        sx={{
+                          color: "textBlack",
+                          fontSize: "16px",
+                        }}
+                      >
+                        Occasions
+                      </InputLabel>
+                      <TextField
+                        {...params}
+                        fullWidth
+                        error={Boolean(error)}
+                        helperText={Boolean(error) && error?.message}
                         id="form-input-tags"
                         margin="normal"
                         variant="outlined"

@@ -1,8 +1,10 @@
 import {
   Autocomplete,
   Box,
+  Chip,
   createFilterOptions,
   Grid,
+  IconButton,
   InputLabel,
   MenuItem,
   Paper,
@@ -10,10 +12,12 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { GrAddCircle } from "react-icons/gr";
 import UploadImage from "../../Shared/UploadImage";
 import { Controller } from "react-hook-form";
 import { Fragment } from "react";
 import { useQuery } from "@tanstack/react-query";
+import PairedInputField from "../../Shared/PairedInputField";
 
 const ProductStyleAndShape = ({
   control,
@@ -31,118 +35,108 @@ const ProductStyleAndShape = ({
         mt: "24px",
       }}
     >
-      <Box>
-        <Typography
-          variant="body4"
-          sx={{
-            position: "relative",
-            mb: "30px",
-            "&:after": {
-              content: `""`,
-              position: "absolute",
-              width: "50px",
-              height: "2px",
-              bgcolor: "textBlack",
-              bottom: "-10px",
-              left: 0,
-              mx: "auto",
-            },
-          }}
-        >
-          Style
-        </Typography>
+      <Grid container rowGap={"45px"} columnSpacing={"45px"}>
+        <Grid item xs={12}>
+          <Typography
+            variant="body4"
+            sx={{
+              position: "relative",
+              mb: "30px",
+              "&:after": {
+                content: `""`,
+                position: "absolute",
+                width: "50px",
+                height: "2px",
+                bgcolor: "textBlack",
+                bottom: "-10px",
+                left: 0,
+                mx: "auto",
+              },
+            }}
+          >
+            Style
+          </Typography>
 
-        <Grid container columnGap={"35px"} rowGap={"35px"}>
-          {Boolean(previousStyleImage?.length) &&
-            previousStyleImage?.map((file, index) => (
-              <Grid
-                key={index}
-                item
-                xs={1}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "left",
-                }}
-              >
-                <Box
-                  component="img"
-                  src={file?.image}
+          <Grid container columnGap={"35px"} rowGap={"35px"}>
+            {Boolean(previousStyleImage?.length) &&
+              previousStyleImage?.map((file, index) => (
+                <Grid
+                  key={index}
+                  item
+                  xs={1}
                   sx={{
-                    height: "99px",
-                    width: "109px",
-                    borderRadius: "5px",
-                    boxShadow: "0px 1px 4px",
-                    bgcolor: "#FCFCFC",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "left",
                   }}
-                />
-              </Grid>
-            ))}
-          <UploadImage control={control} fieldName={"styles"} />
+                >
+                  <Box
+                    component="img"
+                    src={file?.image}
+                    sx={{
+                      height: "99px",
+                      width: "109px",
+                      borderRadius: "5px",
+                      boxShadow: "0px 1px 4px",
+                      bgcolor: "#FCFCFC",
+                    }}
+                  />
+                </Grid>
+              ))}
+            <UploadImage control={control} fieldName={"styles"} />
+          </Grid>
         </Grid>
-      </Box>
-      <Box sx={{ mt: "45px" }}>
-        <Typography
-          variant="body4"
-          sx={{
-            position: "relative",
-            mb: "30px",
-            "&:after": {
-              content: `""`,
-              position: "absolute",
-              width: "50px",
-              height: "2px",
-              bgcolor: "textBlack",
-              bottom: "-10px",
-              left: 0,
-              mx: "auto",
-            },
-          }}
-        >
-          Shape
-        </Typography>
-        <Grid container columnGap={"35px"} rowGap={"35px"}>
-          {Boolean(previousShapeImage?.length) &&
-            previousShapeImage?.map((file, index) => (
-              <Grid
-                key={index}
-                item
-                xs={1}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "left",
-                }}
-              >
-                <Box
-                  component="img"
-                  src={file?.image}
+        <Grid item xs={12}>
+          <Typography
+            variant="body4"
+            sx={{
+              position: "relative",
+              mb: "30px",
+              "&:after": {
+                content: `""`,
+                position: "absolute",
+                width: "50px",
+                height: "2px",
+                bgcolor: "textBlack",
+                bottom: "-10px",
+                left: 0,
+                mx: "auto",
+              },
+            }}
+          >
+            Shape
+          </Typography>
+          <Grid container columnGap={"35px"} rowGap={"35px"}>
+            {Boolean(previousShapeImage?.length) &&
+              previousShapeImage?.map((file, index) => (
+                <Grid
+                  key={index}
+                  item
+                  xs={1}
                   sx={{
-                    height: "99px",
-                    width: "109px",
-                    borderRadius: "5px",
-                    boxShadow: "0px 1px 4px",
-                    bgcolor: "#FCFCFC",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "left",
                   }}
-                />
-              </Grid>
-            ))}
-          <UploadImage control={control} fieldName={"shapes"} />
+                >
+                  <Box
+                    component="img"
+                    src={file?.image}
+                    sx={{
+                      height: "99px",
+                      width: "109px",
+                      borderRadius: "5px",
+                      boxShadow: "0px 1px 4px",
+                      bgcolor: "#FCFCFC",
+                    }}
+                  />
+                </Grid>
+              ))}
+            <UploadImage control={control} fieldName={"shapes"} />
+          </Grid>
         </Grid>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "35px",
-          mt: "40px",
-          "& .MuiTextField-root": {
-            // marginTop: 0,
-          },
-        }}
-      >
         {/* size */}
-        <Box>
+        <Grid item xs={4}>
           <Controller
             name={"sizes"}
             control={control}
@@ -152,8 +146,11 @@ const ProductStyleAndShape = ({
             //     message: "Size is required",
             //   },
             // }}
-            defaultValue={""}
-            render={({ field, fieldState: { error } }) => (
+            // defaultValue={[]}
+            render={({
+              field: { value = [], onChange },
+              fieldState: { error },
+            }) => (
               <Fragment>
                 <InputLabel
                   // required
@@ -166,32 +163,148 @@ const ProductStyleAndShape = ({
                 >
                   Size
                 </InputLabel>
-                <TextField
-                  id="form-input-size"
-                  variant="outlined"
-                  type="text"
-                  // error={Boolean(error)}
-                  // helperText={Boolean(error) && error?.message}
-                  placeholder="Enter Product Size "
-                  {...field}
+                <Box
+                  variant="body6"
+                  color={"textBlack"}
                   sx={{
                     border: 1,
+                    width: 1,
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "10px",
+                    overflowX: "auto",
                     borderColor: "primary.main",
-                    width: "350px",
-                    borderRadius: "5px",
-                    mt: "10px",
                     height: "40px",
-                    "& .MuiInputBase-input": {
-                      padding: "7px",
-                    },
+                    borderRadius: "5px",
+                    padding: "4px 11px",
+                    mt: "10px",
+                  }}
+                >
+                  {value?.map(({ size = "", added_price = "" }, index, arr) => {
+                    return (
+                      <Chip
+                        key={index}
+                        onDelete={() => {
+                          const newData = arr?.filter(
+                            (item) => item?.size !== size
+                          );
+                          onChange(newData);
+                        }}
+                        label={`${size} - ${added_price}`}
+                        variant="outlined"
+                        sx={{
+                          height: "30px",
+                          minWidth: "40px",
+                          borderRadius: "6px",
+                          "& .MuiChip-label": {
+                            padding: " 6px",
+                            fontSize: "14px",
+                            color: "textBlack",
+                          },
+                        }}
+                      />
+                    );
+                  })}
+                </Box>
+                <PairedInputField
+                  firstField="size"
+                  secondField="added_price"
+                  onSubmit={(data) => {
+                    const newData = [...value, data];
+                    onChange(newData);
                   }}
                 />
               </Fragment>
             )}
           />
-        </Box>
+        </Grid>
+        {/* flavour */}
+        <Grid item xs={4}>
+          <Controller
+            name={"flavours"}
+            control={control}
+            // rules={{
+            //   required: {
+            //     value: true,
+            //     message: "Flavour is required",
+            //   },
+            // }}
+            defaultValue={[]}
+            render={({
+              field: { value = [], onChange },
+              fieldState: { error },
+            }) => (
+              <Fragment>
+                <InputLabel
+                  // required
+                  // error={Boolean(error)}
+                  htmlFor="form-input-size"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Flavour
+                </InputLabel>
+                <Box
+                  variant="body6"
+                  color={"textBlack"}
+                  sx={{
+                    border: 1,
+                    width: 1,
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "10px",
+                    overflowX: "auto",
+                    borderColor: "primary.main",
+                    height: "40px",
+                    borderRadius: "5px",
+                    padding: "4px 11px",
+                    mt: "10px",
+                  }}
+                >
+                  {value?.map(
+                    ({ flavour = "", added_price = "" }, index, arr) => {
+                      return (
+                        <Chip
+                          key={index}
+                          onDelete={() => {
+                            const newData = arr?.filter(
+                              (item) => item?.flavour !== flavour
+                            );
+                            onChange(newData);
+                          }}
+                          label={`${flavour} - ${added_price}`}
+                          variant="outlined"
+                          sx={{
+                            height: "30px",
+                            minWidth: "40px",
+                            borderRadius: "6px",
+                            "& .MuiChip-label": {
+                              padding: " 6px",
+                              fontSize: "14px",
+                              color: "textBlack",
+                            },
+                          }}
+                        />
+                      );
+                    }
+                  )}
+                </Box>
+                <PairedInputField
+                  firstField="flavour"
+                  secondField="added_price"
+                  onSubmit={(data) => {
+                    const newData = [...value, data];
+                    onChange(newData);
+                  }}
+                />
+              </Fragment>
+            )}
+          />
+        </Grid>
         {/* color */}
-        <Box>
+        <Grid item xs={4}>
           <Controller
             name={"colors"}
             control={control}
@@ -209,7 +322,7 @@ const ProductStyleAndShape = ({
                   freeSolo
                   autoSelect
                   multiple
-                  options={["Red", "Yellow", "Green", "Orange"]}
+                  options={["red", "yellow", "green", "orange"]}
                   value={value}
                   onChange={(_, newValue) => onChange(newValue)}
                   filterOptions={(options, params) => {
@@ -277,57 +390,8 @@ const ProductStyleAndShape = ({
               );
             }}
           />
-        </Box>
-        {/* flavour */}
-        <Box>
-          <Controller
-            name={"flavours"}
-            control={control}
-            // rules={{
-            //   required: {
-            //     value: true,
-            //     message: "Flavour is required",
-            //   },
-            // }}
-            defaultValue={""}
-            render={({ field, fieldState: { error } }) => (
-              <Fragment>
-                <InputLabel
-                  // error={Boolean(error)}
-                  // required
-                  htmlFor="form-input-flavour"
-                  sx={{
-                    color: "textBlack",
-                    fontSize: "16px",
-                  }}
-                >
-                  Flavour
-                </InputLabel>
-                <TextField
-                  id="form-input-flavour"
-                  variant="outlined"
-                  // error={Boolean(error)}
-                  // helperText={Boolean(error) && error?.message}
-                  type="text"
-                  placeholder="Enter Product flavour "
-                  {...field}
-                  sx={{
-                    border: 1,
-                    borderColor: "primary.main",
-                    width: "350px",
-                    borderRadius: "5px",
-                    mt: "10px",
-                    height: "40px",
-                    "& .MuiInputBase-input": {
-                      padding: "7px",
-                    },
-                  }}
-                />
-              </Fragment>
-            )}
-          />
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </Paper>
   );
 };

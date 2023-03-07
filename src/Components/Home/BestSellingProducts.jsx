@@ -16,15 +16,14 @@ const BestSellingProducts = () => {
   const navigate = useNavigate();
 
   const {
-    data: products = [],
+    data: { data: products = [] } = {},
     isLoading: productLoading,
     refetch,
   } = useQuery(["/dashboard/best-selling-products/"]);
-
+  console.log(products);
   const [deleteId, setDeleteId] = useState(null);
 
   const { data: { summary = {} } = {} } = useQuery(["/dashboard/summary/"]);
-
   const statsData = [
     {
       title: "Total Products",
@@ -79,15 +78,6 @@ const BestSellingProducts = () => {
       headerName: "Category",
       flex: 1,
       width: 120,
-      valueGetter: ({ value }) => value?.title,
-    },
-    {
-      field: "sub_category",
-      headerName: "Sub Category",
-      flex: 1,
-      minWidth: 120,
-      align: "center",
-      headerAlign: "center",
     },
     {
       field: "price",

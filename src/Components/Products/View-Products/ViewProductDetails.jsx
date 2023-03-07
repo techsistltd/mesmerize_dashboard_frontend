@@ -37,7 +37,7 @@ const ViewProductDetails = ({ product }) => {
               padding: "11px",
             }}
           >
-            {product?.description}
+            {product?.description?.replace(/<[^>]*>|&[A-Za-z0-9#]+;/gi, " ")}
           </Typography>
         </Box>
         <Grid container columnSpacing={"40px"} rowGap={"30px"}>
@@ -96,9 +96,10 @@ const ViewProductDetails = ({ product }) => {
                 borderRadius: "5px",
                 padding: "7px 11px",
                 mt: "10px",
+                textTransform: "capitalize",
               }}
             >
-              {/* {product?.} */}
+              {product?.status?.toLowerCase()}
             </Typography>
           </Grid>
           {/* delivery option */}
@@ -107,11 +108,11 @@ const ViewProductDetails = ({ product }) => {
               Delivery Option
             </Typography>
             <Box
-              variant="body6"
-              color="textBlack"
               sx={{
                 border: 1,
                 display: "flex",
+                fontSize: "14px",
+                color: "textBlack",
                 alignItems: "center",
                 gap: "8px",
                 overflowX: "auto",
@@ -148,19 +149,85 @@ const ViewProductDetails = ({ product }) => {
             <Typography variant="body4" color="textBlack">
               Tags
             </Typography>
-            <Typography
-              variant="body6"
-              color="textBlack"
+            <Box
               sx={{
                 border: 1,
+                display: "flex",
+
+                alignItems: "center",
+                gap: "8px",
+                overflowX: "auto",
                 borderColor: "primary.main",
                 height: "40px",
                 borderRadius: "5px",
+                px: "11px",
                 mt: "10px",
               }}
             >
-              {product?.tag}
+              {product?.tag?.map((tag, index) => {
+                return (
+                  <Box key={index}>
+                    <Chip
+                      label={tag}
+                      variant="outlined"
+                      sx={{
+                        height: "30px",
+                        minWidth: "40px",
+
+                        borderRadius: "6px",
+                        "& .MuiChip-label": {
+                          padding: " 6px",
+                          fontSize: "14px",
+                          color: "textBlack",
+                        },
+                      }}
+                    />
+                  </Box>
+                );
+              })}
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="body4" color="textBlack">
+              Occasions
             </Typography>
+            <Box
+              sx={{
+                border: 1,
+                display: "flex",
+
+                alignItems: "center",
+                gap: "8px",
+                overflowX: "auto",
+                borderColor: "primary.main",
+                height: "40px",
+                borderRadius: "5px",
+                px: "11px",
+                mt: "10px",
+              }}
+            >
+              {product?.occasions?.map((value, index) => {
+                return (
+                  <Box key={index}>
+                    <Chip
+                      label={value}
+                      variant="outlined"
+                      sx={{
+                        height: "30px",
+                        minWidth: "40px",
+
+                        borderRadius: "6px",
+                        "& .MuiChip-label": {
+                          padding: " 6px",
+                          fontSize: "14px",
+                          color: "textBlack",
+                        },
+                      }}
+                    />
+                  </Box>
+                );
+              })}
+            </Box>
           </Grid>
         </Grid>
       </Paper>
