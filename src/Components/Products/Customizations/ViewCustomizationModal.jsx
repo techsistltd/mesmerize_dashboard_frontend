@@ -18,9 +18,12 @@ const ViewCustomizationModal = ({
 }) => {
   const [deleteCustomization, setDeleteCustomization] = useState(false);
   const queryClient = useQueryClient();
-  const { data: customizations } = useQuery([
-    `/mesmerize/get-customization/${productSlug}/`,
-  ]);
+  const { data: customizations } = useQuery(
+    [`/mesmerize/get-customization/${productSlug}/`],
+    {
+      cacheTime: 0,
+    }
+  );
 
   return (
     <Modal
@@ -66,7 +69,6 @@ const ViewCustomizationModal = ({
         </Box>
         <Box
           sx={{
-            position: "relative",
             maxHeight: "80vh",
             overflowY: "auto",
             // scrollbar
@@ -76,32 +78,39 @@ const ViewCustomizationModal = ({
           }}
         >
           <Box
-            component="img"
-            src={customizations?.customize_image}
             sx={{
-              width: 1,
-              borderRadius: "3px",
+              position: "relative",
             }}
-          />
-          <Box
-            sx={{
-              borderRadius: "3px",
-              position: "absolute",
-              width: customizations?.width,
-              top: customizations?.top,
-              left: customizations?.left,
-              height: customizations?.height,
-              border: "2px dashed",
-            }}
-          />
+          >
+            <Box
+              component="img"
+              src={customizations?.customize_image}
+              sx={{
+                width: 1,
+                height: 1,
+                borderRadius: "3px",
+              }}
+            />
+            <Box
+              sx={{
+                borderRadius: "3px",
+                position: "absolute",
+                width: customizations?.width,
+                top: customizations?.top,
+                left: customizations?.left,
+                height: customizations?.height,
+                border: "2px dashed",
+              }}
+            />
+          </Box>
+          <Button
+            variant="button6"
+            onClick={() => setDeleteCustomization(true)}
+            sx={{ width: 1, mt: "24px" }}
+          >
+            Remove this customization
+          </Button>
         </Box>
-        <Button
-          variant="button6"
-          onClick={() => setDeleteCustomization(true)}
-          sx={{ width: 1, mt: "24px" }}
-        >
-          Remove this customization
-        </Button>
         <DeleteDialog
           open={Boolean(deleteCustomization)}
           deleteURL={`/dashboard/customize-product-image/${customizations?.id}/`}
