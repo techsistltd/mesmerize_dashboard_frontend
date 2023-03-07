@@ -2,7 +2,7 @@ import { Avatar, Box, Chip, Tooltip, Typography } from "@mui/material";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { AiFillStar, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";

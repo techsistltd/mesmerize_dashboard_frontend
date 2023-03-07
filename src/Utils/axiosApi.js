@@ -9,8 +9,8 @@ import {
 const onProd = Boolean(process.env.NODE_ENV === "production");
 
 const baseURL = onProd
-  ? "https://mesmerize-dev.techsistltd.com"
-  : "http://192.168.1.101:8000";
+  ? "https://mesmerize-apis.techsistltd.com"
+  : "http://192.168.1.100:8000";
 
 // const baseURL = "https://mesmerize-dev.techsistltd.com";
 
@@ -97,7 +97,7 @@ export const defaultQueryFn = async ({ queryKey }) => {
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: onProd,
+      retry: false,
       refetchOnWindowFocus: onProd,
       refetchOnMount: onProd,
       refetchOnReconnect: onProd,

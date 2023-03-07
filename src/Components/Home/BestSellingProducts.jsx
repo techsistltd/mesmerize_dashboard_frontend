@@ -1,16 +1,15 @@
 import { Avatar, Box, Tooltip, Typography } from "@mui/material";
-import React from "react";
-import SearchField from "../Shared/SearchField";
+import { GridActionsCellItem } from "@mui/x-data-grid";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 import { AiFillStar, AiOutlineEye } from "react-icons/ai";
-import { TbCurrencyTaka } from "react-icons/tb";
-import DataTable from "../Shared/DataTable";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { useQuery } from "@tanstack/react-query";
-import { GridActionsCellItem } from "@mui/x-data-grid";
+import { TbCurrencyTaka } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import DataTable from "../Shared/DataTable";
 import DeleteDialog from "../Shared/DeleteDialog";
+import SearchField from "../Shared/SearchField";
 
 const BestSellingProducts = () => {
   const navigate = useNavigate();

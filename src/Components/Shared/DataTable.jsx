@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import MuiPagination from "@mui/material/Pagination";
 import {
   DataGrid,
   gridPageCountSelector,
@@ -6,9 +7,7 @@ import {
   useGridApiContext,
   useGridSelector,
 } from "@mui/x-data-grid";
-import React from "react";
-import MuiPagination from "@mui/material/Pagination";
-import { useState } from "react";
+import React, { useState } from "react";
 
 function Pagination({ page, onPageChange, className }) {
   const apiRef = useGridApiContext();
@@ -66,10 +65,13 @@ const DataTable = ({ columns = [], rows = [], isLoading = false }) => {
             marginTop: "20px",
           },
           "& .MuiDataGrid-cell": {
-            border: 0,
+            border: "0 !important",
             "&:focus": {
               outline: "none",
             },
+          },
+          "& .MuiDataGrid-cell:focus-within": {
+            outline: "none !important",
           },
           "& .MuiDataGrid-row": {
             "&:hover": {

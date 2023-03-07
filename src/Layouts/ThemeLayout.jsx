@@ -253,6 +253,7 @@ const ThemeLayout = ({ children }) => {
           {
             props: { variant: "button6" },
             style: {
+              color: "white",
               backgroundColor: "#D22943",
               "&:hover": {
                 backgroundColor: "#D22943E6",
