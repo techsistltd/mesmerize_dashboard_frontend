@@ -23,19 +23,22 @@ const CustomizationImageUpload = ({ setCustomizationImage = () => null }) => {
         sx={{
           mt: "30px",
           width: 1,
-          border: "0.2px solid",
+          border: "0.5px solid",
+          borderColor: "primary.main",
           borderRadius: "5px",
-          input: {
-            fontSize: "13px",
-            fontWeight: 400,
-            height: "unset",
-            padding: "unset",
+
+          "& input": {
+            padding: 0,
+            height: "50px",
+
             "&::file-selector-button": {
-              paddingY: "10px",
-              width: "110px",
-              // borderRadius: "5px",
+              bgcolor: "rgba(0, 112, 152, 0.15)",
+              height: "50px",
+              width: "125px",
               border: 0,
               borderRight: 1,
+              borderColor: "primary.main",
+              mr: "20px",
             },
           },
         }}
