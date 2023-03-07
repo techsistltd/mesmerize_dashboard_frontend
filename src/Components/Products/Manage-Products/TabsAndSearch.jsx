@@ -107,18 +107,18 @@ const TabsAndSearch = () => {
                     borderRadius: "5px",
                     mt: "10px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 >
                   <MenuItem value="default" disabled>
                     Category
                   </MenuItem>
-                  {products.map((category) => (
+                  {/* {products.map((category) => (
                     <MenuItem key={category.slug} value={category.title}>
                       {category.title}
                     </MenuItem>
-                  ))}
+                  ))} */}
                 </TextField>
               )}
             />
@@ -143,7 +143,7 @@ const TabsAndSearch = () => {
                     borderRadius: "5px",
                     mt: "10px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 />
@@ -170,7 +170,7 @@ const TabsAndSearch = () => {
                     mt: "10px",
                     height: "40px",
                     "& .MuiInputBase-input": {
-                      padding: "8px",
+                      padding: "7px",
                     },
                   }}
                 ></TextField>

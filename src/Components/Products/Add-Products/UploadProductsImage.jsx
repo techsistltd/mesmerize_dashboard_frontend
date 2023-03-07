@@ -15,7 +15,7 @@ import UploadImage from "../../Shared/UploadImage";
 import { Fragment } from "react";
 
 const UploadProductsImage = ({ control, previousImage = [] }) => {
-  const { data: products = [] } = useQuery(["/dashboard/products/"]);
+  const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
 
   return (
     <Paper sx={{ padding: "45px" }}>
@@ -137,7 +137,7 @@ const UploadProductsImage = ({ control, previousImage = [] }) => {
                       mt: "10px",
                       height: "40px",
                       "& .MuiInputBase-input": {
-                        padding: "8px",
+                        padding: "7px",
                       },
                     }}
                   />
@@ -189,14 +189,14 @@ const UploadProductsImage = ({ control, previousImage = [] }) => {
                       borderRadius: "5px",
                       mt: "10px",
                       "& .MuiInputBase-input": {
-                        padding: "8px",
+                        padding: "7px",
                       },
                     }}
                   >
                     <MenuItem value="default" disabled>
                       Category
                     </MenuItem>
-                    {products?.map((category) => (
+                    {categories?.map((category) => (
                       <MenuItem key={category?.slug} value={category?.id}>
                         {category?.title}
                       </MenuItem>
