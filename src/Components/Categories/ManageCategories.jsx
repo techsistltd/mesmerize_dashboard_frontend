@@ -123,7 +123,7 @@ const ManageCategories = ({ handleClose, item }) => {
               borderRadius: "5px",
               mt: "10px",
               "& .MuiInputBase-input": {
-                padding: "8px",
+                padding: "7px",
               },
             }}
           />
@@ -153,7 +153,7 @@ const ManageCategories = ({ handleClose, item }) => {
               borderRadius: "5px",
               mt: "10px",
               "& .MuiInputBase-input": {
-                padding: "8px",
+                padding: "7px",
               },
             }}
           />

@@ -77,7 +77,7 @@ const ProductList = ({ control }) => {
                 mt: "10px",
                 height: "40px",
                 "& .MuiInputBase-input": {
-                  padding: "8px",
+                  padding: "7px",
                 },
               }}
             ></TextField>
@@ -141,7 +141,7 @@ const ProductList = ({ control }) => {
                   height: "40px",
                   mt: "10px",
                   "& .MuiInputBase-input": {
-                    padding: "8px",
+                    padding: "7px",
                   },
                 }}
               />
@@ -178,7 +178,7 @@ const ProductList = ({ control }) => {
                   mt: " 10px",
                   borderRadius: "5px",
                   "& .MuiInputBase-input": {
-                    padding: "8px",
+                    padding: "7px",
                   },
                 }}
               />
@@ -215,7 +215,7 @@ const ProductList = ({ control }) => {
                   borderRadius: "5px",
                   mt: "10px",
                   "& .MuiInputBase-input": {
-                    padding: "8px",
+                    padding: "7px",
                   },
                 }}
               >
@@ -261,7 +261,7 @@ const ProductList = ({ control }) => {
                   borderRadius: "5px",
                   mt: "10px",
                   "& .MuiInputBase-input": {
-                    padding: "8px",
+                    padding: "7px",
                   },
                 }}
               >
@@ -348,7 +348,7 @@ const ProductList = ({ control }) => {
                           borderRadius: "5px",
                           mt: "10px",
                           "& .MuiInputBase-input": {
-                            padding: "8px",
+                            padding: "7px",
                           },
                         }}
                       />

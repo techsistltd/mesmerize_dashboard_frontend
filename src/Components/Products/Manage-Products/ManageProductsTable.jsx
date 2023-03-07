@@ -7,13 +7,14 @@ import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import { renderStatusColor } from "../../../Utils/styleHelpers";
 import DataTable from "../../Shared/DataTable";
 
 const ManageProductsTable = () => {
   const navigate = useNavigate();
-  const { data: products = [], isLoading: productLoading } = useQuery([
-    "/dashboard/products/",
-  ]);
+
+  const { data: { data: products = [] } = {}, isLoading: productLoading } =
+    useQuery(["/dashboard/products/"]);
 
   const tableColumn = [
     {
@@ -89,7 +90,7 @@ const ManageProductsTable = () => {
       headerAlign: "center",
     },
     {
-      field: "is_active",
+      field: "status",
       headerName: "Status",
       align: "center",
       headerAlign: "center",
@@ -103,14 +104,14 @@ const ManageProductsTable = () => {
             },
             "& .MuiChip-label": {
               color: "textWhite",
+              textTransform: "capitalize",
             },
           }}
         >
-          {Boolean(value) ? (
-            <Chip label="Active" sx={{ bgcolor: "#67A13E" }} />
-          ) : (
-            <Chip label="Inactive" sx={{ bgcolor: "#EA5046" }} />
-          )}
+          <Chip
+            label={value?.toLowerCase()}
+            sx={{ bgcolor: renderStatusColor(value) }}
+          />
         </Box>
       ),
     },
