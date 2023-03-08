@@ -15,6 +15,7 @@ const ProductDetails = ({ control }) => {
   const { data: deliveryOption = [] } = useQuery([
     "/dashboard/delivery-option/",
   ]);
+
   const filter = createFilterOptions();
 
   return (
@@ -169,15 +170,15 @@ const ProductDetails = ({ control }) => {
                   }}
                 >
                   <MenuItem value="default" disabled>
-                    status
+                    Status
                   </MenuItem>
                   <MenuItem value="ACTIVE">ACTIVE</MenuItem>
                   <MenuItem value="DEACTIVE">DEACTIVE</MenuItem>
-                  {/* {products.map((category) => (
-                  <MenuItem key={category?.slug} value={""}>
-                    {}
-                  </MenuItem>
-                ))} */}
+                  {/* {?.map(() => (
+                    <MenuItem key={?.slug} value={?.id}>
+                      {?.title}
+                    </MenuItem>
+                  ))} */}
                 </TextField>
               </Fragment>
             )}
@@ -381,7 +382,7 @@ const ProductDetails = ({ control }) => {
                       <InputLabel
                         required
                         error={Boolean(error)}
-                        htmlFor="form-input-tags"
+                        htmlFor="form-input-occasions"
                         sx={{
                           color: "textBlack",
                           fontSize: "16px",
@@ -394,7 +395,7 @@ const ProductDetails = ({ control }) => {
                         fullWidth
                         error={Boolean(error)}
                         helperText={Boolean(error) && error?.message}
-                        id="form-input-tags"
+                        id="form-input-occasions"
                         margin="normal"
                         variant="outlined"
                         sx={{

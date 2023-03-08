@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductDetails from "../../../Components/Products/Add-Products/ProductDetails";
 import ProductStyleAndShape from "../../../Components/Products/Add-Products/ProductStyleAndShape";
 import RichTextProduct from "../../../Components/Products/Add-Products/RichTextProduct";
@@ -13,6 +13,8 @@ import axiosApi from "../../../Utils/axiosApi";
 
 const EditProduct = () => {
   const { control, handleSubmit, reset, setValue } = useForm();
+
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
@@ -43,13 +45,20 @@ const EditProduct = () => {
   }, [product]);
 
   const { mutate: patchProduct, isLoading: mutationLoading } = useMutation(
-    (payload) => axiosApi.patch(`/dashboard/products/${productSlug}/`, payload),
+    (payload) =>
+      axiosApi.patch(`/dashboard/products/${productSlug}/`, payload, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      }),
     {
       onSuccess: () => {
+        reset();
+        queryClient.invalidateQueries(["/dashboard/products/"]);
+        navigate("/products");
         enqueueSnackbar("Successfully Update Product", {
           variant: "success",
         });
-        queryClient.invalidateQueries(["/dashboard/products/"]);
       },
       onError: (e) => {
         enqueueSnackbar("Something went wrong", {

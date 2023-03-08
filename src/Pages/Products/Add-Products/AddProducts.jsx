@@ -21,22 +21,30 @@ const AddProducts = () => {
   const queryClient = useQueryClient();
 
   const { mutate: productMutation, isLoading: productMutationLoading } =
-    useMutation((payload) => axiosApi.post("/dashboard/products/", payload), {
-      onSuccess: () => {
-        reset();
-        queryClient.invalidateQueries(["/dashboard/products/"]);
-        navigate("/products");
-        enqueueSnackbar("Successfully Added Product", {
-          variant: "success",
-        });
-      },
-      onError: (err) => {
-        console.log(err);
-        enqueueSnackbar("Something went wrong", {
-          variant: "error",
-        });
-      },
-    });
+    useMutation(
+      (payload) =>
+        axiosApi.post("/dashboard/products/", payload, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        }),
+      {
+        onSuccess: () => {
+          reset();
+          queryClient.invalidateQueries(["/dashboard/products/"]);
+          navigate("/products");
+          enqueueSnackbar("Successfully Added Product", {
+            variant: "success",
+          });
+        },
+        onError: (err) => {
+          console.log(err);
+          enqueueSnackbar("Something went wrong", {
+            variant: "error",
+          });
+        },
+      }
+    );
 
   const getData = (data) => {
     console.log(data);

@@ -236,11 +236,11 @@ const PackageProductList = () => {
                   <MenuItem value="default" disabled>
                     Category
                   </MenuItem>
-                  {/* {products.map((category) => (
-                    <MenuItem key={category.slug} value={category.title}>
-                      {category.title}
+                  {categories?.map((category) => (
+                    <MenuItem key={category?.slug} value={category?.id}>
+                      {category?.title}
                     </MenuItem>
-                  ))} */}
+                  ))}
                 </TextField>
               )}
             />

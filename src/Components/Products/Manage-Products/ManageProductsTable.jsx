@@ -16,6 +16,8 @@ const ManageProductsTable = () => {
   const { data: { data: products = [] } = {}, isLoading: productLoading } =
     useQuery(["/dashboard/products/"]);
 
+  const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
+
   const tableColumn = [
     {
       field: "id",
