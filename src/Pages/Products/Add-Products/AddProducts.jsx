@@ -29,10 +29,11 @@ const AddProducts = () => {
           },
         }),
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          console.log(data);
           reset();
           queryClient.invalidateQueries(["/dashboard/products/"]);
-          navigate("/products");
+          navigate(`/products/${data?.slug}`);
           enqueueSnackbar("Successfully Added Product", {
             variant: "success",
           });
@@ -47,7 +48,20 @@ const AddProducts = () => {
     );
 
   const getData = (data) => {
-    console.log(data);
+    const payload = new FormData();
+
+    // Object.entries(data)?.map(([key, val]) => {
+    //   if (Boolean(val)) {
+    //     if (Boolean(Object.prototype.toString.call(val) == "[object Array]")) {
+    //       val?.forEach((item) => {
+    //         payload.append(`${key}[]`, item);
+    //       });
+    //     } else {
+    //       payload.append([key], val);
+    //     }
+    //   }
+    // });
+    // console.log(data);
     productMutation(data);
   };
 

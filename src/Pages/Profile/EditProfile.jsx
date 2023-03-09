@@ -69,19 +69,6 @@ const EditProfile = () => {
       inputType: "text",
     },
     {
-      name: "email",
-      defaultValue: currentUser?.email ?? "",
-      rules: {
-        required: {
-          value: true,
-          message: "Email is required",
-        },
-      },
-      inputComponent: TextField,
-      inputLabel: "Email",
-      inputType: "email",
-    },
-    {
       name: "phone_number",
       defaultValue: currentUser?.phone_number ?? "+880",
       rules: {
@@ -101,35 +88,6 @@ const EditProfile = () => {
       inputLabel: "Phone Number",
       inputType: "tel",
       disablePadding: true,
-    },
-    {
-      name: "date_joined",
-      defaultValue: currentUser?.date_joined ?? moment().format("YYYY-MM-DD"),
-      rules: {
-        required: {
-          value: true,
-          message: "joining date is required",
-        },
-      },
-      dateInput: true,
-      inputComponent: TextField,
-      inputLabel: "Joining Date",
-      inputType: "text",
-    },
-    {
-      name: "status",
-      defaultValue: Boolean(currentUser?.is_active) ? "Active" : "Inactive",
-      rules: {
-        required: {
-          value: true,
-          message: "Status is required",
-        },
-      },
-      inputComponent: TextField,
-      inputLabel: "Status",
-      inputType: "text",
-      isSelect: true,
-      options: ["Active", "Inactive"],
     },
     {
       name: "gender",
