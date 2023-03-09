@@ -18,7 +18,7 @@ const ViewProductStyleAndShape = ({ product }) => {
           : "none",
       }}
     >
-      <Grid container rowGap={"45px"} columnSpacing={"45px"}>
+      <Grid container rowGap={"45px"} columnSpacing="45px">
         {Boolean(product?.product_style?.length) && (
           <Grid item xs={12}>
             <Typography
@@ -71,7 +71,7 @@ const ViewProductStyleAndShape = ({ product }) => {
           </Grid>
         )}
         {Boolean(product?.product_shape?.length) && (
-          <Grid item xs={12} sx={{ mt: "45px" }}>
+          <Grid item xs={12}>
             <Typography
               variant="body4"
               color={"textBlack"}
@@ -124,72 +124,76 @@ const ViewProductStyleAndShape = ({ product }) => {
         {/* size */}
         {Boolean(product?.product_structure?.length) && (
           <Grid item xs={4}>
-            <Typography variant="body4" color={"textBlack"}>
-              Size
-            </Typography>
-            <Box
-              variant="body6"
-              color={"textBlack"}
-              sx={{
-                border: 1,
-                borderColor: "primary.main",
-                width: 1,
-                borderRadius: "5px",
-                mt: "10px",
-                padding: "7px 11px",
-                height: "40px",
-                "& .MuiInputBase-input": {
-                  padding: "7px",
-                },
-              }}
-            >
-              {product?.product_structure?.map(({ size }, index) => {
-                return (
-                  <Typography key={index} variant="body6" color="textBlack">
-                    {size}
-                  </Typography>
-                );
-              })}
+            <Box sx={{ width: 1 }}>
+              <Typography variant="body4" color={"textBlack"}>
+                Size
+              </Typography>
+              <Box
+                variant="body6"
+                color={"textBlack"}
+                sx={{
+                  border: 1,
+                  borderColor: "primary.main",
+                  width: 1,
+                  borderRadius: "5px",
+                  mt: "10px",
+                  padding: "7px 11px",
+                  height: "40px",
+                  "& .MuiInputBase-input": {
+                    padding: "7px",
+                  },
+                }}
+              >
+                {product?.product_structure?.map(({ size }, index) => {
+                  return (
+                    <Typography key={index} variant="body6" color="textBlack">
+                      {size}
+                    </Typography>
+                  );
+                })}
+              </Box>
             </Box>
           </Grid>
         )}
         {/* color */}
         {Boolean(product?.product_color?.length) && (
           <Grid tem xs={4}>
-            <Typography variant="body4" color={"textBlack"}>
-              color
-            </Typography>
-            <Box
-              sx={{
-                border: 1,
-                display: "flex",
-                alignItems: "center",
-                fontSize: "14px",
-                color: "textBlack",
-                gap: "8px",
-                borderColor: "primary.main",
-                width: 1,
-                height: "40px",
-                padding: "7px 11px",
-                borderRadius: "5px",
-                mt: "10px",
-              }}
-            >
-              {product?.product_color?.map(({ code, color }, index) => {
-                return (
-                  <Tooltip key={index} title={color}>
-                    <Box
-                      key={index}
-                      sx={{
-                        height: "25px",
-                        width: "35px",
-                        borderRadius: "5px",
-                        bgcolor: `${code}`,
-                      }}
-                    ></Box>
-                  </Tooltip>
-                );
-              })}
+            <Box sx={{ width: 1 }}>
+              <Typography variant="body4" color={"textBlack"}>
+                color
+              </Typography>
+              <Box
+                sx={{
+                  border: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "14px",
+                  color: "textBlack",
+                  gap: "8px",
+                  borderColor: "primary.main",
+                  width: 1,
+                  height: "40px",
+                  padding: "7px 11px",
+                  borderRadius: "5px",
+                  mt: "10px",
+                }}
+              >
+                {product?.product_color?.map(({ code, color }, index) => {
+                  return (
+                    <Tooltip key={index} title={color}>
+                      <Box
+                        key={index}
+                        sx={{
+                          height: "25px",
+                          width: "35px",
+                          borderRadius: "5px",
+                          bgcolor: `${code}`,
+                        }}
+                      ></Box>
+                    </Tooltip>
+                  );
+                })}
+              </Box>
             </Box>
           </Grid>
         )}
@@ -197,41 +201,43 @@ const ViewProductStyleAndShape = ({ product }) => {
         {/* flavour */}
         {Boolean(product?.product_flavour?.length) && (
           <Grid tem xs={4}>
-            <Typography variant="body4" color={"textBlack"}>
-              Flavour
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                overflowX: "auto",
-                border: 1,
-                borderColor: "primary.main",
-                width: 1,
-                borderRadius: "5px",
-                px: "11px",
-                mt: "10px",
-                height: "40px",
-              }}
-            >
-              {product?.product_flavour?.map(({ flavour }, index) => {
-                return (
-                  <Box key={index}>
-                    <Chip
-                      label={flavour}
-                      variant="outlined"
-                      sx={{
-                        height: "30px",
-                        borderRadius: "6px",
-                        "& .MuiChip-label": {
-                          padding: " 6px",
-                        },
-                      }}
-                    />
-                  </Box>
-                );
-              })}
+            <Box sx={{ width: 1 }}>
+              <Typography variant="body4" color={"textBlack"}>
+                Flavour
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  overflowX: "auto",
+                  border: 1,
+                  borderColor: "primary.main",
+                  width: 1,
+                  borderRadius: "5px",
+                  px: "11px",
+                  mt: "10px",
+                  height: "40px",
+                }}
+              >
+                {product?.product_flavour?.map(({ flavour }, index) => {
+                  return (
+                    <Box key={index}>
+                      <Chip
+                        label={flavour}
+                        variant="outlined"
+                        sx={{
+                          height: "30px",
+                          borderRadius: "6px",
+                          "& .MuiChip-label": {
+                            padding: " 6px",
+                          },
+                        }}
+                      />
+                    </Box>
+                  );
+                })}
+              </Box>
             </Box>
           </Grid>
         )}
