@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
 
-const ProductDetails = ({ control }) => {
+const ProductDetails = ({ control, required = true }) => {
   const { data: deliveryOption = [] } = useQuery([
     "/dashboard/delivery-option/",
   ]);
@@ -33,7 +33,7 @@ const ProductDetails = ({ control }) => {
             control={control}
             rules={{
               required: {
-                value: true,
+                value: required,
                 message: "Price is required",
               },
             }}
@@ -82,7 +82,7 @@ const ProductDetails = ({ control }) => {
             control={control}
             rules={{
               required: {
-                value: true,
+                value: required,
                 message: "Stock is required",
               },
             }}
@@ -131,7 +131,7 @@ const ProductDetails = ({ control }) => {
             control={control}
             rules={{
               required: {
-                value: true,
+                value: required,
                 message: "Status is required",
               },
             }}
@@ -185,7 +185,7 @@ const ProductDetails = ({ control }) => {
           />
         </Grid>
         {/* delivery option */}
-        <Grid item xs={4}>
+        {/* <Grid item xs={4}>
           <Controller
             name={"delivery_option"}
             control={control}
@@ -241,7 +241,7 @@ const ProductDetails = ({ control }) => {
               </Fragment>
             )}
           />
-        </Grid>
+        </Grid> */}
         {/* tags */}
         <Grid item xs={8}>
           <Controller
@@ -330,7 +330,7 @@ const ProductDetails = ({ control }) => {
             control={control}
             rules={{
               required: {
-                value: true,
+                value: required,
                 message: "Occasions is required",
               },
             }}

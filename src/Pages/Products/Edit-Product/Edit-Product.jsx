@@ -1,14 +1,16 @@
 import { LoadingButton } from "@mui/lab";
 import { Box } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toFormData } from "multipart-object";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductDetails from "../../../Components/Products/Add-Products/ProductDetails";
 import ProductStyleAndShape from "../../../Components/Products/Add-Products/ProductStyleAndShape";
 import RichTextProduct from "../../../Components/Products/Add-Products/RichTextProduct";
 import UploadProductsImage from "../../../Components/Products/Add-Products/UploadProductsImage";
+import LoadingIndicator from "../../../Components/Shared/LoadingIndicator";
 import axiosApi from "../../../Utils/axiosApi";
 
 const EditProduct = () => {
@@ -22,27 +24,33 @@ const EditProduct = () => {
 
   const { productSlug } = useParams();
 
-  const { data: product = {} } = useQuery([
-    `/dashboard/products/${productSlug}/`,
-  ]);
-
-  useEffect(() => {
-    if (product?.id) {
-      setValue("title", product?.title);
-      setValue("category", product?.category);
-      setValue("styles", product?.styles);
-      setValue("shapes", product?.shapes);
-      setValue("sizes", product?.sizes);
-      setValue("colors", product?.colors);
-      setValue("flavours", product?.flavours);
-      setValue("description", product?.description);
-      setValue("price", product?.price);
-      setValue("stock", product?.stock);
-      setValue("status", product?.status);
-      setValue("delivery_option", product?.delivery_option);
-      setValue("tag", product?.tag);
+  const { data: product = {}, isLoading } = useQuery(
+    [`/dashboard/products/${productSlug}/`],
+    {
+      onSuccess: (product) => {
+        setValue("title", product?.title);
+        setValue("category", product?.category?.id);
+        // setValue("styles", product?.product_style);
+        // setValue("shapes", product?.product_shape);
+        setValue("sizes", product?.product_structure);
+        setValue(
+          "colors",
+          product?.product_color?.map((e) => e?.code)
+        );
+        setValue("flavours", product?.product_flavour);
+        setValue("description", product?.description);
+        setValue("price", product?.price);
+        setValue("stock", product?.stock);
+        setValue("status", product?.status);
+        // setValue("delivery_option", product?.delivery_option);
+        // setValue(
+        //   "tag",
+        //   product?.tag?.map((e) => e?.tag)
+        // );
+      },
+      cacheTime: 0,
     }
-  }, [product]);
+  );
 
   const { mutate: patchProduct, isLoading: mutationLoading } = useMutation(
     (payload) =>
@@ -53,9 +61,9 @@ const EditProduct = () => {
       }),
     {
       onSuccess: () => {
-        reset();
+        // reset();
+        // navigate("/products");
         queryClient.invalidateQueries(["/dashboard/products/"]);
-        navigate("/products");
         enqueueSnackbar("Successfully Update Product", {
           variant: "success",
         });
@@ -69,19 +77,30 @@ const EditProduct = () => {
   );
 
   const patchData = (data) => {
-    patchProduct(data);
+    const nestedData = toFormData(data, {
+      separator: "mixedDot",
+    });
+    patchProduct(nestedData);
   };
 
-  return (
+  console.log(product);
+
+  return Boolean(isLoading) ? (
+    <LoadingIndicator height="50vh" />
+  ) : (
     <Box component={"form"} onSubmit={handleSubmit(patchData)}>
-      <UploadProductsImage previousImage={product?.images} control={control} />
+      <UploadProductsImage
+        previousImage={product?.product_image}
+        control={control}
+        required={false}
+      />
       <ProductStyleAndShape
-        previousStyleImage={product?.styles}
-        previousShapeImage={product?.shapes}
+        previousStyleImage={product?.product_style}
+        previousShapeImage={product?.product_shape}
         control={control}
       />
       <RichTextProduct control={control} />
-      <ProductDetails control={control} />
+      <ProductDetails control={control} required={false} />
       {/* submit button */}
       <LoadingButton
         loading={mutationLoading}

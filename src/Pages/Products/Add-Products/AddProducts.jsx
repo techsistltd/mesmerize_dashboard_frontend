@@ -32,15 +32,9 @@ const AddProducts = () => {
       {
         onSuccess: (data) => {
           console.log(data);
-<<<<<<< HEAD
           // reset();
-          // navigate("/products");
+          // navigate(`/products/${data?.slug}`);
           queryClient.invalidateQueries(["/dashboard/products/"]);
-=======
-          reset();
-          queryClient.invalidateQueries(["/dashboard/products/"]);
-          navigate(`/products/${data?.slug}`);
->>>>>>> origin/zubair
           enqueueSnackbar("Successfully Added Product", {
             variant: "success",
           });
@@ -55,28 +49,10 @@ const AddProducts = () => {
     );
 
   const getData = (data) => {
-<<<<<<< HEAD
     const nestedData = toFormData(data, {
       separator: "mixedDot",
     });
     productMutation(nestedData);
-=======
-    const payload = new FormData();
-
-    // Object.entries(data)?.map(([key, val]) => {
-    //   if (Boolean(val)) {
-    //     if (Boolean(Object.prototype.toString.call(val) == "[object Array]")) {
-    //       val?.forEach((item) => {
-    //         payload.append(`${key}[]`, item);
-    //       });
-    //     } else {
-    //       payload.append([key], val);
-    //     }
-    //   }
-    // });
-    // console.log(data);
-    productMutation(data);
->>>>>>> origin/zubair
   };
 
   return (
