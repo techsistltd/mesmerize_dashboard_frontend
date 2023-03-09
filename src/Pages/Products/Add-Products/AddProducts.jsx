@@ -1,15 +1,16 @@
+import { LoadingButton } from "@mui/lab";
 import { Box } from "@mui/material";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toFormData } from "multipart-object";
+import { useSnackbar } from "notistack";
 import React from "react";
-import ProductDetails from "../../../Components/Products/Add-Products/ProductDetails";
-import RichTextProduct from "../../../Components/Products/Add-Products/RichTextProduct";
-import ProductStyleAndShape from "../../../Components/Products/Add-Products/ProductStyleAndShape";
-import UploadProductsImage from "../../../Components/Products/Add-Products/UploadProductsImage";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import ProductDetails from "../../../Components/Products/Add-Products/ProductDetails";
+import ProductStyleAndShape from "../../../Components/Products/Add-Products/ProductStyleAndShape";
+import RichTextProduct from "../../../Components/Products/Add-Products/RichTextProduct";
+import UploadProductsImage from "../../../Components/Products/Add-Products/UploadProductsImage";
 import axiosApi from "../../../Utils/axiosApi";
-import { LoadingButton } from "@mui/lab";
-import { useSnackbar } from "notistack";
 
 const AddProducts = () => {
   const navigate = useNavigate();
@@ -31,9 +32,15 @@ const AddProducts = () => {
       {
         onSuccess: (data) => {
           console.log(data);
+<<<<<<< HEAD
+          // reset();
+          // navigate("/products");
+          queryClient.invalidateQueries(["/dashboard/products/"]);
+=======
           reset();
           queryClient.invalidateQueries(["/dashboard/products/"]);
           navigate(`/products/${data?.slug}`);
+>>>>>>> origin/zubair
           enqueueSnackbar("Successfully Added Product", {
             variant: "success",
           });
@@ -48,6 +55,12 @@ const AddProducts = () => {
     );
 
   const getData = (data) => {
+<<<<<<< HEAD
+    const nestedData = toFormData(data, {
+      separator: "mixedDot",
+    });
+    productMutation(nestedData);
+=======
     const payload = new FormData();
 
     // Object.entries(data)?.map(([key, val]) => {
@@ -63,6 +76,7 @@ const AddProducts = () => {
     // });
     // console.log(data);
     productMutation(data);
+>>>>>>> origin/zubair
   };
 
   return (

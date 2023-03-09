@@ -1,13 +1,13 @@
 import { Box, Button, FormHelperText, Grid } from "@mui/material";
 import React, { Fragment } from "react";
-import cloudUpload from "../../Assets/cloudUpload.png";
 import { Controller } from "react-hook-form";
+import cloudUpload from "../../Assets/cloudUpload.png";
 
 const UploadImage = ({
   control,
   fieldName = "",
-  required = false,
   helperText = "",
+  required = false,
 }) => {
   if (!Boolean(control)) {
     return;
@@ -27,8 +27,8 @@ const UploadImage = ({
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <Fragment>
           {value?.map(
-            (file, index) =>
-              Boolean(file) && (
+            ({ image }, index) =>
+              Boolean(image) && (
                 <Grid
                   key={index}
                   item
@@ -41,7 +41,7 @@ const UploadImage = ({
                 >
                   <Box
                     component="img"
-                    src={URL.createObjectURL(file)}
+                    src={URL.createObjectURL(image)}
                     sx={{
                       height: "99px",
                       width: "109px",
@@ -79,7 +79,9 @@ const UploadImage = ({
                 type="file"
                 accept="image/*"
                 hidden
-                onChange={(e) => onChange([...value, e.target.files[0]])}
+                onChange={(e) =>
+                  onChange([...value, { image: e.target.files[0] }])
+                }
               />
 
               <Box component="img" src={cloudUpload} />
