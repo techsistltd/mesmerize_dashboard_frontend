@@ -35,7 +35,7 @@ const RichTextProduct = ({ control }) => {
               message: "Discription is required",
             },
           }}
-          // defaultValue={""}
+          defaultValue={"<p><br></p>"}
           render={({ field, fieldState: { error } }) => (
             <Fragment>
               <Typography

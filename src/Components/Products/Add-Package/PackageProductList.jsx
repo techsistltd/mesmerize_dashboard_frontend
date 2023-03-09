@@ -18,9 +18,10 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import DataTable from "../../Shared/DataTable";
 
 const PackageProductList = () => {
-  const { data: products = [], isLoading: productLoading } = useQuery([
-    "/dashboard/products/",
-  ]);
+  const { data: { data: products = [] } = {}, isLoading: productLoading } =
+    useQuery(["/dashboard/products/"]);
+
+  const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
 
   const { control, handleSubmit, reset } = useForm();
 
