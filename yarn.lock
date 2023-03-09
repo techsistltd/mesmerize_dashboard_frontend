@@ -1123,6 +1123,11 @@ mui-tel-input@^3.1.1:
   dependencies:
     libphonenumber-js "^1.10.15"
 
+multipart-object@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/multipart-object/-/multipart-object-1.2.0.tgz#8e3f8a2ba427d3f461eff1b9ae6a57e8cd616993"
+  integrity sha512-OjrfLtV3Whkyal/Uh14orzXO2gkqoAKUt/1dxqbGy7JXBpbmpxhYS50QP0E28XwJUyXMXyGoROGbQhsDmVnujw==
+
 nanoid@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
