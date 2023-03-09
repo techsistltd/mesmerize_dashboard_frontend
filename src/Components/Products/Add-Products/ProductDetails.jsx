@@ -11,10 +11,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
 
-const ProductDetails = ({ control }) => {
+const ProductDetails = ({ control, required = true }) => {
   const { data: deliveryOption = [] } = useQuery([
     "/dashboard/delivery-option/",
   ]);
+
   const filter = createFilterOptions();
 
   return (
@@ -32,7 +33,7 @@ const ProductDetails = ({ control }) => {
             control={control}
             rules={{
               required: {
-                value: true,
+                value: required,
                 message: "Price is required",
               },
             }}
@@ -81,7 +82,7 @@ const ProductDetails = ({ control }) => {
             control={control}
             rules={{
               required: {
-                value: true,
+                value: required,
                 message: "Stock is required",
               },
             }}
@@ -130,7 +131,7 @@ const ProductDetails = ({ control }) => {
             control={control}
             rules={{
               required: {
-                value: true,
+                value: required,
                 message: "Status is required",
               },
             }}
@@ -169,22 +170,22 @@ const ProductDetails = ({ control }) => {
                   }}
                 >
                   <MenuItem value="default" disabled>
-                    status
+                    Status
                   </MenuItem>
                   <MenuItem value="ACTIVE">ACTIVE</MenuItem>
                   <MenuItem value="DEACTIVE">DEACTIVE</MenuItem>
-                  {/* {products.map((category) => (
-                  <MenuItem key={category?.slug} value={""}>
-                    {}
-                  </MenuItem>
-                ))} */}
+                  {/* {?.map(() => (
+                    <MenuItem key={?.slug} value={?.id}>
+                      {?.title}
+                    </MenuItem>
+                  ))} */}
                 </TextField>
               </Fragment>
             )}
           />
         </Grid>
         {/* delivery option */}
-        <Grid item xs={4}>
+        {/* <Grid item xs={4}>
           <Controller
             name={"delivery_option"}
             control={control}
@@ -240,7 +241,7 @@ const ProductDetails = ({ control }) => {
               </Fragment>
             )}
           />
-        </Grid>
+        </Grid> */}
         {/* tags */}
         <Grid item xs={8}>
           <Controller
@@ -329,7 +330,7 @@ const ProductDetails = ({ control }) => {
             control={control}
             rules={{
               required: {
-                value: true,
+                value: required,
                 message: "Occasions is required",
               },
             }}
@@ -381,7 +382,7 @@ const ProductDetails = ({ control }) => {
                       <InputLabel
                         required
                         error={Boolean(error)}
-                        htmlFor="form-input-tags"
+                        htmlFor="form-input-occasions"
                         sx={{
                           color: "textBlack",
                           fontSize: "16px",
@@ -394,7 +395,7 @@ const ProductDetails = ({ control }) => {
                         fullWidth
                         error={Boolean(error)}
                         helperText={Boolean(error) && error?.message}
-                        id="form-input-tags"
+                        id="form-input-occasions"
                         margin="normal"
                         variant="outlined"
                         sx={{
