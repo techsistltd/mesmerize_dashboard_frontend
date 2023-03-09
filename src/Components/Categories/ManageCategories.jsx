@@ -130,7 +130,7 @@ const ManageCategories = ({ handleClose, item }) => {
         </Box>
         <Box sx={{ mt: "30px" }}>
           <InputLabel
-            htmlFor="form-input-categories"
+            htmlFor="form-input-thumnail"
             sx={{
               color: "textBlack",
               fontSize: "16px",
@@ -144,7 +144,6 @@ const ManageCategories = ({ handleClose, item }) => {
             type={"file"}
             variant="outlined"
             onChange={(e) => setThumbnail(e.target.files[0])}
-            placeholder="Enter categories name"
             sx={{
               border: 1,
               borderColor: "primary.main",

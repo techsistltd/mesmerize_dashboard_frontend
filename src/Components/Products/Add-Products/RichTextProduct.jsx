@@ -1,8 +1,7 @@
-import { Paper, Typography, Box, FormHelperText } from "@mui/material";
-import React, { useRef } from "react";
-import JoditEditor, { Jodit } from "jodit-react";
+import { Box, FormHelperText, Paper, Typography } from "@mui/material";
+import JoditEditor from "jodit-react";
+import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
-import { Fragment } from "react";
 
 const RichTextProduct = ({ control }) => {
   const config = {
@@ -35,7 +34,7 @@ const RichTextProduct = ({ control }) => {
               message: "Discription is required",
             },
           }}
-          // defaultValue={""}
+          // defaultValue={"<p><br></p>"}
           render={({ field, fieldState: { error } }) => (
             <Fragment>
               <Typography

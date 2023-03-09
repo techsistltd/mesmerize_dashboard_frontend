@@ -4,28 +4,21 @@ import {
   Chip,
   createFilterOptions,
   Grid,
-  IconButton,
   InputLabel,
-  MenuItem,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { GrAddCircle } from "react-icons/gr";
-import UploadImage from "../../Shared/UploadImage";
+import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
-import { Fragment } from "react";
-import { useQuery } from "@tanstack/react-query";
 import PairedInputField from "../../Shared/PairedInputField";
+import UploadImage from "../../Shared/UploadImage";
 
 const ProductStyleAndShape = ({
   control,
   previousStyleImage = [],
   previousShapeImage = [],
 }) => {
-  const { data: products = {} } = useQuery([`/dashboard/products/`]);
-
   const filter = createFilterOptions();
 
   return (

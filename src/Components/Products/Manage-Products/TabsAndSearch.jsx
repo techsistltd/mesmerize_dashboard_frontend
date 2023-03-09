@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 const TabsAndSearch = () => {
-  const { data: products = [] } = useQuery(["/dashboard/products/"]);
+  const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
 
   const [selected, setSelected] = useState(0);
 
@@ -114,11 +114,11 @@ const TabsAndSearch = () => {
                   <MenuItem value="default" disabled>
                     Category
                   </MenuItem>
-                  {/* {products.map((category) => (
-                    <MenuItem key={category.slug} value={category.title}>
-                      {category.title}
+                  {categories?.map((category) => (
+                    <MenuItem key={category?.slug} value={category?.id}>
+                      {category?.title}
                     </MenuItem>
-                  ))} */}
+                  ))}
                 </TextField>
               )}
             />

@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Grid,
   InputLabel,
   MenuItem,
@@ -8,13 +7,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { Controller } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
+import React, { Fragment } from "react";
+import { Controller } from "react-hook-form";
 import UploadImage from "../../Shared/UploadImage";
-import { Fragment } from "react";
 
-const UploadProductsImage = ({ control, previousImage = [] }) => {
+const UploadProductsImage = ({
+  control,
+  previousImage = [],
+  required = true,
+}) => {
   const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
 
   return (
@@ -81,7 +83,7 @@ const UploadProductsImage = ({ control, previousImage = [] }) => {
             control={control}
             fieldName={"images"}
             helperText="Product image"
-            required
+            required={required}
           />
         </Grid>
         {/* -------end------- */}

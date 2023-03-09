@@ -18,6 +18,9 @@ const ProductList = ({ control }) => {
   const { data: deliveryOption = [] } = useQuery([
     "/dashboard/delivery-option/",
   ]);
+
+  const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
+
   const filter = createFilterOptions();
   return (
     <Paper
@@ -222,11 +225,11 @@ const ProductList = ({ control }) => {
                 <MenuItem value="default" disabled>
                   status
                 </MenuItem>
-                {/* {products.map((category) => (
-             <MenuItem key={category?.slug} value={""}>
-               {}
-             </MenuItem>
-            ))} */}
+                {categories?.map((category) => (
+                  <MenuItem key={category?.slug} value={category?.id}>
+                    {category?.title}
+                  </MenuItem>
+                ))}
               </TextField>
             )}
           />
