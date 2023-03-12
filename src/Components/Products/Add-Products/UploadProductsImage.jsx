@@ -1,15 +1,19 @@
 import {
   Box,
   Grid,
+  IconButton,
   InputLabel,
   MenuItem,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import React, { Fragment } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import React, { Fragment, useState } from "react";
 import { Controller } from "react-hook-form";
+import { RxCross2 } from "react-icons/rx";
+import { useParams } from "react-router-dom";
+import DeleteDialog from "../../Shared/DeleteDialog";
 import UploadImage from "../../Shared/UploadImage";
 
 const UploadProductsImage = ({
@@ -17,6 +21,9 @@ const UploadProductsImage = ({
   previousImage = [],
   required = true,
 }) => {
+  const { productSlug } = useParams();
+  const queryClient = useQueryClient();
+  const [deleteURL, setDeleteURL] = useState(null);
   const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
 
   return (
@@ -59,7 +66,7 @@ const UploadProductsImage = ({
               <Grid
                 key={index}
                 item
-                xs={1}
+                xs={1.3}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -67,16 +74,44 @@ const UploadProductsImage = ({
                 }}
               >
                 <Box
-                  component="img"
-                  src={file?.image}
                   sx={{
-                    height: "99px",
-                    width: "109px",
-                    borderRadius: "5px",
-                    boxShadow: "0px 1px 4px",
-                    bgcolor: "#FCFCFC",
+                    position: "relative",
+                    pt: "8px",
+                    width: 1,
+                    height: 1,
                   }}
-                />
+                >
+                  <Box
+                    component="img"
+                    src={file?.image}
+                    sx={{
+                      width: 1,
+                      aspectRatio: "1/1",
+                      borderRadius: "5px",
+                      boxShadow: "0px 1px 4px",
+                      bgcolor: "#FCFCFC",
+                    }}
+                  />
+                  <IconButton
+                    onClick={() =>
+                      setDeleteURL(
+                        `/dashboard/product-image-delete/${file?.id}`
+                      )
+                    }
+                    sx={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "3px",
+                      backgroundColor: "rgb(255 255 255 / 80%)",
+                      padding: "3px !important",
+                      "&:hover": {
+                        backgroundColor: "rgb(255 255 255 / 90%)",
+                      },
+                    }}
+                  >
+                    <RxCross2 style={{ color: "#3D464D", fontSize: "17px" }} />
+                  </IconButton>
+                </Box>
               </Grid>
             ))}
           <UploadImage
@@ -211,6 +246,14 @@ const UploadProductsImage = ({
         </Box>
         {/* -----end------ */}
       </Box>
+      <DeleteDialog
+        open={Boolean(deleteURL)}
+        deleteURL={deleteURL}
+        handleClose={() => setDeleteURL(null)}
+        successRefetch={() =>
+          queryClient.invalidateQueries([`/dashboard/products/${productSlug}/`])
+        }
+      />
     </Paper>
   );
 };

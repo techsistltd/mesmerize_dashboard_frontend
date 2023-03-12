@@ -30,8 +30,6 @@ const EditProduct = () => {
       onSuccess: (product) => {
         setValue("title", product?.title);
         setValue("category", product?.category?.id);
-        // setValue("styles", product?.product_style);
-        // setValue("shapes", product?.product_shape);
         setValue("sizes", product?.product_structure);
         setValue(
           "colors",
@@ -42,13 +40,17 @@ const EditProduct = () => {
         setValue("price", product?.price);
         setValue("stock", product?.stock);
         setValue("status", product?.status);
-        // setValue("delivery_option", product?.delivery_option);
-        // setValue(
-        //   "tag",
-        //   product?.tag?.map((e) => e?.tag)
-        // );
+        setValue(
+          "tags",
+          product?.tag?.map((e) => e?.tag)
+        );
+        setValue(
+          "occasions",
+          product?.occasion?.map((e) => e?.title)
+        );
       },
       cacheTime: 0,
+      refetchOnMount: true,
     }
   );
 
@@ -61,9 +63,9 @@ const EditProduct = () => {
       }),
     {
       onSuccess: () => {
-        // reset();
-        // navigate("/products");
-        queryClient.invalidateQueries(["/dashboard/products/"]);
+        reset();
+        queryClient.invalidateQueries([`/dashboard/products/${productSlug}/`]);
+        navigate(-1);
         enqueueSnackbar("Successfully Update Product", {
           variant: "success",
         });
@@ -76,7 +78,10 @@ const EditProduct = () => {
     }
   );
 
-  const patchData = (data) => {
+  const patchData = ({ thumbnail, ...data }) => {
+    if (Boolean(thumbnail)) {
+      data.thumbnail = thumbnail;
+    }
     const nestedData = toFormData(data, {
       separator: "mixedDot",
     });

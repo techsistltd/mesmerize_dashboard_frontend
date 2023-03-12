@@ -1,6 +1,7 @@
-import { Box, Button, FormHelperText, Grid } from "@mui/material";
+import { Box, Button, FormHelperText, Grid, IconButton } from "@mui/material";
 import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
+import { RxCross2 } from "react-icons/rx";
 import cloudUpload from "../../Assets/cloudUpload.png";
 
 const UploadImage = ({
@@ -26,13 +27,13 @@ const UploadImage = ({
       defaultValue={[]}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <Fragment>
-          {value?.map(
-            ({ image }, index) =>
+          {value?.map(({ image }, index, arr) => {
+            return (
               Boolean(image) && (
                 <Grid
                   key={index}
                   item
-                  xs={1}
+                  xs={1.3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -40,22 +41,52 @@ const UploadImage = ({
                   }}
                 >
                   <Box
-                    component="img"
-                    src={URL.createObjectURL(image)}
                     sx={{
-                      height: "99px",
-                      width: "109px",
-                      borderRadius: "5px",
-                      boxShadow: "0px 1px 4px",
-                      bgcolor: "#FCFCFC",
+                      position: "relative",
+                      pt: "8px",
                     }}
-                  />
+                  >
+                    <Box
+                      component="img"
+                      src={URL.createObjectURL(image)}
+                      sx={{
+                        width: 1,
+                        aspectRatio: "1/1",
+                        borderRadius: "5px",
+                        boxShadow: "0px 1px 4px",
+                        bgcolor: "#FCFCFC",
+                      }}
+                    />
+                    <IconButton
+                      onClick={() => {
+                        const filtered = arr.filter(
+                          (item) => item?.image?.name !== image?.name
+                        );
+                        onChange(filtered);
+                      }}
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "3px",
+                        backgroundColor: "rgb(255 255 255 / 70%)",
+                        padding: "3px !importrant",
+                        "&:hover": {
+                          backgroundColor: "rgb(255 255 255 / 90%)",
+                        },
+                      }}
+                    >
+                      <RxCross2
+                        style={{ color: "#3D464D", fontSize: "17px" }}
+                      />
+                    </IconButton>
+                  </Box>
                 </Grid>
               )
-          )}
+            );
+          })}
           <Grid
             item
-            xs={1}
+            xs={1.3}
             sx={{
               display: "flex",
               alignItems: "center",
@@ -69,7 +100,8 @@ const UploadImage = ({
               sx={{
                 boxShadow: "0px 1px 4px",
                 bgcolor: "#FCFCFC",
-                padding: "24px",
+                width: 1,
+                aspectRatio: "1/1",
                 "&:hover": {
                   bgcolor: "#FCFCFC",
                 },
