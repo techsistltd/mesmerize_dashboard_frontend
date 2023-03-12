@@ -2,9 +2,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import LockIcon from "@mui/icons-material/Lock";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person2Icon from "@mui/icons-material/Person2";
-import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import SettingsIcon from "@mui/icons-material/Settings";
 import {
-  alpha,
   AppBar,
   Avatar,
   Badge,
@@ -18,14 +17,13 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../Global/GlobalContext";
 import BrandLogo from "../../Assets/BrandLogo.svg";
-import { MdMessage } from "react-icons/md";
-import SearchField from "./SearchField";
-import { useQueryClient } from "@tanstack/react-query";
+import { useGlobalContext } from "../../Global/GlobalContext";
 import { removeTokens } from "../../Utils/localStorage";
+import SearchField from "./SearchField";
 
 const TopAppBar = ({ drawerWidth }) => {
   const { currentUser } = useGlobalContext();
@@ -43,9 +41,12 @@ const TopAppBar = ({ drawerWidth }) => {
       },
     },
     {
-      title: "Reset Password",
-      icon: VerifiedUserIcon,
+      title: "Settings",
+      icon: SettingsIcon,
       color: "primary.main",
+      action: () => {
+        navigate("/settings");
+      },
     },
     {
       title: "Logout",

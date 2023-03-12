@@ -101,48 +101,25 @@ const ViewProductDetails = ({ product }) => {
               {product?.status?.toLowerCase()}
             </Typography>
           </Grid>
-          {/* delivery option */}
-          {/* <Grid item xs={4}>
+          <Grid item xs={1.5}>
             <Typography variant="body4" color="textBlack">
-              Delivery Option
+              Thumbnail
             </Typography>
             <Box
+              component="img"
+              src={product?.thumbnail}
               sx={{
-                border: 1,
-                display: "flex",
-                fontSize: "14px",
-                color: "textBlack",
-                alignItems: "center",
-                gap: "8px",
-                overflowX: "auto",
-                borderColor: "primary.main",
-                height: "40px",
+                width: 1,
+                aspectRatio: "4/5",
                 borderRadius: "5px",
-                px: "11px",
+                boxShadow: "0px 1px 4px",
+                bgcolor: "#FCFCFC",
                 mt: "10px",
               }}
-            >
-              {deliveryOption?.map(({ name }, index) => {
-                return (
-                  <Box key={index}>
-                    <Chip
-                      label={name}
-                      variant="outlined"
-                      sx={{
-                        height: "30px",
-                        borderRadius: "6px",
-                        "& .MuiChip-label": {
-                          padding: " 6px",
-                        },
-                      }}
-                    />
-                  </Box>
-                );
-              })}
-            </Box>
-          </Grid> */}
+            />
+          </Grid>
           {/* tags */}
-          <Grid item xs={12}>
+          <Grid item xs={10.5}>
             <Typography variant="body4" color="textBlack">
               Tags
             </Typography>
@@ -151,13 +128,13 @@ const ViewProductDetails = ({ product }) => {
                 border: 1,
                 display: "flex",
 
-                alignItems: "center",
+                alignItems: "start",
                 gap: "8px",
                 overflowX: "auto",
                 borderColor: "primary.main",
-                height: "40px",
+                height: "131px",
                 borderRadius: "5px",
-                px: "11px",
+                padding: "11px",
                 mt: "10px",
               }}
             >

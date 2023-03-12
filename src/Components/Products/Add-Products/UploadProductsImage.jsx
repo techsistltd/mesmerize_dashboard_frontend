@@ -102,14 +102,14 @@ const UploadProductsImage = ({
                       position: "absolute",
                       top: "10px",
                       right: "3px",
-                      backgroundColor: "rgb(255 255 255 / 50%)",
-                      padding: 0,
+                      backgroundColor: "rgb(255 255 255 / 80%)",
+                      padding: "3px !important",
                       "&:hover": {
-                        backgroundColor: "rgb(255 255 255 / 70%)",
+                        backgroundColor: "rgb(255 255 255 / 90%)",
                       },
                     }}
                   >
-                    <RxCross2 style={{ color: " red", fontSize: "20px" }} />
+                    <RxCross2 style={{ color: "#3D464D", fontSize: "17px" }} />
                   </IconButton>
                 </Box>
               </Grid>

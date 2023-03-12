@@ -33,7 +33,7 @@ const ViewProductImage = ({ product }) => {
           <Grid
             key={index}
             item
-            xs={1}
+            xs={1.3}
             sx={{
               display: "flex",
               alignItems: "center",
@@ -45,8 +45,8 @@ const ViewProductImage = ({ product }) => {
               component="img"
               src={image}
               sx={{
-                height: "99px",
-                width: "109px",
+                width: 1,
+                aspectRatio: "1/1",
                 borderRadius: "5px",
                 boxShadow: "0px 1px 4px",
                 bgcolor: "#FCFCFC",

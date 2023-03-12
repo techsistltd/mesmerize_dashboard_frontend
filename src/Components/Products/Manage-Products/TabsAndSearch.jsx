@@ -9,7 +9,7 @@ const buttonData = [
     value: "ACTIVE",
   },
   {
-    text: "Draft(1)",
+    text: "Draft",
     value: "DRAFT",
   },
   // {
@@ -19,7 +19,7 @@ const buttonData = [
   //   text: "Out of Stock(0)",
   // },
   {
-    text: "Archive(1)",
+    text: "Archive",
     value: "ARCHIVE",
   },
 ];

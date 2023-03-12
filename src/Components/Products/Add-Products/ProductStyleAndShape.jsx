@@ -1,17 +1,21 @@
 import {
   Autocomplete,
   Box,
-  Button,
   Chip,
   createFilterOptions,
   Grid,
+  IconButton,
   InputLabel,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { Fragment } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import React, { Fragment, useState } from "react";
 import { Controller } from "react-hook-form";
+import { RxCross2 } from "react-icons/rx";
+import { useParams } from "react-router-dom";
+import DeleteDialog from "../../Shared/DeleteDialog";
 import PairedInputField from "../../Shared/PairedInputField";
 import UploadImage from "../../Shared/UploadImage";
 
@@ -22,6 +26,12 @@ const ProductStyleAndShape = ({
 }) => {
   const filter = createFilterOptions();
 
+  const { productSlug } = useParams();
+
+  const queryClient = useQueryClient();
+
+  const [deleteURL, setDeleteURL] = useState(null);
+
   return (
     <Paper
       sx={{
@@ -30,6 +40,7 @@ const ProductStyleAndShape = ({
       }}
     >
       <Grid container rowGap={"45px"} columnSpacing={"45px"}>
+        {/* style */}
         <Grid item xs={12}>
           <Typography
             variant="body4"
@@ -57,39 +68,58 @@ const ProductStyleAndShape = ({
                 <Grid
                   key={index}
                   item
-                  xs={1}
+                  xs={1.3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "left",
-                    position: "relative",
                   }}
                 >
                   <Box
-                    component="img"
-                    src={file?.image}
                     sx={{
-                      height: "99px",
-                      width: "109px",
-                      borderRadius: "5px",
-                      boxShadow: "0px 1px 4px",
-                      bgcolor: "#FCFCFC",
-                    }}
-                  />
-                  <Button
-                    sx={{
-                      position: "absolute",
-                      top: -5,
-                      right: 0,
+                      position: "relative",
+                      pt: "8px",
+                      width: 1,
+                      height: 1,
                     }}
                   >
-                    test
-                  </Button>
+                    <Box
+                      component="img"
+                      src={file?.image}
+                      sx={{
+                        width: 1,
+                        aspectRatio: "1/1",
+                        borderRadius: "5px",
+                        boxShadow: "0px 1px 4px",
+                        bgcolor: "#FCFCFC",
+                      }}
+                    />
+                    <IconButton
+                      onClick={() =>
+                        setDeleteURL(`/dashboard/styles/${file?.id}`)
+                      }
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "3px",
+                        backgroundColor: "rgb(255 255 255 / 80%)",
+                        padding: "3px !important",
+                        "&:hover": {
+                          backgroundColor: "rgb(255 255 255 / 90%)",
+                        },
+                      }}
+                    >
+                      <RxCross2
+                        style={{ color: "#3D464D", fontSize: "17px" }}
+                      />
+                    </IconButton>
+                  </Box>
                 </Grid>
               ))}
             <UploadImage control={control} fieldName={"styles"} />
           </Grid>
         </Grid>
+        {/* shape */}
         <Grid item xs={12}>
           <Typography
             variant="body4"
@@ -116,7 +146,7 @@ const ProductStyleAndShape = ({
                 <Grid
                   key={index}
                   item
-                  xs={1}
+                  xs={1.3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -124,16 +154,44 @@ const ProductStyleAndShape = ({
                   }}
                 >
                   <Box
-                    component="img"
-                    src={file?.image}
                     sx={{
-                      height: "99px",
-                      width: "109px",
-                      borderRadius: "5px",
-                      boxShadow: "0px 1px 4px",
-                      bgcolor: "#FCFCFC",
+                      position: "relative",
+                      pt: "8px",
+                      width: 1,
+                      height: 1,
                     }}
-                  />
+                  >
+                    <Box
+                      component="img"
+                      src={file?.image}
+                      sx={{
+                        width: 1,
+                        aspectRatio: "1/1",
+                        borderRadius: "5px",
+                        boxShadow: "0px 1px 4px",
+                        bgcolor: "#FCFCFC",
+                      }}
+                    />
+                    <IconButton
+                      onClick={() =>
+                        setDeleteURL(`/dashboard/shapes/${file?.id}`)
+                      }
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "3px",
+                        backgroundColor: "rgb(255 255 255 / 80%)",
+                        padding: "3px !important",
+                        "&:hover": {
+                          backgroundColor: "rgb(255 255 255 / 90%)",
+                        },
+                      }}
+                    >
+                      <RxCross2
+                        style={{ color: "#3D464D", fontSize: "17px" }}
+                      />
+                    </IconButton>
+                  </Box>
                 </Grid>
               ))}
             <UploadImage control={control} fieldName={"shapes"} />
@@ -396,6 +454,14 @@ const ProductStyleAndShape = ({
           />
         </Grid>
       </Grid>
+      <DeleteDialog
+        open={Boolean(deleteURL)}
+        deleteURL={deleteURL}
+        handleClose={() => setDeleteURL(null)}
+        successRefetch={() =>
+          queryClient.invalidateQueries([`/dashboard/products/${productSlug}/`])
+        }
+      />
     </Paper>
   );
 };

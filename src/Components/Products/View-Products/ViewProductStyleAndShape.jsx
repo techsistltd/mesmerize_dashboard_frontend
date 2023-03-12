@@ -46,7 +46,7 @@ const ViewProductStyleAndShape = ({ product }) => {
                 <Grid
                   key={index}
                   item
-                  xs={1}
+                  xs={1.3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -58,8 +58,8 @@ const ViewProductStyleAndShape = ({ product }) => {
                     component="img"
                     src={image}
                     sx={{
-                      height: "99px",
-                      width: "109px",
+                      width: 1,
+                      aspectRatio: "1/1",
                       borderRadius: "5px",
                       boxShadow: "0px 1px 4px",
                       bgcolor: "#FCFCFC",
@@ -97,7 +97,7 @@ const ViewProductStyleAndShape = ({ product }) => {
                 <Grid
                   key={index}
                   item
-                  xs={1}
+                  xs={1.3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -109,8 +109,8 @@ const ViewProductStyleAndShape = ({ product }) => {
                     component="img"
                     src={image}
                     sx={{
-                      height: "99px",
-                      width: "109px",
+                      width: 1,
+                      aspectRatio: "1/1",
                       borderRadius: "5px",
                       boxShadow: "0px 1px 4px",
                       bgcolor: "#FCFCFC",
@@ -134,8 +134,8 @@ const ViewProductStyleAndShape = ({ product }) => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
+                  flexWrap: "wrap",
                   gap: "8px",
-                  overflowX: "auto",
                   border: 1,
                   borderColor: "primary.main",
                   width: 1,
@@ -143,6 +143,7 @@ const ViewProductStyleAndShape = ({ product }) => {
                   px: "11px",
                   mt: "10px",
                   height: "40px",
+                  overflowY: "auto",
                 }}
               >
                 {product?.product_structure?.map(
@@ -179,8 +180,8 @@ const ViewProductStyleAndShape = ({ product }) => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
+                  flexWrap: "wrap",
                   gap: "8px",
-                  overflowX: "auto",
                   border: 1,
                   borderColor: "primary.main",
                   width: 1,
@@ -188,6 +189,7 @@ const ViewProductStyleAndShape = ({ product }) => {
                   px: "11px",
                   mt: "10px",
                   height: "40px",
+                  overflowY: "auto",
                 }}
               >
                 {product?.product_flavour?.map(
@@ -226,15 +228,17 @@ const ViewProductStyleAndShape = ({ product }) => {
                   border: 1,
                   display: "flex",
                   alignItems: "center",
+                  flexWrap: "wrap",
                   fontSize: "14px",
                   color: "textBlack",
                   gap: "8px",
                   borderColor: "primary.main",
                   width: 1,
-                  height: "40px",
                   padding: "7px 11px",
                   borderRadius: "5px",
                   mt: "10px",
+                  height: "40px",
+                  overflowY: "auto",
                 }}
               >
                 {product?.product_color?.map(({ code }, index) => {
