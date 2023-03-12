@@ -161,7 +161,7 @@ const ViewProductDetails = ({ product }) => {
                 mt: "10px",
               }}
             >
-              {product?.tag?.map((tag, index) => {
+              {product?.tag?.map(({ tag }, index) => {
                 return (
                   <Box key={index}>
                     <Chip
@@ -203,11 +203,11 @@ const ViewProductDetails = ({ product }) => {
                 mt: "10px",
               }}
             >
-              {product?.occasion?.map((value, index) => {
+              {product?.occasion?.map(({ title }, index) => {
                 return (
                   <Box key={index}>
                     <Chip
-                      label={value}
+                      label={title}
                       variant="outlined"
                       sx={{
                         height: "30px",

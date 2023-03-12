@@ -30,8 +30,6 @@ const EditProduct = () => {
       onSuccess: (product) => {
         setValue("title", product?.title);
         setValue("category", product?.category?.id);
-        // setValue("styles", product?.product_style);
-        // setValue("shapes", product?.product_shape);
         setValue("sizes", product?.product_structure);
         setValue(
           "colors",
@@ -42,11 +40,14 @@ const EditProduct = () => {
         setValue("price", product?.price);
         setValue("stock", product?.stock);
         setValue("status", product?.status);
-        // setValue("thumbnail", product?.thumbnail);
-        // setValue(
-        //   "tag",
-        //   product?.tag?.map((e) => e?.tag)
-        // );
+        setValue(
+          "tags",
+          product?.tag?.map((e) => e?.tag)
+        );
+        setValue(
+          "occasions",
+          product?.occasion?.map((e) => e?.title)
+        );
       },
       cacheTime: 0,
       refetchOnMount: true,
@@ -63,7 +64,6 @@ const EditProduct = () => {
     {
       onSuccess: () => {
         reset();
-        queryClient.invalidateQueries(["/dashboard/products/"]);
         queryClient.invalidateQueries([`/dashboard/products/${productSlug}/`]);
         navigate(-1);
         enqueueSnackbar("Successfully Update Product", {
