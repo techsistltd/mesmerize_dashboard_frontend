@@ -167,13 +167,9 @@ const ProductDetails = ({ control, required = true }) => {
                   <MenuItem value="default" disabled>
                     Status
                   </MenuItem>
-                  <MenuItem value="ACTIVE">ACTIVE</MenuItem>
-                  <MenuItem value="DEACTIVE">DEACTIVE</MenuItem>
-                  {/* {?.map(() => (
-                    <MenuItem key={?.slug} value={?.id}>
-                      {?.title}
-                    </MenuItem>
-                  ))} */}
+                  <MenuItem value="ACTIVE">Active</MenuItem>
+                  <MenuItem value="ARCHIVE">Archive</MenuItem>
+                  <MenuItem value="DRAFT">Draft</MenuItem>
                 </TextField>
               </Fragment>
             )}

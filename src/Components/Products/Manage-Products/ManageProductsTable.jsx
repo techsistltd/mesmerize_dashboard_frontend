@@ -11,15 +11,31 @@ import { renderStatusColor } from "../../../Utils/styleHelpers";
 import DataTable from "../../Shared/DataTable";
 import DeleteDialog from "../../Shared/DeleteDialog";
 
-const ManageProductsTable = () => {
+const ManageProductsTable = ({ filters = {} }) => {
   const navigate = useNavigate();
   const [deleteId, setDeleteId] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+
+  const activeFilters = Object.entries(filters)
+    .map(([key, value]) => `${key}=${value}`)
+    .join("&");
 
   const {
-    data: { data: products = [] } = {},
+    data: { data: products = [], count = 0 } = {},
     isLoading: productLoading,
     refetch,
-  } = useQuery(["/dashboard/products/"]);
+  } = useQuery(
+    [
+      `/dashboard/products/?page=${page}&size=${pageSize}&${activeFilters}`,
+      page,
+      pageSize,
+      activeFilters,
+    ],
+    {
+      cacheTime: 0,
+    }
+  );
 
   const tableColumn = [
     {
@@ -56,15 +72,6 @@ const ManageProductsTable = () => {
       headerName: "Category",
       flex: 1,
       width: 120,
-      valueGetter: ({ value }) => value?.title,
-    },
-    {
-      field: "sub_category",
-      headerName: "Sub Category",
-      flex: 1,
-      minWidth: 120,
-      align: "center",
-      headerAlign: "center",
     },
     {
       field: "price",
@@ -193,6 +200,11 @@ const ManageProductsTable = () => {
           columns={tableColumn}
           rows={products}
           isLoading={productLoading}
+          paginationMode="server"
+          rowCount={count}
+          pageSize={pageSize}
+          onPageSizeChange={(size) => setPageSize(size)}
+          onPageChange={(page) => setPage(page + 1)}
         />
       </Box>
       <DeleteDialog

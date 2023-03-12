@@ -64,6 +64,6 @@ export function getCroppedImg(image, crop) {
   );
 
   ctx.restore();
-  const base64Image = canvas.toDataURL("image/jpeg");
+  const base64Image = canvas.toDataURL("image/jpeg", 1.0);
   return base64Image;
 }
