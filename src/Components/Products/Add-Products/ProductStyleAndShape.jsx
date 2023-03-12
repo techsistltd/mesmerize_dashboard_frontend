@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   Box,
+  Button,
   Chip,
   createFilterOptions,
   Grid,
@@ -61,6 +62,7 @@ const ProductStyleAndShape = ({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "left",
+                    position: "relative",
                   }}
                 >
                   <Box
@@ -74,6 +76,15 @@ const ProductStyleAndShape = ({
                       bgcolor: "#FCFCFC",
                     }}
                   />
+                  <Button
+                    sx={{
+                      position: "absolute",
+                      top: -5,
+                      right: 0,
+                    }}
+                  >
+                    test
+                  </Button>
                 </Grid>
               ))}
             <UploadImage control={control} fieldName={"styles"} />

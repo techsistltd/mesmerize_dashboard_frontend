@@ -1,6 +1,5 @@
 import { Box, IconButton, TextField } from "@mui/material";
-import React from "react";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import { GrAddCircle } from "react-icons/gr";
 
 const PairedInputField = ({
@@ -8,18 +7,30 @@ const PairedInputField = ({
   secondField = "",
   onSubmit = () => null,
 }) => {
-  const [field1, setField1] = useState("");
-  const [field2, setField2] = useState("");
+  const [error, setError] = useState(null);
+  const field1 = useRef();
+  const field2 = useRef();
 
   const handleSubmit = () => {
+    setError(null);
+
+    if (!Boolean(field1.current.value)) {
+      setError(firstField);
+      return;
+    }
+
+    if (!Boolean(field2.current.value)) {
+      setError(secondField);
+      return;
+    }
+
     const data = {
-      [firstField]: field1,
-      [secondField]: field2,
+      [firstField]: field1.current.value,
+      [secondField]: field2.current.value,
     };
 
     onSubmit(data);
-    setField1("");
-    setField2("");
+    field1.current.value = field2.current.value = "";
   };
 
   return (
@@ -31,12 +42,13 @@ const PairedInputField = ({
       }}
     >
       <TextField
+        inputRef={field1}
         placeholder={firstField?.replace("_", " ")}
-        value={field1}
-        onChange={(e) => setField1(e.target.value)}
         sx={{
           border: 1,
-          borderColor: "primary.main",
+          borderColor: Boolean(error === firstField)
+            ? "error.main"
+            : "primary.main",
           width: "350px",
           borderRadius: "5px",
           mt: "10px",
@@ -47,13 +59,15 @@ const PairedInputField = ({
         }}
       />
       <TextField
+        inputRef={field2}
         type={"number"}
+        defaultValue="0"
         placeholder={secondField?.replace("_", " ")}
-        value={field2}
-        onChange={(e) => setField2(e.target.value)}
         sx={{
           border: 1,
-          borderColor: "primary.main",
+          borderColor: Boolean(error === secondField)
+            ? "error.main"
+            : "primary.main",
           width: "350px",
           borderRadius: "5px",
           mt: "10px",
@@ -62,6 +76,7 @@ const PairedInputField = ({
             padding: "7px",
           },
         }}
+        InputProps={{ inputProps: { min: 0 } }}
       />
       <IconButton onClick={handleSubmit} sx={{ p: 0 }}>
         <GrAddCircle

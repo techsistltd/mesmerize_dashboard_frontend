@@ -1,37 +1,53 @@
-import { Box, Button, InputLabel, MenuItem, TextField } from "@mui/material";
+import { Box, Button, MenuItem, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
-const TabsAndSearch = () => {
-  const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
+const buttonData = [
+  {
+    text: "All",
+    value: "ACTIVE",
+  },
+  {
+    text: "Draft(1)",
+    value: "DRAFT",
+  },
+  // {
+  //   text: "Stock(1)",
+  // },
+  // {
+  //   text: "Out of Stock(0)",
+  // },
+  {
+    text: "Archive(1)",
+    value: "ARCHIVE",
+  },
+];
 
-  const [selected, setSelected] = useState(0);
+const TabsAndSearch = ({ setFilters = () => null, filters = {} }) => {
+  const { data: category = [] } = useQuery(["/dashboard/categories/"]);
+
+  const [selected, setSelected] = useState(buttonData[0]?.value);
 
   const { control, handleSubmit, reset } = useForm();
+
   const getData = (data) => {
-    console.log({ ...data });
+    console.log(data);
+    setFilters((filters) => {
+      return { ...filters, ...data };
+    });
+  };
+
+  const handleClear = () => {
+    setFilters({
+      status: "",
+      category: "",
+      product_name: "",
+    });
+
     reset();
   };
 
-  const buttonData = [
-    {
-      text: "All",
-    },
-    {
-      text: "Draft(1)",
-    },
-    {
-      text: "Stock(1)",
-    },
-    {
-      text: "Out of Stock(0)",
-    },
-    {
-      text: "Archive(1)",
-    },
-  ];
   return (
     <Box>
       <Box
@@ -42,11 +58,16 @@ const TabsAndSearch = () => {
           width: 1,
         }}
       >
-        {buttonData.map(({ text }, idx) => {
+        {buttonData.map(({ text, value }, idx) => {
           return (
             <Button
               key={idx}
-              onClick={() => setSelected(idx)}
+              onClick={() => {
+                setSelected(value);
+                setFilters((filters) => {
+                  return { ...filters, status: value };
+                });
+              }}
               variant="text"
               sx={{
                 width: 1,
@@ -54,11 +75,11 @@ const TabsAndSearch = () => {
                 fontWeight: 600,
                 transition: ".50s ease",
                 borderRadius: 0,
-                backgroundColor: selected === idx ? "color3.main" : "unset",
-                color: selected === idx ? "textWhite" : "unset",
+                backgroundColor: selected === value ? "color3.main" : "unset",
+                color: selected === value ? "textWhite" : "unset",
                 "&:hover": {
-                  backgroundColor: selected === idx ? "color3.main" : "unset",
-                  color: selected === idx ? "textWhite" : "unset",
+                  backgroundColor: selected === value ? "color3.main" : "unset",
+                  color: selected === value ? "textWhite" : "unset",
                 },
               }}
             >
@@ -87,10 +108,10 @@ const TabsAndSearch = () => {
             },
           }}
         >
-          {/* categories */}
+          {/* category */}
           <Box>
             <Controller
-              name={"categories"}
+              name={"category"}
               control={control}
               defaultValue=""
               render={({ field: { value, ...field } }) => (
@@ -114,8 +135,8 @@ const TabsAndSearch = () => {
                   <MenuItem value="default" disabled>
                     Category
                   </MenuItem>
-                  {categories?.map((category) => (
-                    <MenuItem key={category?.slug} value={category?.id}>
+                  {category?.map((category) => (
+                    <MenuItem key={category?.id} value={category?.id}>
                       {category?.title}
                     </MenuItem>
                   ))}
@@ -124,7 +145,7 @@ const TabsAndSearch = () => {
             />
           </Box>
           {/* product id */}
-          <Box>
+          {/* <Box>
             <Controller
               name={"prductId"}
               control={control}
@@ -149,11 +170,11 @@ const TabsAndSearch = () => {
                 />
               )}
             />
-          </Box>
+          </Box> */}
           {/* productName */}
           <Box>
             <Controller
-              name={"productName"}
+              name={"product_name"}
               control={control}
               defaultValue={""}
               render={({ field }) => (
@@ -173,24 +194,45 @@ const TabsAndSearch = () => {
                       padding: "7px",
                     },
                   }}
-                ></TextField>
+                />
               )}
             />
           </Box>
         </Box>
-        {/* submit button */}
-        <Button
-          variant="button3"
-          type="submit"
+        <Box
           sx={{
-            fontWeight: 600,
-            fontSize: "16px",
-            height: "40px",
-            width: 1,
+            display: "flex",
+            gap: "20px",
           }}
         >
-          Search
-        </Button>
+          {/* submit button */}
+          <Button
+            variant="button3"
+            type="submit"
+            sx={{
+              fontWeight: 600,
+              fontSize: "16px",
+              height: "40px",
+              width: "200px",
+            }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={handleClear}
+            disabled={!Boolean(filters?.product_name || filters?.category)}
+            variant="contained"
+            color="error"
+            sx={{
+              fontWeight: 600,
+              fontSize: "16px",
+              height: "40px",
+              width: "100px",
+            }}
+          >
+            Clear
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
