@@ -34,6 +34,7 @@ const ManageProductsTable = ({ filters = {} }) => {
     ],
     {
       cacheTime: 0,
+      onSuccess: () => {},
     }
   );
 
