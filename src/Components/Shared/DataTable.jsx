@@ -41,7 +41,12 @@ function CustomPagination(props) {
   return <GridPagination ActionsComponent={Pagination} {...props} />;
 }
 
-const DataTable = ({ columns = [], rows = [], isLoading = false }) => {
+const DataTable = ({
+  columns = [],
+  rows = [],
+  isLoading = false,
+  ...dataGridProps
+}) => {
   const [pageSize, setPageSize] = useState(6);
 
   return (
@@ -96,11 +101,11 @@ const DataTable = ({ columns = [], rows = [], isLoading = false }) => {
         // hideFooterPagination
         hideFooterSelectedRowCount
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[5, 6, 7, 10, 20, 35, 50, 70, 100, 200]}
-        pagination
+        rowsPerPageOptions={[5, 6, 7, 10, 20, 35, 50, 70, 100]}
         components={{
           Pagination: CustomPagination,
         }}
+        {...dataGridProps}
       />
     </Box>
   );

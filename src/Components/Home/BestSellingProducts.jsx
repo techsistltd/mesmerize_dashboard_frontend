@@ -13,16 +13,21 @@ import SearchField from "../Shared/SearchField";
 
 const BestSellingProducts = () => {
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
 
   const {
     data: { data: products = [] } = {},
     isLoading: productLoading,
     refetch,
-  } = useQuery(["/dashboard/best-selling-products/"]);
-  console.log(products);
-  const [deleteId, setDeleteId] = useState(null);
+    isInitialLoading,
+  } = useQuery(["/dashboard/best-selling-products/", search]);
+
+  console.log(isInitialLoading);
 
   const { data: { summary = {} } = {} } = useQuery(["/dashboard/summary/"]);
+
+  const [deleteId, setDeleteId] = useState(null);
+
   const statsData = [
     {
       title: "Total Products",
@@ -230,7 +235,11 @@ const BestSellingProducts = () => {
         }}
       >
         <Typography variant="body4">Best Selling Products</Typography>
-        <SearchField borderVariant />
+        <SearchField
+          borderVariant
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </Box>
       {/* typography and search field end */}
 

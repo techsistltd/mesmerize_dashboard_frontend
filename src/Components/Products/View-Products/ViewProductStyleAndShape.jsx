@@ -18,7 +18,7 @@ const ViewProductStyleAndShape = ({ product }) => {
           : "none",
       }}
     >
-      <Grid container rowGap={"45px"} columnSpacing="45px">
+      <Grid container rowGap={"45px"} columnSpacing={"45px"}>
         {Boolean(product?.product_style?.length) && (
           <Grid item xs={12}>
             <Typography
@@ -46,7 +46,7 @@ const ViewProductStyleAndShape = ({ product }) => {
                 <Grid
                   key={index}
                   item
-                  xs={1}
+                  xs={1.3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -58,8 +58,8 @@ const ViewProductStyleAndShape = ({ product }) => {
                     component="img"
                     src={image}
                     sx={{
-                      height: "99px",
-                      width: "109px",
+                      width: 1,
+                      aspectRatio: "1/1",
                       borderRadius: "5px",
                       boxShadow: "0px 1px 4px",
                       bgcolor: "#FCFCFC",
@@ -97,7 +97,7 @@ const ViewProductStyleAndShape = ({ product }) => {
                 <Grid
                   key={index}
                   item
-                  xs={1}
+                  xs={1.3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -109,8 +109,8 @@ const ViewProductStyleAndShape = ({ product }) => {
                     component="img"
                     src={image}
                     sx={{
-                      height: "99px",
-                      width: "109px",
+                      width: 1,
+                      aspectRatio: "1/1",
                       borderRadius: "5px",
                       boxShadow: "0px 1px 4px",
                       bgcolor: "#FCFCFC",
@@ -124,7 +124,7 @@ const ViewProductStyleAndShape = ({ product }) => {
         {/* size */}
         {Boolean(product?.product_structure?.length) && (
           <Grid item xs={4}>
-            <Box sx={{ width: 1 }}>
+            <Box>
               <Typography variant="body4" color={"textBlack"}>
                 Size
               </Typography>
@@ -132,32 +132,93 @@ const ViewProductStyleAndShape = ({ product }) => {
                 variant="body6"
                 color={"textBlack"}
                 sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "8px",
                   border: 1,
                   borderColor: "primary.main",
                   width: 1,
                   borderRadius: "5px",
+                  px: "11px",
                   mt: "10px",
-                  padding: "7px 11px",
                   height: "40px",
-                  "& .MuiInputBase-input": {
-                    padding: "7px",
-                  },
+                  overflowY: "auto",
                 }}
               >
-                {product?.product_structure?.map(({ size }, index) => {
-                  return (
-                    <Typography key={index} variant="body6" color="textBlack">
-                      {size}
-                    </Typography>
-                  );
-                })}
+                {product?.product_structure?.map(
+                  ({ size = "", added_price = "" }, index) => {
+                    return (
+                      <Box key={index}>
+                        <Chip
+                          label={`${size} - ${added_price}`}
+                          variant="outlined"
+                          sx={{
+                            height: "30px",
+                            borderRadius: "6px",
+                            "& .MuiChip-label": {
+                              padding: " 6px",
+                            },
+                          }}
+                        />
+                      </Box>
+                    );
+                  }
+                )}
               </Box>
             </Box>
           </Grid>
         )}
+        {/* flavour */}
+        {Boolean(product?.product_flavour?.length) && (
+          <Grid item xs={4}>
+            <Box sx={{ width: 1 }}>
+              <Typography variant="body4" color={"textBlack"}>
+                Flavour
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "8px",
+                  border: 1,
+                  borderColor: "primary.main",
+                  width: 1,
+                  borderRadius: "5px",
+                  px: "11px",
+                  mt: "10px",
+                  height: "40px",
+                  overflowY: "auto",
+                }}
+              >
+                {product?.product_flavour?.map(
+                  ({ flavour = "", added_price = "" }, index) => {
+                    return (
+                      <Box key={index}>
+                        <Chip
+                          label={`${flavour} - ${added_price}`}
+                          variant="outlined"
+                          sx={{
+                            height: "30px",
+                            borderRadius: "6px",
+                            "& .MuiChip-label": {
+                              padding: " 6px",
+                            },
+                          }}
+                        />
+                      </Box>
+                    );
+                  }
+                )}
+              </Box>
+            </Box>
+          </Grid>
+        )}
+
         {/* color */}
         {Boolean(product?.product_color?.length) && (
-          <Grid tem xs={4}>
+          <Grid item xs={4}>
             <Box sx={{ width: 1 }}>
               <Typography variant="body4" color={"textBlack"}>
                 color
@@ -167,20 +228,22 @@ const ViewProductStyleAndShape = ({ product }) => {
                   border: 1,
                   display: "flex",
                   alignItems: "center",
+                  flexWrap: "wrap",
                   fontSize: "14px",
                   color: "textBlack",
                   gap: "8px",
                   borderColor: "primary.main",
                   width: 1,
-                  height: "40px",
                   padding: "7px 11px",
                   borderRadius: "5px",
                   mt: "10px",
+                  height: "40px",
+                  overflowY: "auto",
                 }}
               >
-                {product?.product_color?.map(({ code, color }, index) => {
+                {product?.product_color?.map(({ code }, index) => {
                   return (
-                    <Tooltip key={index} title={color}>
+                    <Tooltip key={index} title={code}>
                       <Box
                         key={index}
                         sx={{
@@ -191,50 +254,6 @@ const ViewProductStyleAndShape = ({ product }) => {
                         }}
                       ></Box>
                     </Tooltip>
-                  );
-                })}
-              </Box>
-            </Box>
-          </Grid>
-        )}
-
-        {/* flavour */}
-        {Boolean(product?.product_flavour?.length) && (
-          <Grid tem xs={4}>
-            <Box sx={{ width: 1 }}>
-              <Typography variant="body4" color={"textBlack"}>
-                Flavour
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  overflowX: "auto",
-                  border: 1,
-                  borderColor: "primary.main",
-                  width: 1,
-                  borderRadius: "5px",
-                  px: "11px",
-                  mt: "10px",
-                  height: "40px",
-                }}
-              >
-                {product?.product_flavour?.map(({ flavour }, index) => {
-                  return (
-                    <Box key={index}>
-                      <Chip
-                        label={flavour}
-                        variant="outlined"
-                        sx={{
-                          height: "30px",
-                          borderRadius: "6px",
-                          "& .MuiChip-label": {
-                            padding: " 6px",
-                          },
-                        }}
-                      />
-                    </Box>
                   );
                 })}
               </Box>

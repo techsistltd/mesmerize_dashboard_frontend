@@ -1,7 +1,7 @@
 import { Avatar, Box, Chip, Tooltip, Typography } from "@mui/material";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -9,14 +9,34 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { renderStatusColor } from "../../../Utils/styleHelpers";
 import DataTable from "../../Shared/DataTable";
+import DeleteDialog from "../../Shared/DeleteDialog";
 
-const ManageProductsTable = () => {
+const ManageProductsTable = ({ filters = {} }) => {
   const navigate = useNavigate();
+  const [deleteId, setDeleteId] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
 
-  const { data: { data: products = [] } = {}, isLoading: productLoading } =
-    useQuery(["/dashboard/products/"]);
+  const activeFilters = Object.entries(filters)
+    .map(([key, value]) => `${key}=${value}`)
+    .join("&");
 
-  const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
+  const {
+    data: { data: products = [], count = 0 } = {},
+    isLoading: productLoading,
+    refetch,
+  } = useQuery(
+    [
+      `/dashboard/products/?page=${page}&size=${pageSize}&${activeFilters}`,
+      page,
+      pageSize,
+      activeFilters,
+    ],
+    {
+      cacheTime: 0,
+      onSuccess: () => {},
+    }
+  );
 
   const tableColumn = [
     {
@@ -53,15 +73,6 @@ const ManageProductsTable = () => {
       headerName: "Category",
       flex: 1,
       width: 120,
-      valueGetter: ({ value }) => value?.title,
-    },
-    {
-      field: "sub_category",
-      headerName: "Sub Category",
-      flex: 1,
-      minWidth: 120,
-      align: "center",
-      headerAlign: "center",
     },
     {
       field: "price",
@@ -166,7 +177,7 @@ const ManageProductsTable = () => {
                 />
               }
               label="Delete"
-              onClick={() => console.log(row)}
+              onClick={() => setDeleteId(row?.slug)}
             />
           </Tooltip>,
         ];
@@ -190,8 +201,19 @@ const ManageProductsTable = () => {
           columns={tableColumn}
           rows={products}
           isLoading={productLoading}
+          paginationMode="server"
+          rowCount={count}
+          pageSize={pageSize}
+          onPageSizeChange={(size) => setPageSize(size)}
+          onPageChange={(page) => setPage(page + 1)}
         />
       </Box>
+      <DeleteDialog
+        open={Boolean(deleteId)}
+        handleClose={() => setDeleteId(null)}
+        successRefetch={refetch}
+        deleteURL={`/dashboard/products/${deleteId}/`}
+      />
     </Box>
   );
 };
