@@ -42,13 +42,14 @@ const EditProduct = () => {
         setValue("price", product?.price);
         setValue("stock", product?.stock);
         setValue("status", product?.status);
-        // setValue("delivery_option", product?.delivery_option);
+        // setValue("thumbnail", product?.thumbnail);
         // setValue(
         //   "tag",
         //   product?.tag?.map((e) => e?.tag)
         // );
       },
       cacheTime: 0,
+      refetchOnMount: true,
     }
   );
 
@@ -61,9 +62,10 @@ const EditProduct = () => {
       }),
     {
       onSuccess: () => {
-        // reset();
-        // navigate("/products");
+        reset();
         queryClient.invalidateQueries(["/dashboard/products/"]);
+        queryClient.invalidateQueries([`/dashboard/products/${productSlug}/`]);
+        navigate(-1);
         enqueueSnackbar("Successfully Update Product", {
           variant: "success",
         });
@@ -76,7 +78,10 @@ const EditProduct = () => {
     }
   );
 
-  const patchData = (data) => {
+  const patchData = ({ thumbnail, ...data }) => {
+    if (Boolean(thumbnail)) {
+      data.thumbnail = thumbnail;
+    }
     const nestedData = toFormData(data, {
       separator: "mixedDot",
     });

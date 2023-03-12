@@ -9,9 +9,11 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { renderStatusColor } from "../../../Utils/styleHelpers";
 import DataTable from "../../Shared/DataTable";
+import DeleteDialog from "../../Shared/DeleteDialog";
 
 const ManageProductsTable = ({ filters = {} }) => {
   const navigate = useNavigate();
+  const [deleteId, setDeleteId] = useState(null);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
 
@@ -22,6 +24,7 @@ const ManageProductsTable = ({ filters = {} }) => {
   const {
     data: { data: products = [], count = 0 } = {},
     isLoading: productLoading,
+    refetch,
   } = useQuery(
     [
       `/dashboard/products/?page=${page}&size=${pageSize}&${activeFilters}`,
@@ -173,7 +176,7 @@ const ManageProductsTable = ({ filters = {} }) => {
                 />
               }
               label="Delete"
-              onClick={() => console.log(row)}
+              onClick={() => setDeleteId(row?.slug)}
             />
           </Tooltip>,
         ];
@@ -204,6 +207,12 @@ const ManageProductsTable = ({ filters = {} }) => {
           onPageChange={(page) => setPage(page + 1)}
         />
       </Box>
+      <DeleteDialog
+        open={Boolean(deleteId)}
+        handleClose={() => setDeleteId(null)}
+        successRefetch={refetch}
+        deleteURL={`/dashboard/products/${deleteId}/`}
+      />
     </Box>
   );
 };

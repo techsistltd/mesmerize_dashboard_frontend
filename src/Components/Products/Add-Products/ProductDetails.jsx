@@ -7,15 +7,10 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
 
 const ProductDetails = ({ control, required = true }) => {
-  const { data: deliveryOption = [] } = useQuery([
-    "/dashboard/delivery-option/",
-  ]);
-
   const filter = createFilterOptions();
 
   return (
@@ -238,6 +233,54 @@ const ProductDetails = ({ control, required = true }) => {
             )}
           />
         </Grid> */}
+        <Grid item xs={4}>
+          <Controller
+            name={"thumbnail"}
+            control={control}
+            rules={{
+              required: {
+                value: required,
+                message: "Thumbnail is required",
+              },
+            }}
+            defaultValue={[]}
+            render={({ field: { onChange }, fieldState: { error } }) => (
+              <Fragment>
+                <InputLabel
+                  error={Boolean(error)}
+                  required
+                  htmlFor="form-input-thumbnail"
+                  sx={{
+                    color: "textBlack",
+                    fontSize: "16px",
+                  }}
+                >
+                  Thumbnail
+                </InputLabel>
+                <TextField
+                  fullWidth
+                  id="form-input-thumbnail"
+                  error={Boolean(error)}
+                  helperText={Boolean(error) && error?.message}
+                  type={"file"}
+                  variant="outlined"
+                  onChange={(e) => onChange(e.target.files[0])}
+                  sx={{
+                    border: 1,
+                    borderColor: "primary.main",
+                    width: 1,
+                    height: "40px",
+                    borderRadius: "5px",
+                    mt: "10px",
+                    "& .MuiInputBase-input": {
+                      padding: "7px",
+                    },
+                  }}
+                />
+              </Fragment>
+            )}
+          />
+        </Grid>
         {/* tags */}
         <Grid item xs={8}>
           <Controller
