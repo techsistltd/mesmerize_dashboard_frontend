@@ -20,6 +20,7 @@ const ViewProduct = () => {
       onError: () => {
         navigate(-1);
       },
+      cacheTime: 0,
     }
   );
 

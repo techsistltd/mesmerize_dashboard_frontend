@@ -30,10 +30,10 @@ const AddProducts = () => {
           },
         }),
       {
-        onSuccess: (data) => {
+        onSuccess: ({ data }) => {
           console.log(data);
-          // reset();
-          // navigate(`/products/${data?.slug}`);
+          reset();
+          navigate(`/products/${data?.slug}`);
           queryClient.invalidateQueries(["/dashboard/products/"]);
           enqueueSnackbar("Successfully Added Product", {
             variant: "success",

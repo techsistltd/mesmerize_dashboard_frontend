@@ -369,7 +369,7 @@ const ProductStyleAndShape = ({
                           borderColor: "primary.main",
                           overflowX: "auto",
                           height: "40px",
-                          width: "350px",
+                          width: 1,
                           borderRadius: "5px",
                           mt: "10px",
                           "& .MuiInputBase-input": {

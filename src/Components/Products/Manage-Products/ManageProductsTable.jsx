@@ -1,7 +1,7 @@
 import { Avatar, Box, Chip, Tooltip, Typography } from "@mui/material";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -9,14 +9,17 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { renderStatusColor } from "../../../Utils/styleHelpers";
 import DataTable from "../../Shared/DataTable";
+import DeleteDialog from "../../Shared/DeleteDialog";
 
 const ManageProductsTable = () => {
   const navigate = useNavigate();
+  const [deleteId, setDeleteId] = useState(null);
 
-  const { data: { data: products = [] } = {}, isLoading: productLoading } =
-    useQuery(["/dashboard/products/"]);
-
-  const { data: categories = [] } = useQuery(["/dashboard/categories/"]);
+  const {
+    data: { data: products = [] } = {},
+    isLoading: productLoading,
+    refetch,
+  } = useQuery(["/dashboard/products/"]);
 
   const tableColumn = [
     {
@@ -166,7 +169,7 @@ const ManageProductsTable = () => {
                 />
               }
               label="Delete"
-              onClick={() => console.log(row)}
+              onClick={() => setDeleteId(row?.slug)}
             />
           </Tooltip>,
         ];
@@ -192,6 +195,12 @@ const ManageProductsTable = () => {
           isLoading={productLoading}
         />
       </Box>
+      <DeleteDialog
+        open={Boolean(deleteId)}
+        handleClose={() => setDeleteId(null)}
+        successRefetch={refetch}
+        deleteURL={`/dashboard/products/${deleteId}/`}
+      />
     </Box>
   );
 };

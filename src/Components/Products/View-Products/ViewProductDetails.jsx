@@ -1,6 +1,5 @@
 import { Box, Chip, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
-
 const ViewProductDetails = ({ product }) => {
   return (
     <Box>
@@ -103,7 +102,7 @@ const ViewProductDetails = ({ product }) => {
             </Typography>
           </Grid>
           {/* delivery option */}
-          <Grid item xs={4}>
+          {/* <Grid item xs={4}>
             <Typography variant="body4" color="textBlack">
               Delivery Option
             </Typography>
@@ -123,29 +122,27 @@ const ViewProductDetails = ({ product }) => {
                 mt: "10px",
               }}
             >
-              {product?.product_delivery_options?.map(
-                ({ option = {} }, index) => {
-                  return (
-                    <Box key={index}>
-                      <Chip
-                        label={option?.name}
-                        variant="outlined"
-                        sx={{
-                          height: "30px",
-                          borderRadius: "6px",
-                          "& .MuiChip-label": {
-                            padding: " 6px",
-                          },
-                        }}
-                      />
-                    </Box>
-                  );
-                }
-              )}
+              {deliveryOption?.map(({ name }, index) => {
+                return (
+                  <Box key={index}>
+                    <Chip
+                      label={name}
+                      variant="outlined"
+                      sx={{
+                        height: "30px",
+                        borderRadius: "6px",
+                        "& .MuiChip-label": {
+                          padding: " 6px",
+                        },
+                      }}
+                    />
+                  </Box>
+                );
+              })}
             </Box>
-          </Grid>
+          </Grid> */}
           {/* tags */}
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Typography variant="body4" color="textBlack">
               Tags
             </Typography>
@@ -206,7 +203,7 @@ const ViewProductDetails = ({ product }) => {
                 mt: "10px",
               }}
             >
-              {product?.occasions?.map((value, index) => {
+              {product?.occasion?.map((value, index) => {
                 return (
                   <Box key={index}>
                     <Chip
