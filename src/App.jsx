@@ -19,15 +19,16 @@ import CustomerProfile from "./Pages/Customers/CustomerProfile";
 import CustomersList from "./Pages/Customers/CustomersList";
 import Home from "./Pages/Home";
 import Notification from "./Pages/Notification";
+import Orders from "./Pages/Orders/Orders";
 import AddPackage from "./Pages/Products/Add-Package/AddPackage";
 import AddProducts from "./Pages/Products/Add-Products/AddProducts";
 import Archive from "./Pages/Products/Archive/Archive";
+import EditProduct from "./Pages/Products/Edit-Product/Edit-Product";
 import ManageProducts from "./Pages/Products/Managa-Products/ManageProducts";
 import ManagePackage from "./Pages/Products/Manage-Package/ManagePackage";
-import Settings from "./Pages/Settings";
-import UserProfile from "./Pages/Profile/UserProfile";
 import EditProfile from "./Pages/Profile/EditProfile";
-import EditProduct from "./Pages/Products/Edit-Product/Edit-Product";
+import UserProfile from "./Pages/Profile/UserProfile";
+import Settings from "./Pages/Settings";
 
 function App() {
   const { currentUser, userLoading } = useGlobalContext();
@@ -175,6 +176,13 @@ function App() {
                   },
                 },
               ],
+            },
+            {
+              path: "orders",
+              element: <Orders />,
+              handle: {
+                crumb: { to: "/orders", title: "Orders" },
+              },
             },
 
             {

@@ -1,8 +1,17 @@
-import { Paper } from "@mui/material";
-import React from "react";
-import PasswordAndSecurity from "../Components/Setting/PasswordAndSecurity";
+import {
+  FormControlLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import ChangePassword from "../Components/Setting/ChangePassword";
+import ForgetPassword from "../Components/Setting/ForgetPassword";
+import TitleUnderLine from "../Components/Setting/TitleUnderLine";
 
 const Settings = () => {
+  const [selectedType, setSelectedType] = useState("change");
   // const [selected, setSelected] = useState(0);
 
   // const buttonData = [
@@ -29,7 +38,39 @@ const Settings = () => {
     // })}
 
     <Paper sx={{ padding: "45px" }}>
-      <PasswordAndSecurity />
+      <TitleUnderLine title="Password & Security" underline />
+      <Typography variant="body4" component={"p"} color="textTan">
+        All password settings and security option.
+      </Typography>
+      {/* radio button */}
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+        value={selectedType}
+        onChange={(e) => setSelectedType(e.target.value)}
+        sx={{ my: "30px" }}
+      >
+        <FormControlLabel
+          value="change"
+          control={<Radio color="color15" />}
+          label="Change Password"
+        />
+        <FormControlLabel
+          value="forget"
+          control={<Radio color="color15" />}
+          label="Forgot Password"
+        />
+      </RadioGroup>
+
+      {/* radio button end */}
+
+      {Boolean(selectedType === "change") ? (
+        <ChangePassword />
+      ) : (
+        <ForgetPassword />
+      )}
+      {/* <PasswordAndSecurity /> */}
     </Paper>
   );
 };

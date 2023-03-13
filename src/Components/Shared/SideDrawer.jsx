@@ -13,6 +13,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { BiCategoryAlt, BiPackage } from "react-icons/bi";
+import { BsCart3 } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { IoMdMove } from "react-icons/io";
 import { MdNotifications, MdSettingsSuggest } from "react-icons/md";
@@ -63,6 +64,11 @@ const drawerMenus = [
     title: "Manage Package",
     icon: BiPackage,
     path: "manage-package",
+  },
+  {
+    title: "Orders",
+    icon: BsCart3,
+    path: "orders",
   },
   {
     title: "Notification",

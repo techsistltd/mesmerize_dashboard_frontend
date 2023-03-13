@@ -61,7 +61,6 @@ const PasswordAndSecurity = () => {
     },
   ];
 
-  const [selectedType, setSelectedType] = useState("change");
   return (
     <Box>
       <TitleUnderLine title="Password & Security" underline />
