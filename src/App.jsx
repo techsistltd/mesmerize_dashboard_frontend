@@ -20,6 +20,7 @@ import CustomersList from "./Pages/Customers/CustomersList";
 import Home from "./Pages/Home";
 import Notification from "./Pages/Notification";
 import Orders from "./Pages/Orders/Orders";
+import ViewOrders from "./Pages/Orders/View-Orders/ViewOrders";
 import AddPackage from "./Pages/Products/Add-Package/AddPackage";
 import AddProducts from "./Pages/Products/Add-Products/AddProducts";
 import Archive from "./Pages/Products/Archive/Archive";
@@ -179,10 +180,23 @@ function App() {
             },
             {
               path: "orders",
-              element: <Orders />,
+              element: <Outlet />,
               handle: {
                 crumb: { to: "/orders", title: "Orders" },
               },
+              children: [
+                {
+                  path: "",
+                  element: <Orders />,
+                },
+                {
+                  path: "view-order",
+                  element: <ViewOrders />,
+                  handle: {
+                    crumb: { to: "/orders/view-order", title: "View Orders" },
+                  },
+                },
+              ],
             },
 
             {
